@@ -151,4 +151,44 @@ export class Board {
             }
         }
     }
+
+    saveToFile() {
+        // Save as JSON file (TODO: binary format)
+        const data = {
+            width: this.width,
+            height: this.height,
+            tileSize: this.tileSize,
+            layers: Object.fromEntries(this.layers)
+        };
+        const json = JSON.stringify(data);
+        const blob = new Blob([json], { type: "application/json" });
+        const url = URL.createObjectURL(blob);
+        const a = document.createElement("a");
+        a.href = url;
+        a.download = "board.json";
+        a.click();
+        URL.revokeObjectURL(url);
+    }
+
+    loadFromFile(file: File) {
+        const reader = new FileReader();
+        reader.onload = (event) => {
+            try {
+                const json = event.target?.result as string;
+                const data = JSON.parse(json);
+                if (data.width && data.height && data.tileSize && data.layers) {
+                    this.width = data.width;
+                    this.height = data.height;
+                    this.tileSize = data.tileSize;
+                    this.layers = new Map(Object.entries(data.layers) as [Layer, number[][]][]);
+                } else {
+                    throw new Error("Invalid board data");
+                }
+            }
+            catch (error) {
+                console.error("Failed to load board:", error);
+            }
+        }
+        reader.readAsText(file);
+    }
 }
