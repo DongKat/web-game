@@ -4,6 +4,7 @@
     // File Layout
     "rootDir": "./src",
     "outDir": "./public/dist",
+    "baseUrl": "./src",
     // Environment Settings
     // See also https://aka.ms/tsconfig/module
     "module": "nodenext",
@@ -35,5 +36,7 @@
     "noUncheckedSideEffectImports": true,
     "moduleDetection": "force",
     "skipLibCheck": true,
+    "noEmit": true,
+    "allowImportingTsExtensions": true,
   }
 }

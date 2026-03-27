@@ -1,4 +1,4 @@
-import { Board } from "../components/Board.js";
+import { Board } from "../map/Board.js";
 
 const canvas = document.getElementById("canvas") as HTMLCanvasElement;
 if (!canvas) {
