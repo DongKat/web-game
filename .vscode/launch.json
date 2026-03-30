@@ -2,6 +2,16 @@
   "version": "0.2.0",
   "configurations": [
     {
+      "type": "chrome",
+      "request": "launch",
+      "name": "Debug Vite App",
+      "url": "http://localhost:5173",
+      "webRoot": "${workspaceFolder}/src",
+      "sourceMapPathOverrides": {
+        "/*": "${webRoot}/*"
+      }
+    },
+    {
       "name": "Debug Node.js Container",
       "type": "node",
       "request": "attach",
@@ -9,7 +19,9 @@
       "address": "localhost",
       "localRoot": "${workspaceFolder}",
       "remoteRoot": "/app",
-      "skipFiles": ["<node_internals>/**"],
+      "skipFiles": [
+        "<node_internals>/**"
+      ],
       "smartStep": true,
       "timeout": 30000
     }
