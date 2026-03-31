@@ -2,6 +2,15 @@
   "version": "0.2.0",
   "configurations": [
     {
+      "type": "node",
+      "request": "launch",
+      "name": "Debug TS File",
+      "runtimeArgs": ["-r", "tsx"],
+      "args": ["${file}"],
+      "cwd": "${workspaceFolder}",
+      "skipFiles": ["<node_internals>/**"]
+    },
+    {
       "type": "chrome",
       "request": "launch",
       "name": "Debug Vite App",
@@ -24,6 +33,6 @@
       ],
       "smartStep": true,
       "timeout": 30000
-    }
+    },
   ]
 }

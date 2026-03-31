@@ -44,7 +44,14 @@ export const Layers = {
   Objects: 'Objects',
   Shadows: 'Shadows',
   Vehicles: 'Vehicles',
-  UI: 'UI'
+  UI: 'UI',
+  Effects : 'Effects',
 } as const;
 
 
+// TODO: Map tile ID to string name
+export const TILE_ID_MAP = {
+  CURSOR: 62,
+  MOVEMENT_HIGHLIGHT : 80,
+  // ... add more mappings as needed
+} as const;
