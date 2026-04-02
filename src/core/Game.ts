@@ -20,7 +20,7 @@ export class Game {
     private movementSystem: MovementSystem | null = null;
     private overlayRenderer: OverlayRenderer | null = null;
 
-    private worldContainer : Container | null = null;
+    private worldContainer: Container | null = null;
 
     private instance: Game | null = null;
     constructor() { }
@@ -40,11 +40,21 @@ export class Game {
         this.overlayMap = new OverlayMap(this.tileMap.width, this.tileMap.height);
         this.movementSystem = new MovementSystem(this.tileMap, this.overlayMap);
         this.overlayRenderer = new OverlayRenderer(this.overlayMap, assets.tileTextures);
-    
+
         this.worldContainer = new Container();
         this.worldContainer.addChild(this.tileMapRenderer.container);
         this.worldContainer.addChild(this.overlayRenderer.container);
         this.app.stage.addChild(this.worldContainer);
+
+        InputManager.getInstance().init(window, this.app.view);
+        InputManager.getInstance().bindAction('move_up', ['ArrowUp', 'KeyW']);
+        InputManager.getInstance().bindAction('move_down', ['ArrowDown', 'KeyS']);
+        InputManager.getInstance().bindAction('move_left', ['ArrowLeft', 'KeyA']);
+        InputManager.getInstance().bindAction('move_right', ['ArrowRight', 'KeyD']);
+        InputManager.getInstance().bindAction('select', ['Enter', 'Space']);
+
+
+
     }
 
     async testInitialization(): Promise<void> {
@@ -77,47 +87,49 @@ export class Game {
         if (!this.movementSystem || !this.overlayMap) return;
 
 
-        // // Hook up InputManager
-        // const inputManager = InputManager.getInstance();
-        // inputManager.update();
-        // // Cursor movement
-        // // TODO: Implement for mouse
-        // switch (true) {
-        //     case inputManager.isActionPressed('move_up'):
-        //         this.overlayMap.setCursor(5, 4);
-        //         break;
-        //     case inputManager.isActionPressed('move_down'):
-        //         this.overlayMap.setCursor(5, 6);
-        //         break;
-        //     case inputManager.isActionPressed('move_left'):
-        //         this.overlayMap.setCursor(4, 5);
-        //         break;
-        //     case inputManager.isActionPressed('move_right'):
-        //         this.overlayMap.setCursor(6, 5);
-        //         break;
-        // }
+        // Hook up InputManager
+        const inputManager = InputManager.getInstance();
+        inputManager.update();
+        // Cursor movement
+        // TODO: Implement for mouse
+        let cursorPosition = this.overlayMap.cursorPosition || { col: 0, row: 0 };
+        switch (true) {
+            case inputManager.isActionPressed('move_up'):
+                cursorPosition = { col: cursorPosition!.col, row: cursorPosition!.row - 1 };
+                break;
+            case inputManager.isActionPressed('move_down'):
+                cursorPosition = { col: cursorPosition!.col, row: cursorPosition!.row + 1 };
+                break;
+            case inputManager.isActionPressed('move_left'):
+                cursorPosition = { col: cursorPosition!.col - 1, row: cursorPosition!.row };
+                break;
+            case inputManager.isActionPressed('move_right'):
+                cursorPosition = { col: cursorPosition!.col + 1, row: cursorPosition!.row };
+                break;
+        }
+        this.overlayMap.setCursor(cursorPosition!.col, cursorPosition!.row);
 
-        // // Select a unit and show movement range
-        // if (inputManager.isActionPressed('select')) {
-        //     // Get cursor position
-        //     const cursorPos = this.overlayMap.cursorPosition;
-        //     if (cursorPos) {
-        //         const { col, row } = cursorPos;
-        //         const unitId = this.tileMap?.getTile(col, row, 'Vehicles');
-        //         if (unitId !== 0) {
-        //             console.log(`Selected unit ${unitId} at (${col}, ${row})`);
-        //             this.overlayMap.setMovementRangeHighlight(col, row, 2);
-        //         }
-        //     }
-        //     else {
-        //         throw new Error('Cursor position is null somehow!');
-        //     }
-        //     if (inputManager.isActionReleased('select')) {
-        //         console.log('Deselected unit');
-        //         // Clear highlights
-        //         this.overlayMap.clearMovementRangeHighlight();
-        //     }
-        // }
+        // Select a unit and show movement range
+        if (inputManager.isActionPressed('select')) {
+            // Get cursor position
+            const cursorPos = this.overlayMap.cursorPosition;
+            if (cursorPos) {
+                const { col, row } = cursorPos;
+                const unitId = this.tileMap?.getTile(col, row, 'Vehicles');
+                if (unitId !== 0) {
+                    console.log(`Selected unit ${unitId} at (${col}, ${row})`);
+                    this.overlayMap.setMovementRangeHighlight(col, row, 2);
+                }
+            }
+            else {
+                throw new Error('Cursor position is null somehow!');
+            }
+            if (inputManager.isActionReleased('select')) {
+                console.log('Deselected unit');
+                // Clear highlights
+                this.overlayMap.clearMovementRangeHighlight();
+            }
+        }
 
 
 
