@@ -139,7 +139,7 @@ export class InputManager {
     }
 
     // Call this at the end of each frame to reset pressed/released states
-    public upodate(): void {
+    public update(): void {
         for (const key in this.keys) {
             this.keys[key].pressed = false;
             this.keys[key].released = false;
