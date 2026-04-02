@@ -96,4 +96,36 @@ export class TileMap {
     inBounds(col: number, row: number): boolean {
         return col >= 0 && col < this.width && row >= 0 && row < this.height;
     }
+
+    moveEntity(fromCol: number, fromRow: number, toCol: number, toRow: number, layerName: string): boolean {
+        if (!this.inBounds(fromCol, fromRow) || !this.inBounds(toCol, toRow)) {
+            return false; // Out of bounds
+        }
+        const entityId = this.getTile(fromCol, fromRow, layerName);
+        if (entityId === 0) {
+            return false; // No entity to move
+        }
+        this.setTile(fromCol, fromRow, layerName, 0);
+        this.setTile(toCol, toRow, layerName, entityId);
+        return true;
+    }
+
+    placeEntity(entityId: number, col: number, row: number, layerName: string): boolean {
+        if (!this.inBounds(col, row)) {
+            return false; // Out of bounds
+        }
+        this.setTile(col, row, layerName, entityId);
+        return true;
+    }
+
+    deleteEntity(col: number, row: number, layerName: string): boolean {
+        if (!this.inBounds(col, row)) {
+            return false; // Out of bounds
+        }
+        this.setTile(col, row, layerName, 0);
+        return true;
+    }
+
+
+
 }

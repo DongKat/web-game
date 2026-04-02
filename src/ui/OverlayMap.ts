@@ -27,12 +27,12 @@ export class OverlayMap {
     }
 
 
-    getTile(layer: string, col: number, row: number): number {
+    getTile(col: number, row: number, layer: string): number {
         if (!this.inBounds(col, row)) return 0;
         return this.layers.get(layer)?.[row * this.width + col] ?? 0;
     }
 
-    setTile(layer: string, col: number, row: number, tileId: number): void {
+    setTile(col: number, row: number, layer: string, tileId: number): void {
         if (!this.inBounds(col, row)) return;
         this.layers.get(layer)![row * this.width + col] = tileId;
     }
@@ -42,7 +42,7 @@ export class OverlayMap {
     }
 
     setCursor(col: number, row: number): void {
-        this.setTile(Layers.UI, col, row, TILE_ID_MAP.CURSOR);
+        this.setTile(col, row, Layers.UI, TILE_ID_MAP.CURSOR);
     }
 
     manhattanDistance(col1: number, row1: number, col2: number, row2: number): number {
@@ -50,7 +50,7 @@ export class OverlayMap {
     }
 
     private highlightMovementRange(col: number, row: number): void {
-        this.setTile(Layers.UI, col, row, TILE_ID_MAP.MOVEMENT_HIGHLIGHT);
+        this.setTile(col, row, Layers.UI, TILE_ID_MAP.MOVEMENT_HIGHLIGHT);
     }
 
     setMovementRangeHighlight(col: number, row: number, movementRange: number): void {
@@ -58,6 +58,7 @@ export class OverlayMap {
         let queue: Node[] = [{ col, row, distance: 0 }];
         let result: { col: number; row: number }[] = [];
 
+        // Directions for movement (right, left, down, up)
         const dirs = [
             [1, 0], [-1, 0],
             [0, 1], [0, -1]
@@ -87,6 +88,26 @@ export class OverlayMap {
             this.highlightMovementRange(col, row);
         }
     }
+
+    moveOverlay(fromCol: number, fromRow: number, toCol: number, toRow: number): void {
+        const uiLayer = this.layers.get(Layers.UI);
+        if (!uiLayer) return;
+        const fromIndex = fromRow * this.width + fromCol;
+        const toIndex = toRow * this.width + toCol;
+        const tileId = uiLayer[fromIndex];
+        uiLayer[fromIndex] = 0;
+        uiLayer[toIndex] = tileId;
+    }
+
+    clearMovementRangeHighlight(): void {
+        const uiLayer = this.layers.get(Layers.UI);
+        if (!uiLayer) return;
+        for (let i = 0; i < uiLayer.length; i++) {
+            if (uiLayer[i] === TILE_ID_MAP.MOVEMENT_HIGHLIGHT) {
+                uiLayer[i] = 0;
+            }
+        }
+    }
 }
 
 
@@ -102,7 +123,7 @@ function testSetMovementRangeHighlight() {
     ];
 
     for (const [col, row] of expectedHighlightedTiles) {
-        const tileId = overlayMap.getTile('UI', col, row);
+        const tileId = overlayMap.getTile(col, row, 'UI');
         if (tileId !== TILE_ID_MAP.MOVEMENT_HIGHLIGHT) {
             console.error(`Tile at (${col}, ${row}) should be highlighted but is not.`);
         }
