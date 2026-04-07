@@ -48,6 +48,13 @@ export class InputManager {
         canvas.addEventListener('mousemove', (e) => { this.handleMouseMove(e); });
         canvas.addEventListener('mousedown', (e) => { this.handleMouseDown(e); });
         canvas.addEventListener('mouseup', (e) => { this.handleMouseUp(e); });
+        window.addEventListener('wheel', function (e) {
+            e.preventDefault();
+        }, { passive: false });
+
+        window.addEventListener('touchmove', function (e) {
+            e.preventDefault();
+        }, { passive: false });
     }
 
     bindAction(action: string, keys: string[]): void {
@@ -57,6 +64,7 @@ export class InputManager {
     // Keyboard event handlers
     private handleKeyDown(event: KeyboardEvent): void {
         const code = event.code;
+        console.log(`Key down: ${code}`);
         if (!this.keys[code]) {
             this.keys[code] = {
                 down: false,
@@ -64,7 +72,7 @@ export class InputManager {
                 released: false,
             };
         }
-        this.keys[code].down = !this.keys[code].down;
+        this.keys[code].down = true;
         this.keys[code].pressed = true;
     }
 
@@ -146,5 +154,9 @@ export class InputManager {
         }
         this.mouse.pressed = false;
         this.mouse.released = false;
+    }
+
+    public cleanUp(): void {
+        // Remove event listeners if needed (not implemented here for simplicity)
     }
 }
