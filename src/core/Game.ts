@@ -51,7 +51,8 @@ export class Game {
         InputManager.getInstance().bindAction('move_down', ['ArrowDown', 'KeyS']);
         InputManager.getInstance().bindAction('move_left', ['ArrowLeft', 'KeyA']);
         InputManager.getInstance().bindAction('move_right', ['ArrowRight', 'KeyD']);
-        InputManager.getInstance().bindAction('select', ['Enter', 'Space']);
+        InputManager.getInstance().bindAction('select', ['Enter', 'Space', 'KeyZ']);
+        InputManager.getInstance().bindAction('cancel', ['Escape', 'KeyX']);
 
 
 
@@ -81,6 +82,14 @@ export class Game {
         console.log('✅ All game components initialized successfully');
     }
 
+    // Sub loop when player select a unit, show movement range, and can move the unit around
+    selectUnitLoop(deltaTime: number): void {
+        if (!this.movementSystem || !this.overlayMap) return;
+        
+        
+    
+    }
+
 
 
     gameLoop(deltaTime: number): void {
@@ -89,28 +98,31 @@ export class Game {
 
         // Hook up InputManager
         const inputManager = InputManager.getInstance();
-        inputManager.update();
         // Cursor movement
         // TODO: Implement for mouse
         let cursorPosition = this.overlayMap.cursorPosition || { col: 0, row: 0 };
         switch (true) {
             case inputManager.isActionPressed('move_up'):
+                // console.log('Moving cursor up');
                 cursorPosition = { col: cursorPosition!.col, row: cursorPosition!.row - 1 };
                 break;
             case inputManager.isActionPressed('move_down'):
+                // console.log('Moving cursor down');
                 cursorPosition = { col: cursorPosition!.col, row: cursorPosition!.row + 1 };
                 break;
             case inputManager.isActionPressed('move_left'):
+                // console.log('Moving cursor left');
                 cursorPosition = { col: cursorPosition!.col - 1, row: cursorPosition!.row };
                 break;
             case inputManager.isActionPressed('move_right'):
+                // console.log('Moving cursor right');
                 cursorPosition = { col: cursorPosition!.col + 1, row: cursorPosition!.row };
                 break;
         }
-        this.overlayMap.setCursor(cursorPosition!.col, cursorPosition!.row);
+        this.overlayMap.moveCursor(cursorPosition!.col, cursorPosition!.row);
 
         // Select a unit and show movement range
-        if (inputManager.isActionPressed('select')) {
+        if (inputManager.isActionDown('select')) {
             // Get cursor position
             const cursorPos = this.overlayMap.cursorPosition;
             if (cursorPos) {
@@ -124,18 +136,21 @@ export class Game {
             else {
                 throw new Error('Cursor position is null somehow!');
             }
-            if (inputManager.isActionReleased('select')) {
-                console.log('Deselected unit');
-                // Clear highlights
-                this.overlayMap.clearMovementRangeHighlight();
-            }
         }
 
+        if (inputManager.isActionDown('cancel')) {
+            this.overlayMap.clearMovementRangeHighlight();
+        }
+
+        
 
 
 
 
 
+
+
+        inputManager.update();
         // Draw map
         this.tileMapRenderer?.refresh();
         // Draw overlays (movement range, cursor)
