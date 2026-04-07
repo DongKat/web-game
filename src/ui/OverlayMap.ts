@@ -50,7 +50,17 @@ export class OverlayMap {
     }
 
     private highlightMovementRange(col: number, row: number): void {
-        this.setTile(col, row, Layers.UI, TILE_ID_MAP.MOVEMENT_HIGHLIGHT);
+        this.setTile(col, row, Layers.Effects, TILE_ID_MAP.MOVEMENT_HIGHLIGHT);
+    }
+
+    public clearMovementRangeHighlight(): void {
+        const uiLayer = this.layers.get(Layers.Effects);
+        if (!uiLayer) return;
+        for (let i = 0; i < uiLayer.length; i++) {
+            if (uiLayer[i] === TILE_ID_MAP.MOVEMENT_HIGHLIGHT) {
+                uiLayer[i] = 0;
+            }
+        }
     }
 
     setMovementRangeHighlight(col: number, row: number, movementRange: number): void {
@@ -99,14 +109,14 @@ export class OverlayMap {
         uiLayer[toIndex] = tileId;
     }
 
-    clearMovementRangeHighlight(): void {
-        const uiLayer = this.layers.get(Layers.UI);
-        if (!uiLayer) return;
-        for (let i = 0; i < uiLayer.length; i++) {
-            if (uiLayer[i] === TILE_ID_MAP.MOVEMENT_HIGHLIGHT) {
-                uiLayer[i] = 0;
-            }
+    moveCursor(toCol: number, toRow: number): void {
+        if (!this.inBounds(toCol, toRow)) return;
+
+        if (this.cursorPosition) {
+            this.setTile(this.cursorPosition.col, this.cursorPosition.row, Layers.UI, 0);
         }
+        this.setCursor(toCol, toRow);
+        this.cursorPosition = { col: toCol, row: toRow };
     }
 }
 

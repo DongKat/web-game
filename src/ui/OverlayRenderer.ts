@@ -6,7 +6,10 @@ import { AssetLoader } from '../core/AssetLoader';
 import { TILE_SIZE, SCALE, TILE_ID_MAP } from '../core/constants';
 import type { OverlayMap } from './OverlayMap';
 
-const LAYER_ORDER = ['UI', 'Effects'] as const;
+const LAYER_ORDER = [
+    'Effects',
+    'UI',
+] as const;
 
 export class OverlayRenderer {
     /** The root PixiJS container — add this to your scene */

@@ -7,7 +7,13 @@ import { TILE_SIZE, SCALE } from '../core/constants';
  * Rendering order for layers — bottom to top.
  * Each entry is the layer name in our map JSON.
  */
-const LAYER_ORDER = ['Terrain', 'Objects', 'Shadows', 'Vehicles', 'UI'] as const;
+const LAYER_ORDER = [
+  'Terrain', 
+  'Objects', 
+  // 'Shadows', 
+  'Vehicles', 
+  // 'UI'
+] as const;
 
 /**
  * TileMapRenderer
