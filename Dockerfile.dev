@@ -4,8 +4,12 @@ WORKDIR /app
 
 # Copy dependency files first (better caching)
 COPY package.json package-lock.json* ./
+COPY packages/shared/package.json packages/shared/
+COPY packages/server/package.json packages/server/
+COPY packages/client/package.json packages/client/
+COPY tsconfig.base.json ./
 
 # Install dependencies
-RUN npm ci
+RUN npm install
 
-CMD ["sh"]  
+CMD ["sh"]

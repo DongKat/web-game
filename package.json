@@ -3,22 +3,24 @@
   "private": true,
   "version": "0.0.0",
   "type": "module",
+  "workspaces": [
+    "packages/shared",
+    "packages/server",
+    "packages/client"
+  ],
   "scripts": {
-    "test": "vitest",
-    "dev": "vite",
-    "build": "tsc && vite build",
-    "preview": "vite preview"
+    "dev": "npm run dev -w packages/client",
+    "dev:server": "npm run dev -w packages/server",
+    "dev:all": "npm run dev:server & npm run dev",
+    "build": "npm run build -w packages/shared && npm run build -w packages/server && npm run build -w packages/client",
+    "build:shared": "npm run build -w packages/shared",
+    "build:server": "npm run build -w packages/server",
+    "build:client": "npm run build -w packages/client",
+    "test": "npm run test --workspaces --if-present",
+    "clean": "rimraf packages/*/dist"
   },
   "devDependencies": {
-    "ts-node": "^10.9.2",
-    "tsx": "^4.21.0",
     "typescript": "~5.9.3",
-    "vite": "^8.0.1",
-    "vitest": "^4.1.2"
-  },
-  "dependencies": {
-    "@pixi/devtools": "^2.0.1",
-    "jest": "^30.3.0",
-    "pixi.js": "^8.17.1"
+    "rimraf": "^6.0.0"
   }
 }
