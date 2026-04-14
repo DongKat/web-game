@@ -1,24 +1,24 @@
 // Hold the state machine here and instantiate the main game components (TileMap, TileMapRenderer, OverlayMap, etc.)
-import { Application, Container, Sprite } from 'pixi.js';
-import { Camera } from 'pixi-game-camera';
-import { TILE_SIZE, SCALE } from '../core/constants';
-import { TileMap } from '../map/TileMap';
-import { TileMapRenderer } from '../map/TileMapRenderer';
+import { Application, Container } from 'pixi.js';
+import { TileMap } from '../map/GameMap';
+import { LayeredTileRenderer } from '../renderer/MapRenderer';
 import { OverlayMap } from '../ui/OverlayMap';
-import { OverlayRenderer } from '../ui/OverlayRenderer';
 import { MovementSystem } from '../systems/MovementSystem';
 import { InputManager } from '../core/InputManager';
 import { AssetLoader } from '../core/AssetLoader';
+
+const TILEMAP_LAYER_ORDER = ['Terrain', 'Objects', 'Vehicles'] as const;
+const OVERLAY_LAYER_ORDER = ['Effects', 'UI'] as const;
 
 
 export class Game {
     private app: Application | null = null;
     private assetLoader: AssetLoader | null = null;
     private tileMap: TileMap | null = null;
-    private tileMapRenderer: TileMapRenderer | null = null;
+    private tileMapRenderer: LayeredTileRenderer | null = null;
     private overlayMap: OverlayMap | null = null;
     private movementSystem: MovementSystem | null = null;
-    private overlayRenderer: OverlayRenderer | null = null;
+    private overlayRenderer: LayeredTileRenderer | null = null;
 
     private worldContainer: Container | null = null;
 
@@ -36,10 +36,20 @@ export class Game {
         this.assetLoader = new AssetLoader();
         const assets = await AssetLoader.loadAll();
         this.tileMap = new TileMap(assets.mapData);
-        this.tileMapRenderer = new TileMapRenderer(this.tileMap, assets.tileTextures);
+        this.tileMapRenderer = new LayeredTileRenderer(
+            this.tileMap,
+            assets.tileTextures,
+            TILEMAP_LAYER_ORDER,
+            'TileMapRenderer'
+        );
         this.overlayMap = new OverlayMap(this.tileMap.width, this.tileMap.height);
         this.movementSystem = new MovementSystem(this.tileMap, this.overlayMap);
-        this.overlayRenderer = new OverlayRenderer(this.overlayMap, assets.tileTextures);
+        this.overlayRenderer = new LayeredTileRenderer(
+            this.overlayMap,
+            assets.tileTextures,
+            OVERLAY_LAYER_ORDER,
+            'OverlayRenderer'
+        );
 
         this.worldContainer = new Container();
         this.worldContainer.addChild(this.tileMapRenderer.container);

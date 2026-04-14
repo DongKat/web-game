@@ -1,9 +1,9 @@
 // Move rendering of UI layer (cursor, highlights) from TileMapRenderer
 
 import { Container, Texture, Sprite } from 'pixi.js';
-import { TileMap } from '../map/TileMap';
+import { TileMap } from '../map/GameMap';
 import { AssetLoader } from '../core/AssetLoader';
-import { TILE_SIZE, SCALE, TILE_ID_MAP } from '../core/constants';
+import { TILE_SIZE, SCALE, TILE_ID_MAP } from '../shared/constants';
 import type { OverlayMap } from './OverlayMap';
 
 const LAYER_ORDER = [

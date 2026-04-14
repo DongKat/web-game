@@ -1,7 +1,7 @@
 import { Container, Sprite, Texture } from 'pixi.js';
 import type { TileMap } from './TileMap';
 import { AssetLoader } from '../core/AssetLoader';
-import { TILE_SIZE, SCALE } from '../core/constants';
+import { TILE_SIZE, SCALE } from '../shared/constants';
 
 /**
  * Rendering order for layers — bottom to top.

@@ -1,4 +1,4 @@
-import type { TileMap } from '../map/TileMap';
+import type { TileMap } from '../map/GameMap';
 import type { OverlayMap } from '../ui/OverlayMap';
 
 

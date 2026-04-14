@@ -1,3 +1,6 @@
+// TODO: Put this in shared for now because I feel it will be reused. Split up in the future
+
+
 /**
  * Core game constants
  */
@@ -29,7 +32,7 @@ export const DEFAULT_MAP_DATA_PATH = '/assets/maps/sample.json';
 /**
  * Team colors used for units and buildings
  */
-export const Team = {
+export const TEAM = {
   Blue: 'blue',
   Red: 'red',
   Green: 'green',
@@ -37,20 +40,23 @@ export const Team = {
   Gray: 'gray',
 } as const;
 
-export type Team = (typeof Team)[keyof typeof Team];
+export type Team = (typeof TEAM)[keyof typeof TEAM];
 
-export const Layers = {
-  Terrain: 'Terrain',
-  Objects: 'Objects',
-  Shadows: 'Shadows',
-  Vehicles: 'Vehicles',
-  UI: 'UI',
-  Effects: 'Effects',
+
+export type LAYER_NAME = 'Terrain' | 'Building' | 'Unit' | 'Shadows' | 'Effects' | 'UI';
+export const LAYER_ID: Record<LAYER_NAME, number> = {
+  "Terrain": 0,
+  "Building": 1,
+  "Unit": 2,
+  "UI": 3,
+  "Shadows": 4,
+  "Effects": 5,
 } as const;
 
 
-// TODO: Map tile ID to string name
-export const TILE_ID_MAP = {
+
+// For Kenny spritesheet only
+export const SPRITE_ID = {
   GRASS_0: 1,
   GRASS_1: 2,
   GRASS_2: 3,
@@ -250,3 +256,5 @@ export const TILE_ID_MAP = {
   MOUSE_CURSOR: 197,
   SHADOW: 198,
 } as const;
+
+export type SPRITE_ID = (typeof SPRITE_ID)[keyof typeof SPRITE_ID];

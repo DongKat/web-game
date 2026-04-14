@@ -1,3 +1,6 @@
+// TODO: Let interact directly with this for now. When I switch to real AW sprites, refactor these stuffs
+
+
 import { Assets, Texture, Rectangle } from 'pixi.js';
 import {
   TILE_SIZE,
@@ -6,7 +9,7 @@ import {
   SHEET_ROWS,
   SPRITESHEET_PATH,
   DEFAULT_MAP_DATA_PATH,
-} from './constants';
+} from "../shared/constants.ts";
 
 /**
  * Shape of a single layer in our map JSON
