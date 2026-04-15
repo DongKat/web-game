@@ -24,7 +24,7 @@ export const TOTAL_TILES = SHEET_COLUMNS * SHEET_ROWS; // 198
 export const SCALE = 3;
 
 /** Path to the packed tilemap spritesheet */
-export const SPRITESHEET_PATH = '/assets/Tilemap/tilemap_packed.png';
+export const KENNY_SPRITESHEET_PATH = '/assets/Tilemap/tilemap_packed.png';
 
 /** Path to the map data JSON */
 export const DEFAULT_MAP_DATA_PATH = '/assets/maps/sample.json';

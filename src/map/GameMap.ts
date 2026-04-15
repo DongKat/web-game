@@ -13,17 +13,24 @@ export class GameMap {
         this.mapWidth = 0;
         this.mapHeight = 0;
         this.mapLayers = {
-            "Terrain": [] as Entity[],
-            "Building": [] as Entity[],
-            "Unit": [] as Entity[],
-            "Shadows": [] as Entity[],
-            "Effects": [] as Entity[],
-            "UI": [] as Entity[],
+            "Terrain": [] as IEntity[],
+            "Building": [] as IEntity[],
+            "Unit": [] as IEntity[],
+            "Shadows": [] as IEntity[],
+            "Effects": [] as IEntity[],
+            "UI": [] as IEntity[],
         };
     }
 
     inBounds(col: number, row: number): boolean {
         return col >= 0 && col < this.mapWidth && row >= 0 && row < this.mapHeight;
+    }
+
+    getLayer(layerName: LAYER_NAME): IEntity[]{
+        const layer = this.mapLayers[layerName];
+        if (!layer)
+            throw new Error(`Layer ${layerName} does not exist`);
+        return layer;
     }
 
     getTile(col: number, row: number, layerName: LAYER_NAME): IEntity {
