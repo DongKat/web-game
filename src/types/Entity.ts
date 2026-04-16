@@ -1,22 +1,19 @@
-import type { SPRITE_ID } from "../shared/constants";
+import type { Texture } from "pixi.js";
 
 // Just for reporting sprite id to be drawn
 export interface IEntity {
-    id: SPRITE_ID;
-    data: any; // TODO: Define data structure for each entity type
-    getSpriteId(): SPRITE_ID;
+    texture: Texture;
+    getTexture(): Texture;
 }
 
-export abstract class Entity implements IEntity {
-    id: SPRITE_ID;
-    data: any;
+export class Entity implements IEntity {
+    texture: Texture;
 
-    constructor(id: SPRITE_ID, data: any) {
-        this.id = id;
-        this.data = data;
+    constructor(texture: Texture) {
+        this.texture = texture;
     }
 
-    getSpriteId(): SPRITE_ID {
-        return this.id;
+    getTexture(): Texture {
+        return this.texture;
     }
 }
