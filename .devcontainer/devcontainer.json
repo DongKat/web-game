@@ -1,0 +1,6 @@
+{
+  "name": "My Node App",
+  "dockerComposeFile": ["../docker-compose.yml"],
+  "service": "dev", // The name of the service in docker-compose.yml
+  "workspaceFolder": "/app" // Where your code lives inside the container
+}

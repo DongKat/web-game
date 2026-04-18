@@ -1,0 +1,15 @@
+services:
+    dev:
+        image: web-game
+        container_name: node-container
+        ports:
+            - 5173:5173
+        volumes:
+            - ./:/app
+            - vscode-server:/root/.vscode-server
+        stdin_open: true
+        tty: true
+
+
+volumes:
+    vscode-server:
