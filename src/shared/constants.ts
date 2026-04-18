@@ -27,7 +27,7 @@ export const SCALE = 3;
 export const KENNY_SPRITESHEET_PATH = '/assets/Tilemap/tilemap_packed.png';
 
 /** Path to the map data JSON */
-export const DEFAULT_MAP_DATA_PATH = '/assets/maps/sample.json';
+export const DEFAULT_MAP_DATA_PATH = '/assets/maps/default-map.json';
 
 export type TerrainType = 'Grass' | 'Mountain' | 'Lake' | 'River' | 'Road' | 'Bridge' | 'Forest';
 export type UnitType = 'Infantry' | 'Tank' | 'Artillery' | 'Jet' | 'Heli' | 'Boat' | 'Sub';

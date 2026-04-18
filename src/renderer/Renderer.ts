@@ -1,27 +1,22 @@
 import { Container, Sprite, Texture } from 'pixi.js';
 import { TILE_SIZE, SCALE } from '../shared/constants';
 import type { GameMap } from '../map/GameMap';
-import type { ISpriteProvider } from '../sprites/ISpriteProvider';
+// import type { ITextureProvider } from '../sprites/ITextureProvider';
 
 
 
 export class Renderer {
-    /** The root PixiJS container — add this to your scene */
-
-    // Hold refrence to GameMap to read tile data from
     private gameMap: GameMap;
-    private spriteProvider: ISpriteProvider;
-
-
+    // private spriteProvider: ITextureProvider;
     readonly rootContainer: Container;
     private layerContainers: Map<string, Container> = new Map();
 
     constructor(
         gameMap: GameMap,
-        spriteProvider: ISpriteProvider,
+        // spriteProvider: ITextureProvider,
     ) {
         this.gameMap = gameMap;
-        this.spriteProvider = spriteProvider;
+        // this.spriteProvider = spriteProvider;
         this.rootContainer = new Container();
     }
 
@@ -33,6 +28,9 @@ export class Renderer {
         this.layerContainers.set('Shadows', new Container());
         this.layerContainers.set('Effects', new Container());
         this.layerContainers.set('UI', new Container());
+        for (const layerContainer of this.layerContainers.values()) {
+            this.rootContainer.addChild(layerContainer);
+        }
     }
 
     public update(): void {
@@ -51,8 +49,23 @@ export class Renderer {
             throw new Error(`Layer container for ${layerName} not found`);
         }
         layerContainer.removeChildren(); // Clear previous frame
-        
-        
+
+        const { width, height } = this.gameMap.getMapSize();
+        const layerData = this.gameMap.getLayer(layerName as any);
+
+        for (let colIdx = 0; colIdx < width; colIdx++) {
+            for (let rowIdx = 0; rowIdx < height; rowIdx++) {
+                const entity = layerData[rowIdx * width + colIdx];
+                if (entity) {
+                    const entityTexture : Texture = entity.getTexture(); // TODO: Re think about this
+                    const sprite = new Sprite(entityTexture);
+                    sprite.x = colIdx * TILE_SIZE * SCALE;
+                    sprite.y = rowIdx * TILE_SIZE * SCALE;
+                    sprite.scale.set(SCALE);
+                    layerContainer.addChild(sprite);
+                }
+            }
+        }
     }
 
 }

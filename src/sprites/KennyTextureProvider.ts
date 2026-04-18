@@ -100,6 +100,17 @@ export class KennySpriteProvider implements ISpriteProvider {
         allSpriteEntries.map((entry) => [entry.id, entry] as const),
     );
 
+    private static instance: KennySpriteProvider;
+
+    private constructor() {}
+
+    public static getInstance(): KennySpriteProvider {
+        if (!KennySpriteProvider.instance) {
+            KennySpriteProvider.instance = new KennySpriteProvider();
+        }
+        return KennySpriteProvider.instance;
+    }
+
     async loadAll(): Promise<void> {
         this.spritesheetTexture = await Assets.load<Texture>(KENNY_SPRITESHEET_PATH);
         this.textureMap = this.sliceSpriteSheet();

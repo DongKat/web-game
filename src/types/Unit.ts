@@ -1,8 +1,7 @@
+import type { Texture } from "pixi.js";
 import type { IEntity } from "./Entity";
 
-
-
-type UnitData = {
+export type UnitData = {
     unitType: string;
     owner: number; // Player ID or faction
     healthPoint: number;
@@ -11,8 +10,18 @@ type UnitData = {
     attackRange: number;
     attackPower: number;
     movementRange: number;
-}
+};
 
-export interface Unit extends IEntity {
+export class Unit implements IEntity {
+    texture: Texture;
     data: UnitData;
+
+    constructor(texture: Texture, data: UnitData) {
+        this.texture = texture;
+        this.data = data;
+    }
+
+    getTexture(): Texture {
+        return this.texture;
+    }
 }
