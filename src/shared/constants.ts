@@ -36,14 +36,7 @@ export type UIElementType = 'Cursor' | 'MovementHighlight' | 'Health' | 'Shadow'
 export type TeamColor = 'Blue' | 'Red' | 'Green' | 'Orange' | 'Gray' | 'Yellow';
 
 
-export type LAYER_NAME = 'Terrain' | 'Building' | 'Unit' | 'Shadows' | 'Effects' | 'UI';
-export const LAYER_ID: Record<LAYER_NAME, number> = {
-  "Terrain": 0,
-  "Building": 1,
-  "Unit": 2,
-  "UI": 3,
-  "Shadows": 4,
-  "Effects": 5,
-} as const;
+export type LAYER_NAME = 'Terrain' | 'Building' | 'Unit'
+export type UI_LAYER_NAME = 'Shadow' | 'Effect' | 'UI';
 
 export type SPRITE_ID = number;

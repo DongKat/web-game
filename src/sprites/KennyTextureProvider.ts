@@ -1,5 +1,5 @@
 import { Assets, Rectangle, Texture } from 'pixi.js';
-import type { ISpriteProvider } from './ITextureProvider.ts';
+import type { ITextureProvider } from './ITextureProvider.ts';
 import { KENNY_SPRITESHEET_PATH, SHEET_COLUMNS, SHEET_ROWS, TILE_SIZE, TILE_SPACING } from '../shared/constants.ts';
 import type { BuildingType, SPRITE_ID, TeamColor, TerrainType, UIElementType, UnitType } from '../shared/constants.ts';
 import spriteMetadata from '../schema/KennySpriteMetadata.json';
@@ -93,7 +93,7 @@ const uiLookup: Record<UIElementType, SPRITE_ID> = {
 
 const availableTeams = new Set<TeamColor>(['Gray', 'Green', 'Blue', 'Red', 'Yellow']);
 
-export class KennySpriteProvider implements ISpriteProvider {
+export class KennySpriteProvider implements ITextureProvider {
     private spritesheetTexture: Texture | null = null;
     private textureMap: Map<SPRITE_ID, Texture> = new Map();
     private spriteEntriesById: Map<SPRITE_ID, SpriteEntry> = new Map(

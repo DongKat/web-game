@@ -1,7 +1,6 @@
-import { Container, Sprite, Texture } from 'pixi.js';
-import { TILE_SIZE, SCALE } from '../shared/constants';
+import { Container } from 'pixi.js';
 import type { GameMap } from '../map/GameMap';
-// import type { ITextureProvider } from '../sprites/ITextureProvider';
+import type { ITextureProvider } from '../sprites/ITextureProvider';
 
 
 
@@ -11,12 +10,26 @@ export class Renderer {
     readonly rootContainer: Container;
     private layerContainers: Map<string, Container> = new Map();
 
+    private static instance: Renderer;
+
+    private textureProvider: ITextureProvider;
+
+
+
+    public static getInstance(gameMap: GameMap, textureProvider: ITextureProvider): Renderer {
+        if (!Renderer.instance) {
+            Renderer.instance = new Renderer(gameMap, textureProvider);
+        }
+        return Renderer.instance;
+    }
+
+
     constructor(
         gameMap: GameMap,
-        // spriteProvider: ITextureProvider,
+        textureProvider: ITextureProvider,
     ) {
         this.gameMap = gameMap;
-        // this.spriteProvider = spriteProvider;
+        this.textureProvider = textureProvider;
         this.rootContainer = new Container();
     }
 
@@ -33,39 +46,22 @@ export class Renderer {
         }
     }
 
-    public update(): void {
-        // Render each layer in order
-        this.renderLayer('Terrain');
-        this.renderLayer('Building');
-        this.renderLayer('Unit');
-        this.renderLayer('Shadows');
-        this.renderLayer('Effects');
-        this.renderLayer('UI');
-    }
 
-    private renderLayer(layerName: string): void {
-        const layerContainer = this.layerContainers.get(layerName);
-        if (!layerContainer) {
-            throw new Error(`Layer container for ${layerName} not found`);
-        }
-        layerContainer.removeChildren(); // Clear previous frame
-
-        const { width, height } = this.gameMap.getMapSize();
-        const layerData = this.gameMap.getLayer(layerName as any);
-
-        for (let colIdx = 0; colIdx < width; colIdx++) {
-            for (let rowIdx = 0; rowIdx < height; rowIdx++) {
-                const entity = layerData[rowIdx * width + colIdx];
-                if (entity) {
-                    const entityTexture : Texture = entity.getTexture(); // TODO: Re think about this
-                    const sprite = new Sprite(entityTexture);
-                    sprite.x = colIdx * TILE_SIZE * SCALE;
-                    sprite.y = rowIdx * TILE_SIZE * SCALE;
-                    sprite.scale.set(SCALE);
-                    layerContainer.addChild(sprite);
+    public renderTerrain(): void {
+        // Terrain don't change so render once
+        const terrainLayerData = this.gameMap.getLayer('Terrain');
+        const terrainContainer = this.layerContainers.get('Terrain');
+        for (let row = 0; row < this.gameMap.mapHeight; row++) {
+            for (let col = 0; col < this.gameMap.mapWidth; col++) {
+                const terrainTile = terrainLayerData[row * this.gameMap.mapWidth + col];
+                if (terrainTile) {
                 }
             }
         }
     }
 
+
+
+    public update(): void {
+    }
 }

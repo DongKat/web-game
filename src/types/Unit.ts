@@ -1,5 +1,4 @@
-import type { Texture } from "pixi.js";
-import type { IEntity } from "./Entity";
+import { Entity } from "./Entity";
 
 export type UnitData = {
     unitType: string;
@@ -12,16 +11,33 @@ export type UnitData = {
     movementRange: number;
 };
 
-export class Unit implements IEntity {
-    texture: Texture;
+export class Unit extends Entity {
     data: UnitData;
 
-    constructor(texture: Texture, data: UnitData) {
-        this.texture = texture;
-        this.data = data;
+    constructor() {
+        super();
+        this.data = {
+            unitType: "",
+            owner: 0,
+            healthPoint: 0,
+            ammo: 0,
+            fuel: 0,
+            attackRange: 0,
+            attackPower: 0,
+            movementRange: 0,
+        } as UnitData;
     }
 
-    getTexture(): Texture {
-        return this.texture;
+    importFromJson(json: string): void {
+        const obj = JSON.parse(json);
+        this.data.unitType = obj.unitType;
+        this.data.owner = obj.owner;
+    }
+
+    exportToJson(): string {
+        return JSON.stringify({
+            unitType: this.data.unitType,
+            owner: this.data.owner,
+        });
     }
 }

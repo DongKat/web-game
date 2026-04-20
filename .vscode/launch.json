@@ -5,7 +5,7 @@
       "type": "node",
       "request": "launch",
       "name": "Debug TS File",
-      "runtimeArgs": ["-r", "tsx"],
+      "runtimeArgs": ["--import", "tsx"],
       "args": ["${file}"],
       "cwd": "${workspaceFolder}",
       "skipFiles": ["<node_internals>/**"]

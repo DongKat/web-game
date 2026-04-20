@@ -21,30 +21,19 @@ export class EntityFactory {
     }
 
     
-    createEntity(type: string, texture: Texture, params: any): Building | Unit | Terrain | null 
+    public static createEntity(type: string): Building | Unit | Terrain | null
     {
         switch (type) {
             case 'Building':
-                return new Building(texture, params);
+                return new Building();
             case 'Unit':
-                return new Unit(texture, params);
+                return new Unit();
             case 'Terrain':
-                return new Terrain(texture, params);
+                return new Terrain();
             default:
-                console.warn(`Unknown entity type: ${type}`);
+                throw new Error(`EntityFactory: Unknown entity type: ${type}`);
+                console.warn(`EntityFactory: Unknown entity type: ${type}`);
                 return null;
         }
-    }
-
-    createBuilding(texture: Texture, params: any): Building {
-        return new Building(texture, params);
-    }
-    
-    createUnit(texture: Texture, params: any): Unit {
-        return new Unit(texture, params);
-    }
-
-    createTerrain(texture: Texture, params: any): Terrain {
-        return new Terrain(texture, params);
     }
 }

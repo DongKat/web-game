@@ -1,18 +1,19 @@
-import type { Texture } from "pixi.js";
 
 // Just for reporting sprite id to be drawn
 export interface IEntity {
-    getTexture(): Texture;
+    importFromJson(json: string): void;
+    exportToJson(): string;
 }
 
 export class Entity implements IEntity {
-    private texture: Texture;
-
-    constructor(texture: Texture) {
-        this.texture = texture;
+    constructor() {
     }
 
-    getTexture(): Texture {
-        return this.texture;
+    importFromJson(json: string): void {
+        throw new Error("importFromJson() not implemented for Entity.");
+    }
+
+    exportToJson(): string {
+        throw new Error("exportToJson() not implemented for Entity.");
     }
 }
