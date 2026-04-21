@@ -8,65 +8,63 @@
     "mountain": [
       { "id": 6, "name": "MOUNTAIN", "type": "Mountain" }
     ],
-    "lake": [
-      { "id": 19, "name": "LAKE_0", "type": "Lake", "variant": 0 },
-      { "id": 20, "name": "LAKE_1", "type": "Lake", "variant": 1 },
-      { "id": 21, "name": "LAKE_2", "type": "Lake", "variant": 2 },
-      { "id": 37, "name": "LAKE_3", "type": "Lake", "variant": 3 },
-      { "id": 38, "name": "LAKE_4", "type": "Lake", "variant": 4 },
-      { "id": 39, "name": "LAKE_5", "type": "Lake", "variant": 5 },
-      { "id": 40, "name": "LAKE_6", "type": "Lake", "variant": 6 },
-      { "id": 55, "name": "LAKE_7", "type": "Lake", "variant": 7 },
-      { "id": 56, "name": "LAKE_8", "type": "Lake", "variant": 8 },
-      { "id": 57, "name": "LAKE_9", "type": "Lake", "variant": 9 },
-      { "id": 73, "name": "LAKE_10", "type": "Lake", "variant": 10 },
-      { "id": 74, "name": "LAKE_11", "type": "Lake", "variant": 11 },
-      { "id": 75, "name": "LAKE_12", "type": "Lake", "variant": 12 },
-      { "id": 76, "name": "LAKE_13", "type": "Lake", "variant": 13 },
-      { "id": 91, "name": "LAKE_14", "type": "Lake", "variant": 14 },
-      { "id": 92, "name": "LAKE_15", "type": "Lake", "variant": 15 },
-      { "id": 93, "name": "LAKE_16", "type": "Lake", "variant": 16 },
-      { "id": 94, "name": "LAKE_17", "type": "Lake", "variant": 17 }
-    ],
-    "river": [
-      { "id": 4, "name": "RIVER_0", "type": "River", "variant": 0 },
-      { "id": 5, "name": "RIVER_1", "type": "River", "variant": 1 },
-      { "id": 22, "name": "RIVER_3", "type": "River", "variant": 3 },
-      { "id": 23, "name": "RIVER_4", "type": "River", "variant": 4 },
-      { "id": 58, "name": "RIVER_5", "type": "River", "variant": 5 }
+    "water": [
+      { "id": 19, "name": "WATER_0",  "type": "Water", "variant": 0 },
+      { "id": 20, "name": "WATER_1",  "type": "Water", "variant": 1 },
+      { "id": 21, "name": "WATER_2",  "type": "Water", "variant": 2 },
+      { "id": 37, "name": "WATER_3",  "type": "Water", "variant": 3 },
+      { "id": 38, "name": "WATER_4",  "type": "Water", "variant": 4 },
+      { "id": 39, "name": "WATER_5",  "type": "Water", "variant": 5 },
+      { "id": 40, "name": "WATER_6",  "type": "Water", "variant": 6 },
+      { "id": 55, "name": "WATER_7",  "type": "Water", "variant": 7 },
+      { "id": 56, "name": "WATER_8",  "type": "Water", "variant": 8 },
+      { "id": 57, "name": "WATER_9",  "type": "Water", "variant": 9 },
+      { "id": 73, "name": "WATER_10", "type": "Water", "variant": 10 },
+      { "id": 74, "name": "WATER_11", "type": "Water", "variant": 11 },
+      { "id": 75, "name": "WATER_12", "type": "Water", "variant": 12 },
+      { "id": 76, "name": "WATER_13", "type": "Water", "variant": 13 },
+      { "id": 91, "name": "WATER_14", "type": "Water", "variant": 14 },
+      { "id": 92, "name": "WATER_15", "type": "Water", "variant": 15 },
+      { "id": 93, "name": "WATER_16", "type": "Water", "variant": 16 },
+      { "id": 94, "name": "WATER_17", "type": "Water", "variant": 17 },
+      { "id": 4,  "name": "WATER_18", "type": "Water", "variant": 18 },
+      { "id": 5,  "name": "WATER_19", "type": "Water", "variant": 19 },
+      { "id": 22, "name": "WATER_20", "type": "Water", "variant": 20 },
+      { "id": 23, "name": "WATER_21", "type": "Water", "variant": 21 },
+      { "id": 58, "name": "WATER_22", "type": "Water", "variant": 22 }
     ],
     "forest": [
-      { "id": 95, "name": "FOREST_1", "type": "Forest", "variant": 1 },
-      { "id": 113, "name": "FOREST_2", "type": "Forest", "variant": 2 }
+      { "id": 95, "name": "FOREST_1", "type": "Forest", "variant": 0 },
+      { "id": 113, "name": "FOREST_2", "type": "Forest", "variant": 1 }
     ]
   },
   "infrastructure": {
     "roadBlocks": [
-      { "id": 24, "name": "ROAD_BLOCK_1", "type": "RoadBlock", "variant": 1 },
-      { "id": 26, "name": "ROAD_BLOCK_2", "type": "RoadBlock", "variant": 2 }
+      { "id": 24, "name": "ROAD_BLOCK_1", "type": "RoadBlock", "variant": 0 },
+      { "id": 26, "name": "ROAD_BLOCK_2", "type": "RoadBlock", "variant": 1 }
     ],
     "roads": [
-      { "id": 109, "name": "ROAD_1", "type": "Road", "variant": 1 },
-      { "id": 110, "name": "ROAD_2", "type": "Road", "variant": 2 },
-      { "id": 111, "name": "ROAD_3", "type": "Road", "variant": 3 },
-      { "id": 112, "name": "ROAD_4", "type": "Road", "variant": 4 },
-      { "id": 127, "name": "ROAD_5", "type": "Road", "variant": 5 },
-      { "id": 128, "name": "ROAD_6", "type": "Road", "variant": 6 },
-      { "id": 129, "name": "ROAD_7", "type": "Road", "variant": 7 },
-      { "id": 130, "name": "ROAD_8", "type": "Road", "variant": 8 },
-      { "id": 145, "name": "ROAD_9", "type": "Road", "variant": 9 },
-      { "id": 146, "name": "ROAD_10", "type": "Road", "variant": 10 },
-      { "id": 147, "name": "ROAD_11", "type": "Road", "variant": 11 },
-      { "id": 148, "name": "ROAD_12", "type": "Road", "variant": 12 },
-      { "id": 163, "name": "ROAD_13", "type": "Road", "variant": 13 },
-      { "id": 164, "name": "ROAD_14", "type": "Road", "variant": 14 },
-      { "id": 165, "name": "ROAD_15", "type": "Road", "variant": 15 },
-      { "id": 166, "name": "ROAD_16", "type": "Road", "variant": 16 }
+      { "id": 109, "name": "ROAD_1", "type": "Road", "variant": 0 },
+      { "id": 110, "name": "ROAD_2", "type": "Road", "variant": 1 },
+      { "id": 111, "name": "ROAD_3", "type": "Road", "variant": 2 },
+      { "id": 112, "name": "ROAD_4", "type": "Road", "variant": 3 },
+      { "id": 127, "name": "ROAD_5", "type": "Road", "variant": 4 },
+      { "id": 128, "name": "ROAD_6", "type": "Road", "variant": 5 },
+      { "id": 129, "name": "ROAD_7", "type": "Road", "variant": 6 },
+      { "id": 130, "name": "ROAD_8", "type": "Road", "variant": 7 },
+      { "id": 145, "name": "ROAD_9", "type": "Road", "variant": 8 },
+      { "id": 146, "name": "ROAD_10", "type": "Road", "variant": 9 },
+      { "id": 147, "name": "ROAD_11", "type": "Road", "variant": 10 },
+      { "id": 148, "name": "ROAD_12", "type": "Road", "variant": 11 },
+      { "id": 163, "name": "ROAD_13", "type": "Road", "variant": 12 },
+      { "id": 164, "name": "ROAD_14", "type": "Road", "variant": 13 },
+      { "id": 165, "name": "ROAD_15", "type": "Road", "variant": 14 },
+      { "id": 166, "name": "ROAD_16", "type": "Road", "variant": 15 }
     ],
     "bridges": [
-      { "id": 131, "name": "BRIDGE", "type": "Bridge", "variant": 1 },
-      { "id": 149, "name": "BRIDGE_2", "type": "Bridge", "variant": 2 },
-      { "id": 167, "name": "BRIDGE_3", "type": "Bridge", "variant": 3 }
+      { "id": 131, "name": "BRIDGE", "type": "Bridge", "variant": 0 },
+      { "id": 149, "name": "BRIDGE_2", "type": "Bridge", "variant": 1 },
+      { "id": 167, "name": "BRIDGE_3", "type": "Bridge", "variant": 2 }
     ],
     "paths": [
       { "id": 41, "name": "PATH_ARROW_UP", "type": "Path", "variant": "Up" },
@@ -96,8 +94,8 @@
       { "id": 14, "name": "GRAY_COMN", "type": "ComTower", "team": "Gray" },
       { "id": 15, "name": "GRAY_SILO", "type": "Silo", "team": "Gray" },
       { "id": 16, "name": "GRAY_AIRPORT", "type": "Airport", "team": "Gray" },
-      { "id": 17, "name": "GRAY_FLAG_ANIMATION_1", "type": "Flag", "team": "Gray", "frame": 1 },
-      { "id": 18, "name": "GRAY_FLAG_ANIMATION_2", "type": "Flag", "team": "Gray", "frame": 2 }
+      { "id": 17, "name": "GRAY_FLAG_ANIMATION_1", "type": "Flag", "team": "Gray", "frame": 0 },
+      { "id": 18, "name": "GRAY_FLAG_ANIMATION_2", "type": "Flag", "team": "Gray", "frame": 1 }
     ],
     "Green": [
       { "id": 27, "name": "GREEN_CITY", "type": "City", "team": "Green" },
@@ -108,8 +106,8 @@
       { "id": 32, "name": "GREEN_COMN", "type": "ComTower", "team": "Green" },
       { "id": 33, "name": "GREEN_SILO", "type": "Silo", "team": "Green" },
       { "id": 34, "name": "GREEN_AIRPORT", "type": "Airport", "team": "Green" },
-      { "id": 35, "name": "GREEN_FLAG_ANIMATION_1", "type": "Flag", "team": "Green", "frame": 1 },
-      { "id": 36, "name": "GREEN_FLAG_ANIMATION_2", "type": "Flag", "team": "Green", "frame": 2 }
+      { "id": 35, "name": "GREEN_FLAG_ANIMATION_1", "type": "Flag", "team": "Green", "frame": 0 },
+      { "id": 36, "name": "GREEN_FLAG_ANIMATION_2", "type": "Flag", "team": "Green", "frame": 1 }
     ],
     "Blue": [
       { "id": 45, "name": "BLUE_CITY", "type": "City", "team": "Blue" },
@@ -120,8 +118,8 @@
       { "id": 50, "name": "BLUE_COMN", "type": "ComTower", "team": "Blue" },
       { "id": 51, "name": "BLUE_SILO", "type": "Silo", "team": "Blue" },
       { "id": 52, "name": "BLUE_AIRPORT", "type": "Airport", "team": "Blue" },
-      { "id": 53, "name": "BLUE_FLAG_ANIMATION_1", "type": "Flag", "team": "Blue", "frame": 1 },
-      { "id": 54, "name": "BLUE_FLAG_ANIMATION_2", "type": "Flag", "team": "Blue", "frame": 2 }
+      { "id": 53, "name": "BLUE_FLAG_ANIMATION_1", "type": "Flag", "team": "Blue", "frame": 0 },
+      { "id": 54, "name": "BLUE_FLAG_ANIMATION_2", "type": "Flag", "team": "Blue", "frame": 1 }
     ],
     "Red": [
       { "id": 63, "name": "RED_CITY", "type": "City", "team": "Red" },
@@ -132,8 +130,8 @@
       { "id": 68, "name": "RED_COMN", "type": "ComTower", "team": "Red" },
       { "id": 69, "name": "RED_SILO", "type": "Silo", "team": "Red" },
       { "id": 70, "name": "RED_AIRPORT", "type": "Airport", "team": "Red" },
-      { "id": 71, "name": "RED_FLAG_ANIMATION_1", "type": "Flag", "team": "Red", "frame": 1 },
-      { "id": 72, "name": "RED_FLAG_ANIMATION_2", "type": "Flag", "team": "Red", "frame": 2 }
+      { "id": 71, "name": "RED_FLAG_ANIMATION_1", "type": "Flag", "team": "Red", "frame": 0 },
+      { "id": 72, "name": "RED_FLAG_ANIMATION_2", "type": "Flag", "team": "Red", "frame": 1 }
     ],
     "Yellow": [
       { "id": 81, "name": "YELLOW_CITY", "type": "City", "team": "Yellow" },
@@ -144,14 +142,14 @@
       { "id": 86, "name": "YELLOW_COMN", "type": "ComTower", "team": "Yellow" },
       { "id": 87, "name": "YELLOW_SILO", "type": "Silo", "team": "Yellow" },
       { "id": 88, "name": "YELLOW_AIRPORT", "type": "Airport", "team": "Yellow" },
-      { "id": 89, "name": "YELLOW_FLAG_ANIMATION_1", "type": "Flag", "team": "Yellow", "frame": 1 },
-      { "id": 90, "name": "YELLOW_FLAG_ANIMATION_2", "type": "Flag", "team": "Yellow", "frame": 2 }
+      { "id": 89, "name": "YELLOW_FLAG_ANIMATION_1", "type": "Flag", "team": "Yellow", "frame": 0 },
+      { "id": 90, "name": "YELLOW_FLAG_ANIMATION_2", "type": "Flag", "team": "Yellow", "frame": 1 }
     ]
   },
   "units": {
     "Gray": [
-      { "id": 96, "name": "GRAY_TRUCK_1", "type": "Truck", "team": "Gray", "variant": 1 },
-      { "id": 97, "name": "GRAY_TRUCK_2", "type": "Truck", "team": "Gray", "variant": 2 },
+      { "id": 96, "name": "GRAY_TRUCK_1", "type": "Truck", "team": "Gray", "variant": 0 },
+      { "id": 97, "name": "GRAY_TRUCK_2", "type": "Truck", "team": "Gray", "variant": 1 },
       { "id": 98, "name": "GRAY_APC", "type": "APC", "team": "Gray" },
       { "id": 99, "name": "GRAY_TANK", "type": "Tank", "team": "Gray" },
       { "id": 100, "name": "GRAY_ARTY", "type": "Artillery", "team": "Gray" },
@@ -165,8 +163,8 @@
       { "id": 108, "name": "GRAY_AT_INF", "type": "AntiTankInfantry", "team": "Gray" }
     ],
     "Green": [
-      { "id": 114, "name": "GREEN_TRUCK_1", "type": "Truck", "team": "Green", "variant": 1 },
-      { "id": 115, "name": "GREEN_TRUCK_2", "type": "Truck", "team": "Green", "variant": 2 },
+      { "id": 114, "name": "GREEN_TRUCK_1", "type": "Truck", "team": "Green", "variant": 0 },
+      { "id": 115, "name": "GREEN_TRUCK_2", "type": "Truck", "team": "Green", "variant": 1 },
       { "id": 116, "name": "GREEN_APC", "type": "APC", "team": "Green" },
       { "id": 117, "name": "GREEN_TANK", "type": "Tank", "team": "Green" },
       { "id": 118, "name": "GREEN_ARTY", "type": "Artillery", "team": "Green" },
@@ -180,8 +178,8 @@
       { "id": 126, "name": "GREEN_AT_INF", "type": "AntiTankInfantry", "team": "Green" }
     ],
     "Blue": [
-      { "id": 132, "name": "BLUE_TRUCK_1", "type": "Truck", "team": "Blue", "variant": 1 },
-      { "id": 133, "name": "BLUE_TRUCK_2", "type": "Truck", "team": "Blue", "variant": 2 },
+      { "id": 132, "name": "BLUE_TRUCK_1", "type": "Truck", "team": "Blue", "variant": 0 },
+      { "id": 133, "name": "BLUE_TRUCK_2", "type": "Truck", "team": "Blue", "variant": 1 },
       { "id": 134, "name": "BLUE_APC", "type": "APC", "team": "Blue" },
       { "id": 135, "name": "BLUE_TANK", "type": "Tank", "team": "Blue" },
       { "id": 136, "name": "BLUE_ARTY", "type": "Artillery", "team": "Blue" },
@@ -195,8 +193,8 @@
       { "id": 144, "name": "BLUE_AT_INF", "type": "AntiTankInfantry", "team": "Blue" }
     ],
     "Red": [
-      { "id": 150, "name": "RED_TRUCK_1", "type": "Truck", "team": "Red", "variant": 1 },
-      { "id": 151, "name": "RED_TRUCK_2", "type": "Truck", "team": "Red", "variant": 2 },
+      { "id": 150, "name": "RED_TRUCK_1", "type": "Truck", "team": "Red", "variant": 0 },
+      { "id": 151, "name": "RED_TRUCK_2", "type": "Truck", "team": "Red", "variant": 1 },
       { "id": 152, "name": "RED_APC", "type": "APC", "team": "Red" },
       { "id": 153, "name": "RED_TANK", "type": "Tank", "team": "Red" },
       { "id": 154, "name": "RED_ARTY", "type": "Artillery", "team": "Red" },
@@ -210,8 +208,8 @@
       { "id": 162, "name": "RED_AT_INF", "type": "AntiTankInfantry", "team": "Red" }
     ],
     "Yellow": [
-      { "id": 168, "name": "YELLOW_TRUCK_1", "type": "Truck", "team": "Yellow", "variant": 1 },
-      { "id": 169, "name": "YELLOW_TRUCK_2", "type": "Truck", "team": "Yellow", "variant": 2 },
+      { "id": 168, "name": "YELLOW_TRUCK_1", "type": "Truck", "team": "Yellow", "variant": 0 },
+      { "id": 169, "name": "YELLOW_TRUCK_2", "type": "Truck", "team": "Yellow", "variant": 1 },
       { "id": 170, "name": "YELLOW_APC", "type": "APC", "team": "Yellow" },
       { "id": 171, "name": "YELLOW_TANK", "type": "Tank", "team": "Yellow" },
       { "id": 172, "name": "YELLOW_ARTY", "type": "Artillery", "team": "Yellow" },

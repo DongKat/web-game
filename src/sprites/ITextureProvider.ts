@@ -3,7 +3,7 @@ import type { TerrainType, UnitType, BuildingType, UIElementType, TeamColor } fr
 
 export interface ITextureProvider {
     loadAll(): Promise<void>;
-    getTerrainTexture(type: TerrainType): Texture;
+    getTerrainTexture(type: TerrainType, variant: number): Texture;
     getUnitTexture(type: UnitType, team: TeamColor): Texture;
     getBuildingTexture(type: BuildingType, team: TeamColor): Texture;
     getUITexture(type: UIElementType): Texture;

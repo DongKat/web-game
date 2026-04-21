@@ -59,6 +59,126 @@ body {
   overflow: hidden;
 }
 
+/* ── Main Menu ── */
+#main-menu {
+  position: fixed;
+  inset: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: #1a1a2e;
+  z-index: 100;
+}
+
+.menu-content {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 2rem;
+}
+
+.menu-title {
+  font-family: var(--heading);
+  font-size: 3rem;
+  font-weight: 700;
+  color: #e0e0ff;
+  letter-spacing: 2px;
+  text-transform: uppercase;
+  margin: 0;
+}
+
+.menu-buttons {
+  display: flex;
+  flex-direction: column;
+  gap: 0.75rem;
+  min-width: 220px;
+}
+
+.menu-btn {
+  font-family: var(--sans);
+  font-size: 1.1rem;
+  padding: 0.7rem 1.5rem;
+  border: 2px solid #444466;
+  border-radius: 6px;
+  background: #22223a;
+  color: #d0d0ee;
+  cursor: pointer;
+  transition: background 0.15s, border-color 0.15s;
+}
+
+.menu-btn:hover:not(:disabled) {
+  background: #33335a;
+  border-color: #7777bb;
+}
+
+.menu-btn:active:not(:disabled) {
+  background: #44446a;
+}
+
+.menu-btn:disabled {
+  opacity: 0.4;
+  cursor: not-allowed;
+}
+
+/* ── Game HUD ── */
+#game-hud {
+  position: fixed;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 0.5rem 1rem;
+  background: rgba(0, 0, 0, 0.75);
+  color: #d0d0ee;
+  font-family: var(--mono);
+  font-size: 0.85rem;
+  z-index: 200;
+  gap: 1rem;
+}
+
+.hud-turn {
+  font-weight: 700;
+  font-size: 1rem;
+}
+
+.hud-info {
+  flex: 1;
+  text-align: center;
+}
+
+.hud-controls {
+  display: flex;
+  gap: 0.75rem;
+  font-size: 0.75rem;
+  opacity: 0.7;
+}
+
+/* ── Action Menu ── */
+#action-menu {
+  position: fixed;
+  background: rgba(20, 20, 40, 0.95);
+  border: 2px solid #5566aa;
+  border-radius: 4px;
+  padding: 4px 0;
+  z-index: 300;
+  min-width: 100px;
+}
+
+.action-item {
+  padding: 4px 12px;
+  color: #c0c0ee;
+  font-family: var(--mono);
+  font-size: 0.85rem;
+  cursor: default;
+}
+
+.action-item.selected {
+  background: #3355aa;
+  color: #ffffff;
+}
+
 h1,
 h2 {
   font-family: var(--heading);

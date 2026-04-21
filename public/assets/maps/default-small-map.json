@@ -1,0 +1,486 @@
+{
+    "mapWidth": 6,
+    "mapHeight": 6,
+    "mapLayers": {
+        "Terrain": [
+            {
+                "type": "Terrain",
+                "data": {
+                    "terrainType": "Grass",
+                    "defenseBonus": 0,
+                    "movementCost": 1,
+                    "passable": true
+                }
+            },
+            {
+                "type": "Terrain",
+                "data": {
+                    "terrainType": "Grass",
+                    "defenseBonus": 0,
+                    "movementCost": 1,
+                    "passable": true
+                }
+            },
+            {
+                "type": "Terrain",
+                "data": {
+                    "terrainType": "Grass",
+                    "defenseBonus": 0,
+                    "movementCost": 1,
+                    "passable": true
+                }
+            },
+            {
+                "type": "Terrain",
+                "data": {
+                    "terrainType": "Grass",
+                    "defenseBonus": 0,
+                    "movementCost": 1,
+                    "passable": true
+                }
+            },
+            {
+                "type": "Terrain",
+                "data": {
+                    "terrainType": "Grass",
+                    "defenseBonus": 0,
+                    "movementCost": 1,
+                    "passable": true
+                }
+            },
+            {
+                "type": "Terrain",
+                "data": {
+                    "terrainType": "Grass",
+                    "defenseBonus": 0,
+                    "movementCost": 1,
+                    "passable": true
+                }
+            },
+            {
+                "type": "Terrain",
+                "data": {
+                    "terrainType": "Grass",
+                    "defenseBonus": 0,
+                    "movementCost": 1,
+                    "passable": true
+                }
+            },
+            {
+                "type": "Terrain",
+                "data": {
+                    "terrainType": "Grass",
+                    "defenseBonus": 0,
+                    "movementCost": 1,
+                    "passable": true
+                }
+            },
+            {
+                "type": "Terrain",
+                "data": {
+                    "terrainType": "Grass",
+                    "defenseBonus": 0,
+                    "movementCost": 1,
+                    "passable": true
+                }
+            },
+            {
+                "type": "Terrain",
+                "data": {
+                    "terrainType": "Grass",
+                    "defenseBonus": 0,
+                    "movementCost": 1,
+                    "passable": true
+                }
+            },
+            {
+                "type": "Terrain",
+                "data": {
+                    "terrainType": "Mountain",
+                    "defenseBonus": 2,
+                    "movementCost": 3,
+                    "passable": true
+                }
+            },
+            {
+                "type": "Terrain",
+                "data": {
+                    "terrainType": "Grass",
+                    "defenseBonus": 0,
+                    "movementCost": 1,
+                    "passable": true
+                }
+            },
+            {
+                "type": "Terrain",
+                "data": {
+                    "terrainType": "Grass",
+                    "defenseBonus": 0,
+                    "movementCost": 1,
+                    "passable": true
+                }
+            },
+            {
+                "type": "Terrain",
+                "data": {
+                    "terrainType": "Grass",
+                    "defenseBonus": 0,
+                    "movementCost": 1,
+                    "passable": true
+                }
+            },
+            {
+                "type": "Terrain",
+                "data": {
+                    "terrainType": "Forest",
+                    "defenseBonus": 1,
+                    "movementCost": 2,
+                    "passable": true
+                }
+            },
+            {
+                "type": "Terrain",
+                "data": {
+                    "terrainType": "Grass",
+                    "defenseBonus": 0,
+                    "movementCost": 1,
+                    "passable": true
+                }
+            },
+            {
+                "type": "Terrain",
+                "data": {
+                    "terrainType": "Grass",
+                    "defenseBonus": 0,
+                    "movementCost": 1,
+                    "passable": true
+                }
+            },
+            {
+                "type": "Terrain",
+                "data": {
+                    "terrainType": "Grass",
+                    "defenseBonus": 0,
+                    "movementCost": 1,
+                    "passable": true
+                }
+            },
+            {
+                "type": "Terrain",
+                "data": {
+                    "terrainType": "Grass",
+                    "defenseBonus": 0,
+                    "movementCost": 1,
+                    "passable": true
+                }
+            },
+            {
+                "type": "Terrain",
+                "data": {
+                    "terrainType": "Grass",
+                    "defenseBonus": 0,
+                    "movementCost": 1,
+                    "passable": true
+                }
+            },
+            {
+                "type": "Terrain",
+                "data": {
+                    "terrainType": "Grass",
+                    "defenseBonus": 0,
+                    "movementCost": 1,
+                    "passable": true
+                }
+            },
+            {
+                "type": "Terrain",
+                "data": {
+                    "terrainType": "Forest",
+                    "defenseBonus": 1,
+                    "movementCost": 2,
+                    "passable": true
+                }
+            },
+            {
+                "type": "Terrain",
+                "data": {
+                    "terrainType": "Grass",
+                    "defenseBonus": 0,
+                    "movementCost": 1,
+                    "passable": true
+                }
+            },
+            {
+                "type": "Terrain",
+                "data": {
+                    "terrainType": "Grass",
+                    "defenseBonus": 0,
+                    "movementCost": 1,
+                    "passable": true
+                }
+            },
+            {
+                "type": "Terrain",
+                "data": {
+                    "terrainType": "Grass",
+                    "defenseBonus": 0,
+                    "movementCost": 1,
+                    "passable": true
+                }
+            },
+            {
+                "type": "Terrain",
+                "data": {
+                    "terrainType": "Grass",
+                    "defenseBonus": 0,
+                    "movementCost": 1,
+                    "passable": true
+                }
+            },
+            {
+                "type": "Terrain",
+                "data": {
+                    "terrainType": "Grass",
+                    "defenseBonus": 0,
+                    "movementCost": 1,
+                    "passable": true
+                }
+            },
+            {
+                "type": "Terrain",
+                "data": {
+                    "terrainType": "Grass",
+                    "defenseBonus": 0,
+                    "movementCost": 1,
+                    "passable": true
+                }
+            },
+            {
+                "type": "Terrain",
+                "data": {
+                    "terrainType": "Grass",
+                    "defenseBonus": 0,
+                    "movementCost": 1,
+                    "passable": true
+                }
+            },
+            {
+                "type": "Terrain",
+                "data": {
+                    "terrainType": "Grass",
+                    "defenseBonus": 0,
+                    "movementCost": 1,
+                    "passable": true
+                }
+            },
+            {
+                "type": "Terrain",
+                "data": {
+                    "terrainType": "Grass",
+                    "defenseBonus": 0,
+                    "movementCost": 1,
+                    "passable": true
+                }
+            },
+            {
+                "type": "Terrain",
+                "data": {
+                    "terrainType": "Grass",
+                    "defenseBonus": 0,
+                    "movementCost": 1,
+                    "passable": true
+                }
+            },
+            {
+                "type": "Terrain",
+                "data": {
+                    "terrainType": "Grass",
+                    "defenseBonus": 0,
+                    "movementCost": 1,
+                    "passable": true
+                }
+            },
+            {
+                "type": "Terrain",
+                "data": {
+                    "terrainType": "Grass",
+                    "defenseBonus": 0,
+                    "movementCost": 1,
+                    "passable": true
+                }
+            },
+            {
+                "type": "Terrain",
+                "data": {
+                    "terrainType": "Grass",
+                    "defenseBonus": 0,
+                    "movementCost": 1,
+                    "passable": true
+                }
+            },
+            {
+                "type": "Terrain",
+                "data": {
+                    "terrainType": "Grass",
+                    "defenseBonus": 0,
+                    "movementCost": 1,
+                    "passable": true
+                }
+            }
+        ],
+        "Building": [
+            null,
+            null,
+            null,
+            null,
+            null,
+            null,
+            null,
+            null,
+            null,
+            null,
+            null,
+            null,
+            null,
+            null,
+            null,
+            null,
+            null,
+            null,
+            null,
+            null,
+            null,
+            null,
+            null,
+            null,
+            null,
+            null,
+            null,
+            null,
+            null,
+            null,
+            null,
+            null,
+            null,
+            null,
+            null,
+            null
+        ],
+        "Unit": [
+            null,
+            {
+                "type": "Unit",
+                "data": {
+                    "unitType": "Tank",
+                    "team": "Red",
+                    "healthPoint": 10,
+                    "ammo": 5,
+                    "fuel": 50,
+                    "attackRange": 1,
+                    "attackPower": 7,
+                    "defense": 3,
+                    "movementRange": 5
+                }
+            },
+            null,
+            null,
+            null,
+            null,
+            {
+                "type": "Unit",
+                "data": {
+                    "unitType": "Infantry",
+                    "team": "Red",
+                    "healthPoint": 10,
+                    "ammo": 0,
+                    "fuel": 99,
+                    "attackRange": 1,
+                    "attackPower": 5,
+                    "defense": 1,
+                    "movementRange": 3
+                }
+            },
+            null,
+            null,
+            null,
+            null,
+            null,
+            {
+                "type": "Unit",
+                "data": {
+                    "unitType": "Infantry",
+                    "team": "Red",
+                    "healthPoint": 10,
+                    "ammo": 0,
+                    "fuel": 99,
+                    "attackRange": 1,
+                    "attackPower": 5,
+                    "defense": 1,
+                    "movementRange": 3
+                }
+            },
+            null,
+            null,
+            null,
+            null,
+            null,
+            null,
+            null,
+            null,
+            null,
+            null,
+            {
+                "type": "Unit",
+                "data": {
+                    "unitType": "Infantry",
+                    "team": "Blue",
+                    "healthPoint": 10,
+                    "ammo": 0,
+                    "fuel": 99,
+                    "attackRange": 1,
+                    "attackPower": 5,
+                    "defense": 1,
+                    "movementRange": 3
+                }
+            },
+            null,
+            null,
+            null,
+            null,
+            null,
+            {
+                "type": "Unit",
+                "data": {
+                    "unitType": "Infantry",
+                    "team": "Blue",
+                    "healthPoint": 10,
+                    "ammo": 0,
+                    "fuel": 99,
+                    "attackRange": 1,
+                    "attackPower": 5,
+                    "defense": 1,
+                    "movementRange": 3
+                }
+            },
+            null,
+            null,
+            null,
+            null,
+            {
+                "type": "Unit",
+                "data": {
+                    "unitType": "Tank",
+                    "team": "Blue",
+                    "healthPoint": 10,
+                    "ammo": 5,
+                    "fuel": 50,
+                    "attackRange": 1,
+                    "attackPower": 7,
+                    "defense": 3,
+                    "movementRange": 5
+                }
+            },
+            null
+        ]
+    }
+}

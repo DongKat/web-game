@@ -1,4 +1,4 @@
-import { Entity, type IEntity } from "./Entity";
+import type { IEntity } from "./Entity";
 
 export type BuildingData = {
     buildingType: string; // e.g., "Factory", "City", etc.
@@ -8,30 +8,33 @@ export type BuildingData = {
     passable: boolean;
 };
 
-export class Building extends Entity implements IEntity {
-    private data: BuildingData;
+export class Building implements IEntity {
+    data: BuildingData;
 
-    constructor() {
-        super();
-        this.data = {
-            buildingType: "",
+    constructor(data?: BuildingData) {
+        this.data = data ?? {
+            buildingType: "City",
             owner: 0,
-            healthPoint: 0,
-            defenseBonus: 0,
+            healthPoint: 20,
+            defenseBonus: 3,
             passable: true,
-        } as BuildingData;
+        };
+    }
+
+    getType(): string {
+        return this.data.buildingType;
     }
 
     importFromJson(json: string): void {
-        const obj = JSON.parse(json);
-        this.data.buildingType = obj.buildingType;
-        this.data.owner = obj.owner;
+        const obj = typeof json === 'string' ? JSON.parse(json) : json;
+        if (obj.data) {
+            this.data = obj.data;
+        } else {
+            this.data = obj;
+        }
     }
 
     exportToJson(): string {
-        return JSON.stringify({
-            buildingType: this.data.buildingType,
-            owner: this.data.owner,
-        });
+        return JSON.stringify({ type: "Building", data: this.data });
     }
 }

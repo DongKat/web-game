@@ -1,15 +1,16 @@
-
 // Just for reporting sprite id to be drawn
 export interface IEntity {
+    getType(): string;
     importFromJson(json: string): void;
     exportToJson(): string;
 }
 
 export class Entity implements IEntity {
-    constructor() {
+    getType(): string {
+        return "Entity";
     }
 
-    importFromJson(json: string): void {
+    importFromJson(_json: string): void {
         throw new Error("importFromJson() not implemented for Entity.");
     }
 

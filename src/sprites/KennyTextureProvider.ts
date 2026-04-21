@@ -19,8 +19,7 @@ type KennySpriteMetadata = {
     terrain: {
         grass: SpriteEntry[];
         mountain: SpriteEntry[];
-        lake: SpriteEntry[];
-        river: SpriteEntry[];
+        water: SpriteEntry[];
         forest: SpriteEntry[];
     };
     infrastructure: {
@@ -46,8 +45,7 @@ function flattenMetadata({ terrain, infrastructure, props, buildings, units, ui,
     return [
         ...terrain.grass,
         ...terrain.mountain,
-        ...terrain.lake,
-        ...terrain.river,
+        ...terrain.water,
         ...terrain.forest,
         ...infrastructure.roadBlocks,
         ...infrastructure.roads,
@@ -73,14 +71,13 @@ function flattenMetadata({ terrain, infrastructure, props, buildings, units, ui,
 
 const allSpriteEntries = flattenMetadata(metadata);
 
-const terrainLookup: Record<TerrainType, SPRITE_ID> = {
-    Grass: metadata.terrain.grass[0].id,
-    Mountain: metadata.terrain.mountain[0].id,
-    Lake: metadata.terrain.lake[0].id,
-    River: metadata.terrain.river[0].id,
-    Road: metadata.infrastructure.roads[0].id,
-    Bridge: metadata.infrastructure.bridges[0].id,
-    Forest: metadata.terrain.forest[0].id,
+const terrainLookup: Record<TerrainType, SPRITE_ID[]> = {
+    Grass: metadata.terrain.grass.map((entry) => entry.id),
+    Mountain: metadata.terrain.mountain.map((entry) => entry.id),
+    Water: metadata.terrain.water.map((entry) => entry.id),
+    Road: metadata.infrastructure.roads.map((entry) => entry.id),
+    Bridge: metadata.infrastructure.bridges.map((entry) => entry.id),
+    Forest: metadata.terrain.forest.map((entry) => entry.id),
 };
 
 const uiLookup: Record<UIElementType, SPRITE_ID> = {
@@ -186,8 +183,8 @@ export class KennySpriteProvider implements ITextureProvider {
         return this.spriteEntriesById.get(id);
     }
 
-    getTerrainTexture(type: TerrainType): Texture {
-        return this.getTextureById(terrainLookup[type]);
+    getTerrainTexture(type: TerrainType, variant: number): Texture {
+        return this.getTextureById(terrainLookup[type][variant] ?? terrainLookup[type]);
     }
 
     getUnitTexture(type: UnitType, team: TeamColor): Texture {

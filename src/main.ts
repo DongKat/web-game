@@ -1,6 +1,8 @@
 import { Application } from 'pixi.js';
-import { Game } from './core/Game';
 import { initDevtools } from '@pixi/devtools';
+import { GameStateMachine } from './core/GameStateMachine';
+import './style.css';
+import { DemoState } from './core/states/DemoState';
 
 
 async function main(): Promise<void> {
@@ -16,10 +18,13 @@ async function main(): Promise<void> {
   document.getElementById('app')!.appendChild(app.canvas);
   initDevtools({ app });
 
-  const game = new Game();
-  await game.initialize(app);
-  game.run();
+  // 2. Boot state machine with main menu
+  const stateMachine = new GameStateMachine(app);
+  // await stateMachine.changeState(new MainMenuState(stateMachine));
+  await stateMachine.changeState(new DemoState());
 
+  // 3. Run game loop through state machine
+  app.ticker.add((ticker) => stateMachine.update(ticker.deltaTime));
 }
 
 main().catch(console.error);

@@ -1,15 +1,12 @@
 import { type LAYER_NAME } from "../shared/constants.ts";
 import type { IEntity } from "../types/Entity";
-import { Entity } from "../types/Entity.ts";
 import { Building } from "../types/Building.ts";
 import { Unit } from "../types/Unit.ts";
 import { Terrain, type TerrainData } from "../types/Terrain.ts";
-import type { TeamColor, TerrainType, SPRITE_ID } from "../shared/constants.ts";
-import type { ITextureProvider } from "../sprites/ITextureProvider.ts";
+import type { UnitData } from "../types/Unit.ts";
+import type { BuildingData } from "../types/Building.ts";
 
-import { EntityFactory } from "../types/EntityFactory.ts";
-
-type Layers = Record<LAYER_NAME, IEntity[]>;
+type Layers = Record<LAYER_NAME, (IEntity | null)[]>;
 // Alias for GameMap used in other parts of the codebase
 export type TileMap = GameMap;
 
@@ -23,12 +20,9 @@ export class GameMap {
         this.mapWidth = 0;
         this.mapHeight = 0;
         this.mapLayers = {
-            "Terrain": [] as IEntity[],
-            "Building": [] as IEntity[],
-            "Unit": [] as IEntity[],
-            // "Shadow": [] as IEntity[],
-            // "Effect": [] as IEntity[],
-            // "UI": [] as IEntity[],
+            "Terrain": [],
+            "Building": [],
+            "Unit": [],
         };
     }
 
@@ -36,7 +30,7 @@ export class GameMap {
         return col >= 0 && col < this.mapWidth && row >= 0 && row < this.mapHeight;
     }
 
-    getLayer(layerName: LAYER_NAME): IEntity[] {
+    getLayer(layerName: LAYER_NAME): (IEntity | null)[] {
         const layer = this.mapLayers[layerName];
         if (!layer)
             throw new Error(`Layer ${layerName} does not exist`);
@@ -47,73 +41,69 @@ export class GameMap {
         return { width: this.mapWidth, height: this.mapHeight };
     }
 
-    getTile(col: number, row: number, layerName: LAYER_NAME): IEntity {
+    getTile(col: number, row: number, layerName: LAYER_NAME): IEntity | null {
+        if (!this.inBounds(col, row)) return null;
         const layer = this.mapLayers[layerName];
         if (!layer)
             throw new Error(`Layer ${layerName} does not exist`);
 
-        let idx = row * this.mapWidth + col;
+        const idx = row * this.mapWidth + col;
         return layer[idx];
     }
 
-    setTile(col: number, row: number, layerName: LAYER_NAME, entity: IEntity): void {
+    setTile(col: number, row: number, layerName: LAYER_NAME, entity: IEntity | null): void {
         const layer = this.mapLayers[layerName];
         if (!layer)
             throw new Error(`Layer ${layerName} does not exist`);
 
-        let idx = row * this.mapWidth + col;
+        const idx = row * this.mapWidth + col;
         layer[idx] = entity;
     }
 
     exportToJson(): string {
         const mapData = {
-            width: this.mapWidth,
-            height: this.mapHeight,
-            layers: Object.entries(this.mapLayers).map(([name, entities]) => ({
-                name,
-                data: entities.map(entity => {
-                    return entity.exportToJson();
-                }),
-            })),
+            mapWidth: this.mapWidth,
+            mapHeight: this.mapHeight,
+            mapLayers: Object.fromEntries(
+                Object.entries(this.mapLayers).map(([name, entities]) => [
+                    name,
+                    entities.map(entity => entity ? JSON.parse(entity.exportToJson()) : null),
+                ]),
+            ),
         };
-
         return JSON.stringify(mapData, null, 2);
     }
 
-    importFromJson(json: string): void {
-        const mapData = JSON.parse(json);
-        this.mapWidth = mapData.width;
-        this.mapHeight = mapData.height;
+    async loadFromJSON(path: string): Promise<void> {
+        const response = await fetch(path);
+        const mapData = await response.json();
+        this.mapWidth = mapData.mapWidth;
+        this.mapHeight = mapData.mapHeight;
 
-        for (const layer of mapData.layers) {
-            const layerName = layer.name as LAYER_NAME;
-            const entitiesJson = layer.data;
-            for (let row = 0; row < this.mapHeight; row++) {
-                for (let col = 0; col < this.mapWidth; col++) {
-                    const idx = row * this.mapWidth + col;
-                    const entityJson = entitiesJson[idx];
-                    if (entityJson) {
-                        const entity = EntityFactory.createEntity(layerName);
-                        if (entity) {
-                            entity.importFromJson(entityJson);
-                            this.setTile(col, row, layerName, entity);
-                        }
-                    }
+        for (const [layerName, entitiesJson] of Object.entries(mapData.mapLayers)) {
+            const entities = entitiesJson as (unknown | null)[];
+            for (let i = 0; i < entities.length; i++) {
+                const raw = entities[i];
+                if (!raw) {
+                    this.mapLayers[layerName as LAYER_NAME][i] = null;
+                    continue;
                 }
+                const serialized = raw as { type: string; data: unknown };
+                let entity: IEntity | null = null;
+                switch (serialized.type) {
+                    case "Terrain":
+                        entity = new Terrain(serialized.data as TerrainData);
+                        break;
+                    case "Building":
+                        entity = new Building(serialized.data as BuildingData);
+                        break;
+                    case "Unit":
+                        entity = new Unit(serialized.data as UnitData);
+                        break;
+                }
+                this.mapLayers[layerName as LAYER_NAME][i] = entity;
             }
         }
     }
 }
 
-// // Test import from Json
-// import { readFileSync } from 'fs';
-// import { resolve } from 'path';
-
-// function testImportFromJson() {
-//     const filePath = resolve('public/assets/maps/converted_sample.json');
-//     const jsonFile = readFileSync(filePath, 'utf-8');
-//     const gameMap = new GameMap();
-//     gameMap.importFromJson(jsonFile);
-//     console.log(gameMap);
-// }
-// testImportFromJson();
