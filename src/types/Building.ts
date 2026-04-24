@@ -3,12 +3,13 @@ import { Entity, type IEntity } from "./Entity";
 export type BuildingData = {
     buildingType: string; // e.g., "Factory", "City", etc.
     owner: number; // Player ID or faction
+    color: string; // TODO: Remove this as it's a hack for Renderer
     healthPoint: number;
     defenseBonus: number;
     passable: boolean;
 };
 
-export class Building extends Entity implements IEntity {
+export class Building extends Entity{
     private data: BuildingData;
 
     constructor() {
@@ -33,5 +34,17 @@ export class Building extends Entity implements IEntity {
             buildingType: this.data.buildingType,
             owner: this.data.owner,
         });
+    }
+
+    getType(): string {
+        return this.data.buildingType;
+    }
+
+    getOwner(): number {
+        return this.data.owner;
+    }
+
+    getColor(): string {
+        return this.data.color;
     }
 }

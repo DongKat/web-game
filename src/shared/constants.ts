@@ -29,7 +29,7 @@ export const KENNY_SPRITESHEET_PATH = '/assets/Tilemap/tilemap_packed.png';
 /** Path to the map data JSON */
 export const DEFAULT_MAP_DATA_PATH = '/assets/maps/default-map.json';
 
-export type TerrainType = 'Grass' | 'Mountain' | 'Lake' | 'River' | 'Road' | 'Bridge' | 'Forest';
+export type TerrainType = 'Grass' | 'Mountain' | 'Water' | 'Road' | 'Bridge' | 'Forest';
 export type UnitType = 'Infantry' | 'Tank' | 'Artillery' | 'Jet' | 'Heli' | 'Boat' | 'Sub';
 export type BuildingType = 'City' | 'Factory' | 'Airport' | 'Port' | 'Tower';
 export type UIElementType = 'Cursor' | 'MovementHighlight' | 'Health' | 'Shadow' | 'PathArrow';

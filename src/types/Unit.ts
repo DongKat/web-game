@@ -3,6 +3,7 @@ import { Entity } from "./Entity";
 export type UnitData = {
     unitType: string;
     owner: number; // Player ID or faction
+    color: string; // TODO: Remove this as it's a hack for Renderer
     healthPoint: number;
     ammo: number;
     fuel: number;
@@ -39,5 +40,13 @@ export class Unit extends Entity {
             unitType: this.data.unitType,
             owner: this.data.owner,
         });
+    }
+
+    getType(): string {
+        return this.data.unitType;
+    }
+
+    getColor(): string {
+        return this.data.color;
     }
 }

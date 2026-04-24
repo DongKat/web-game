@@ -37,4 +37,8 @@ export class Terrain extends Entity {
             terrainType: this.data.terrainType,
         });
     }
+
+    getType(): string {
+        return this.data.terrainType;
+    }
 }

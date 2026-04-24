@@ -13,14 +13,14 @@ type SpriteEntry = {
     variant?: number | string;
     frame?: number;
     value?: number | string;
+    autoTileBitmask?: number; // For auto-tiles, store the bitmask value
 };
 
 type KennySpriteMetadata = {
     terrain: {
         grass: SpriteEntry[];
         mountain: SpriteEntry[];
-        lake: SpriteEntry[];
-        river: SpriteEntry[];
+        water: SpriteEntry[];
         forest: SpriteEntry[];
     };
     infrastructure: {
@@ -46,8 +46,7 @@ function flattenMetadata({ terrain, infrastructure, props, buildings, units, ui,
     return [
         ...terrain.grass,
         ...terrain.mountain,
-        ...terrain.lake,
-        ...terrain.river,
+        ...terrain.water,
         ...terrain.forest,
         ...infrastructure.roadBlocks,
         ...infrastructure.roads,
@@ -76,8 +75,7 @@ const allSpriteEntries = flattenMetadata(metadata);
 const terrainLookup: Record<TerrainType, SPRITE_ID> = {
     Grass: metadata.terrain.grass[0].id,
     Mountain: metadata.terrain.mountain[0].id,
-    Lake: metadata.terrain.lake[0].id,
-    River: metadata.terrain.river[0].id,
+    Water: metadata.terrain.water[0].id,
     Road: metadata.infrastructure.roads[0].id,
     Bridge: metadata.infrastructure.bridges[0].id,
     Forest: metadata.terrain.forest[0].id,
@@ -201,5 +199,17 @@ export class KennySpriteProvider implements ITextureProvider {
     getUITexture(type: UIElementType): Texture {
         return this.getTextureById(uiLookup[type]);
     }
-}
 
+    getAutoTileTexture(baseType: string, bitmask: number): Texture {
+        let entry = allSpriteEntries.find((item) => item.type === baseType && item.autoTileBitmask === bitmask);
+        if (!entry) {
+            console.warn(`Auto-tile sprite for type ${baseType} with bitmask ${bitmask} not found. Using default texture.`);
+            // Falback to default
+            entry = allSpriteEntries.find((item) => item.type === baseType && item.autoTileBitmask === 0);
+            if (!entry) {
+                throw new Error(`Default auto-tile sprite for type ${baseType} not found`);
+            }
+        }   
+        return this.getTextureById(entry.id);
+    }
+}

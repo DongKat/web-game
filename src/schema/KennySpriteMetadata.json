@@ -41,27 +41,26 @@
   },
   "infrastructure": {
     "roads": [
-      { "id": 109, "name": "ROAD_0", "type": "Road", "variant": 0 },
-      { "id": 110, "name": "ROAD_1", "type": "Road", "variant": 1 },
-      { "id": 111, "name": "ROAD_2", "type": "Road", "variant": 2 },
-      { "id": 112, "name": "ROAD_3", "type": "Road", "variant": 3 },
-      { "id": 127, "name": "ROAD_4", "type": "Road", "variant": 4 },
-      { "id": 128, "name": "ROAD_5", "type": "Road", "variant": 5 },
-      { "id": 129, "name": "ROAD_6", "type": "Road", "variant": 6 },
-      { "id": 130, "name": "ROAD_7", "type": "Road", "variant": 7 },
-      { "id": 145, "name": "ROAD_8", "type": "Road", "variant": 8 },
-      { "id": 146, "name": "ROAD_9", "type": "Road", "variant": 9 },
-      { "id": 147, "name": "ROAD_10", "type": "Road", "variant": 10 },
-      { "id": 148, "name": "ROAD_11", "type": "Road", "variant": 11 },
-      { "id": 163, "name": "ROAD_12", "type": "Road", "variant": 12 },
-      { "id": 164, "name": "ROAD_13", "type": "Road", "variant": 13 },
-      { "id": 165, "name": "ROAD_14", "type": "Road", "variant": 14 },
-      { "id": 166, "name": "ROAD_15", "type": "Road", "variant": 15 },
-      { "id": 167, "name": "ROAD_16", "type": "Road", "variant": 16 }
+      { "id": 109, "name": "ROAD_0", "type": "Road", "variant": 0, "autoTileBitmask": 0 },
+      { "id": 110, "name": "ROAD_1", "type": "Road", "variant": 1, "autoTileBitmask": 4 },
+      { "id": 111, "name": "ROAD_2", "type": "Road", "variant": 2, "autoTileBitmask": 68 },
+      { "id": 112, "name": "ROAD_3", "type": "Road", "variant": 3, "autoTileBitmask": 64 },
+      { "id": 127, "name": "ROAD_4", "type": "Road", "variant": 4, "autoTileBitmask": 16 },
+      { "id": 128, "name": "ROAD_5", "type": "Road", "variant": 5, "autoTileBitmask": 20 },
+      { "id": 129, "name": "ROAD_6", "type": "Road", "variant": 6, "autoTileBitmask": 84 },
+      { "id": 130, "name": "ROAD_7", "type": "Road", "variant": 7, "autoTileBitmask": 80 },
+      { "id": 145, "name": "ROAD_8", "type": "Road", "variant": 8, "autoTileBitmask": 17 },
+      { "id": 146, "name": "ROAD_9", "type": "Road", "variant": 9, "autoTileBitmask": 21 },
+      { "id": 147, "name": "ROAD_10", "type": "Road", "variant": 10, "autoTileBitmask": 85 },
+      { "id": 148, "name": "ROAD_11", "type": "Road", "variant": 11, "autoTileBitmask": 81 },
+      { "id": 163, "name": "ROAD_12", "type": "Road", "variant": 12, "autoTileBitmask": 1 },
+      { "id": 164, "name": "ROAD_13", "type": "Road", "variant": 13, "autoTileBitmask": 5 },
+      { "id": 165, "name": "ROAD_14", "type": "Road", "variant": 14, "autoTileBitmask": 69 },
+      { "id": 166, "name": "ROAD_15", "type": "Road", "variant": 15, "autoTileBitmask": 65 }
     ],
     "bridges": [
-      { "id": 131, "name": "BRIDGE_0", "type": "Bridge", "variant": "Horizontal" },
-      { "id": 167, "name": "BRIDGE_1", "type": "Bridge", "variant": "Vertical" }
+      { "id": 131, "name": "BRIDGE_0", "type": "Bridge", "variant": "Horizontal", "autoTileBitmask": 68 },
+      { "id": 167, "name": "BRIDGE_1", "type": "Bridge", "variant": "Vertical", "autoTileBitmask": 17 }
     ],
     "paths": [
       { "id": 41, "name": "PATH_ARROW_UP", "type": "Path", "variant": "Up" },
