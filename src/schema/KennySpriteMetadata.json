@@ -8,65 +8,60 @@
     "mountain": [
       { "id": 6, "name": "MOUNTAIN", "type": "Mountain" }
     ],
-    "lake": [
-      { "id": 19, "name": "LAKE_0", "type": "Lake", "variant": 0 },
-      { "id": 20, "name": "LAKE_1", "type": "Lake", "variant": 1 },
-      { "id": 21, "name": "LAKE_2", "type": "Lake", "variant": 2 },
-      { "id": 37, "name": "LAKE_3", "type": "Lake", "variant": 3 },
-      { "id": 38, "name": "LAKE_4", "type": "Lake", "variant": 4 },
-      { "id": 39, "name": "LAKE_5", "type": "Lake", "variant": 5 },
-      { "id": 40, "name": "LAKE_6", "type": "Lake", "variant": 6 },
-      { "id": 55, "name": "LAKE_7", "type": "Lake", "variant": 7 },
-      { "id": 56, "name": "LAKE_8", "type": "Lake", "variant": 8 },
-      { "id": 57, "name": "LAKE_9", "type": "Lake", "variant": 9 },
-      { "id": 73, "name": "LAKE_10", "type": "Lake", "variant": 10 },
-      { "id": 74, "name": "LAKE_11", "type": "Lake", "variant": 11 },
-      { "id": 75, "name": "LAKE_12", "type": "Lake", "variant": 12 },
-      { "id": 76, "name": "LAKE_13", "type": "Lake", "variant": 13 },
-      { "id": 91, "name": "LAKE_14", "type": "Lake", "variant": 14 },
-      { "id": 92, "name": "LAKE_15", "type": "Lake", "variant": 15 },
-      { "id": 93, "name": "LAKE_16", "type": "Lake", "variant": 16 },
-      { "id": 94, "name": "LAKE_17", "type": "Lake", "variant": 17 }
-    ],
-    "river": [
-      { "id": 4, "name": "RIVER_0", "type": "River", "variant": 0 },
-      { "id": 5, "name": "RIVER_1", "type": "River", "variant": 1 },
-      { "id": 22, "name": "RIVER_3", "type": "River", "variant": 3 },
-      { "id": 23, "name": "RIVER_4", "type": "River", "variant": 4 },
-      { "id": 58, "name": "RIVER_5", "type": "River", "variant": 5 }
+    "water": [
+      { "id": 4, "name": "WATER_0", "type": "River", "variant": 0 },
+      { "id": 5, "name": "WATER_1", "type": "River", "variant": 1 },
+      { "id": 19, "name": "WATER_2", "type": "Cliff", "variant": 2 },
+      { "id": 20, "name": "WATER_3", "type": "Cliff", "variant": 3 },
+      { "id": 21, "name": "WATER_4", "type": "Cliff", "variant": 4 },
+      { "id": 22, "name": "WATER_5", "type": "River", "variant": 5 },
+      { "id": 23, "name": "WATER_6", "type": "River", "variant": 6 },
+      { "id": 37, "name": "WATER_7", "type": "Cliff", "variant": 7 },
+      { "id": 38, "name": "WATER_8", "type": "Water", "variant": 8 },
+      { "id": 39, "name": "WATER_9", "type": "Cliff", "variant": 9 },
+      { "id": 40, "name": "WATER_10", "type": "River", "variant": 10 },
+      { "id": 55, "name": "WATER_11", "type": "Cliff", "variant": 11 },
+      { "id": 56, "name": "WATER_12", "type": "Cliff", "variant": 12 },
+      { "id": 57, "name": "WATER_13", "type": "Cliff", "variant": 13 },
+      { "id": 58, "name": "WATER_14", "type": "River", "variant": 14 },
+      { "id": 73, "name": "WATER_15", "type": "Cliff", "variant": 15 },
+      { "id": 74, "name": "WATER_16", "type": "Cliff", "variant": 16 },
+      { "id": 75, "name": "WATER_17", "type": "Cliff", "variant": 17 },
+      { "id": 76, "name": "WATER_18", "type": "Cliff", "variant": 18 },
+      { "id": 91, "name": "WATER_19", "type": "Cliff", "variant": 19 },
+      { "id": 92, "name": "WATER_20", "type": "Cliff", "variant": 20 },
+      { "id": 93, "name": "WATER_21", "type": "Cliff", "variant": 21 },
+      { "id": 94, "name": "WATER_22", "type": "Cliff", "variant": 22 },
+      { "id": 149, "name": "WATER_23", "type": "UnderBridge", "variant": 23 }
     ],
     "forest": [
-      { "id": 95, "name": "FOREST_1", "type": "Forest", "variant": 1 },
-      { "id": 113, "name": "FOREST_2", "type": "Forest", "variant": 2 }
+      { "id": 95, "name": "FOREST_0", "type": "Forest", "variant": 0 },
+      { "id": 113, "name": "FOREST_1", "type": "Forest", "variant": 1 }
     ]
   },
   "infrastructure": {
-    "roadBlocks": [
-      { "id": 24, "name": "ROAD_BLOCK_1", "type": "RoadBlock", "variant": 1 },
-      { "id": 26, "name": "ROAD_BLOCK_2", "type": "RoadBlock", "variant": 2 }
-    ],
     "roads": [
-      { "id": 109, "name": "ROAD_1", "type": "Road", "variant": 1 },
-      { "id": 110, "name": "ROAD_2", "type": "Road", "variant": 2 },
-      { "id": 111, "name": "ROAD_3", "type": "Road", "variant": 3 },
-      { "id": 112, "name": "ROAD_4", "type": "Road", "variant": 4 },
-      { "id": 127, "name": "ROAD_5", "type": "Road", "variant": 5 },
-      { "id": 128, "name": "ROAD_6", "type": "Road", "variant": 6 },
-      { "id": 129, "name": "ROAD_7", "type": "Road", "variant": 7 },
-      { "id": 130, "name": "ROAD_8", "type": "Road", "variant": 8 },
-      { "id": 145, "name": "ROAD_9", "type": "Road", "variant": 9 },
-      { "id": 146, "name": "ROAD_10", "type": "Road", "variant": 10 },
-      { "id": 147, "name": "ROAD_11", "type": "Road", "variant": 11 },
-      { "id": 148, "name": "ROAD_12", "type": "Road", "variant": 12 },
-      { "id": 163, "name": "ROAD_13", "type": "Road", "variant": 13 },
-      { "id": 164, "name": "ROAD_14", "type": "Road", "variant": 14 },
-      { "id": 165, "name": "ROAD_15", "type": "Road", "variant": 15 },
-      { "id": 166, "name": "ROAD_16", "type": "Road", "variant": 16 }
+      { "id": 109, "name": "ROAD_0", "type": "Road", "variant": 0 },
+      { "id": 110, "name": "ROAD_1", "type": "Road", "variant": 1 },
+      { "id": 111, "name": "ROAD_2", "type": "Road", "variant": 2 },
+      { "id": 112, "name": "ROAD_3", "type": "Road", "variant": 3 },
+      { "id": 127, "name": "ROAD_4", "type": "Road", "variant": 4 },
+      { "id": 128, "name": "ROAD_5", "type": "Road", "variant": 5 },
+      { "id": 129, "name": "ROAD_6", "type": "Road", "variant": 6 },
+      { "id": 130, "name": "ROAD_7", "type": "Road", "variant": 7 },
+      { "id": 145, "name": "ROAD_8", "type": "Road", "variant": 8 },
+      { "id": 146, "name": "ROAD_9", "type": "Road", "variant": 9 },
+      { "id": 147, "name": "ROAD_10", "type": "Road", "variant": 10 },
+      { "id": 148, "name": "ROAD_11", "type": "Road", "variant": 11 },
+      { "id": 163, "name": "ROAD_12", "type": "Road", "variant": 12 },
+      { "id": 164, "name": "ROAD_13", "type": "Road", "variant": 13 },
+      { "id": 165, "name": "ROAD_14", "type": "Road", "variant": 14 },
+      { "id": 166, "name": "ROAD_15", "type": "Road", "variant": 15 },
+      { "id": 167, "name": "ROAD_16", "type": "Road", "variant": 16 }
     ],
     "bridges": [
-      { "id": 131, "name": "BRIDGE", "type": "Bridge", "variant": 1 },
-      { "id": 149, "name": "BRIDGE_2", "type": "Bridge", "variant": 2 },
-      { "id": 167, "name": "BRIDGE_3", "type": "Bridge", "variant": 3 }
+      { "id": 131, "name": "BRIDGE_0", "type": "Bridge", "variant": "Horizontal" },
+      { "id": 167, "name": "BRIDGE_1", "type": "Bridge", "variant": "Vertical" }
     ],
     "paths": [
       { "id": 41, "name": "PATH_ARROW_UP", "type": "Path", "variant": "Up" },
@@ -84,7 +79,9 @@
   "props": [
     { "id": 7, "name": "CAR_1", "type": "Car", "variant": 1 },
     { "id": 8, "name": "STREET_LIGHT", "type": "StreetLight" },
-    { "id": 25, "name": "CAR_2", "type": "Car", "variant": 2 }
+    { "id": 25, "name": "CAR_2", "type": "Car", "variant": 2 },
+    { "id": 24, "name": "ROAD_BLOCK_1", "type": "RoadBlock", "variant": 1 },
+    { "id": 26, "name": "ROAD_BLOCK_2", "type": "RoadBlock", "variant": 2 }
   ],
   "buildings": {
     "Gray": [
