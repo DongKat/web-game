@@ -2,8 +2,7 @@ import { Entity } from "./Entity";
 
 export type UnitData = {
     unitType: string;
-    owner: number; // Player ID or faction
-    color: string; // TODO: Remove this as it's a hack for Renderer
+    owner: number;
     healthPoint: number;
     ammo: number;
     fuel: number;
@@ -26,7 +25,7 @@ export class Unit extends Entity {
             attackRange: 0,
             attackPower: 0,
             movementRange: 0,
-        } as UnitData;
+        };
     }
 
     importFromJson(json: string): void {
@@ -46,7 +45,7 @@ export class Unit extends Entity {
         return this.data.unitType;
     }
 
-    getColor(): string {
-        return this.data.color;
+    getOwner(): number {
+        return this.data.owner;
     }
 }

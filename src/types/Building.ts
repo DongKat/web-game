@@ -1,16 +1,15 @@
-import { Entity, type IEntity } from "./Entity";
+import { Entity } from "./Entity";
 
 export type BuildingData = {
-    buildingType: string; // e.g., "Factory", "City", etc.
-    owner: number; // Player ID or faction
-    color: string; // TODO: Remove this as it's a hack for Renderer
+    buildingType: string;
+    owner: number;
     healthPoint: number;
     defenseBonus: number;
     passable: boolean;
 };
 
-export class Building extends Entity{
-    private data: BuildingData;
+export class Building extends Entity {
+    data: BuildingData;
 
     constructor() {
         super();
@@ -20,7 +19,7 @@ export class Building extends Entity{
             healthPoint: 0,
             defenseBonus: 0,
             passable: true,
-        } as BuildingData;
+        };
     }
 
     importFromJson(json: string): void {
@@ -42,9 +41,5 @@ export class Building extends Entity{
 
     getOwner(): number {
         return this.data.owner;
-    }
-
-    getColor(): string {
-        return this.data.color;
     }
 }

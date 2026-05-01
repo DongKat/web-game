@@ -2,101 +2,21 @@ import { Assets, Rectangle, Texture } from 'pixi.js';
 import type { ITextureProvider } from './ITextureProvider.ts';
 import { KENNY_SPRITESHEET_PATH, SHEET_COLUMNS, SHEET_ROWS, TILE_SIZE, TILE_SPACING } from '../shared/constants.ts';
 import type { BuildingType, SPRITE_ID, TeamColor, TerrainType, UIElementType, UnitType } from '../shared/constants.ts';
+import { EntityDefinitionManager } from '../schema/EntityDefinitionManager.ts';
 import spriteMetadata from '../schema/KennySpriteMetadata.json';
 
-
-type SpriteEntry = {
-    id: SPRITE_ID;
-    name: string;
-    type: string;
-    team?: TeamColor;
-    variant?: number | string;
-    frame?: number;
-    value?: number | string;
-    autoTileBitmask?: number; // For auto-tiles, store the bitmask value
-};
-
-type KennySpriteMetadata = {
-    terrain: {
-        grass: SpriteEntry[];
-        mountain: SpriteEntry[];
-        water: SpriteEntry[];
-        forest: SpriteEntry[];
-    };
-    infrastructure: {
-        roadBlocks: SpriteEntry[];
-        roads: SpriteEntry[];
-        bridges: SpriteEntry[];
-        paths: SpriteEntry[];
-    };
-    props: SpriteEntry[];
-    buildings: Record<TeamColor, SpriteEntry[]>;
-    units: Record<TeamColor, SpriteEntry[]>;
-    ui: SpriteEntry[];
-    status: {
-        health: SpriteEntry[];
-        emotes: SpriteEntry[];
-    };
-    effects: SpriteEntry[];
-};
-
-const metadata = spriteMetadata as KennySpriteMetadata;
-
-function flattenMetadata({ terrain, infrastructure, props, buildings, units, ui, status, effects }: KennySpriteMetadata): SpriteEntry[] {
-    return [
-        ...terrain.grass,
-        ...terrain.mountain,
-        ...terrain.water,
-        ...terrain.forest,
-        ...infrastructure.roadBlocks,
-        ...infrastructure.roads,
-        ...infrastructure.bridges,
-        ...infrastructure.paths,
-        ...props,
-        ...buildings.Gray,
-        ...buildings.Green,
-        ...buildings.Blue,
-        ...buildings.Red,
-        ...buildings.Yellow,
-        ...units.Gray,
-        ...units.Green,
-        ...units.Blue,
-        ...units.Red,
-        ...units.Yellow,
-        ...ui,
-        ...status.health,
-        ...status.emotes,
-        ...effects,
-    ];
-}
-
-const allSpriteEntries = flattenMetadata(metadata);
-
-const terrainLookup: Record<TerrainType, SPRITE_ID> = {
-    Grass: metadata.terrain.grass[0].id,
-    Mountain: metadata.terrain.mountain[0].id,
-    Water: metadata.terrain.water[0].id,
-    Road: metadata.infrastructure.roads[0].id,
-    Bridge: metadata.infrastructure.bridges[0].id,
-    Forest: metadata.terrain.forest[0].id,
-};
-
 const uiLookup: Record<UIElementType, SPRITE_ID> = {
-    Cursor: metadata.ui.find((entry) => entry.type === 'Cursor' && entry.variant === 'Default')?.id ?? metadata.ui[0].id,
-    MovementHighlight: metadata.ui.find((entry) => entry.type === 'MovementHighlight')?.id ?? metadata.ui[0].id,
-    Health: metadata.status.health.find((entry) => entry.value === 'Unknown')?.id ?? metadata.status.health[0].id,
-    Shadow: metadata.effects.find((entry) => entry.type === 'Shadow')?.id ?? metadata.effects[0].id,
-    PathArrow: metadata.infrastructure.paths.find((entry) => entry.variant === 'Horizontal')?.id ?? metadata.infrastructure.paths[0].id,
+    Cursor: (spriteMetadata.ui.find((e: any) => e.type === 'Cursor' && e.variant === 'Default') ?? spriteMetadata.ui[0]).id,
+    MovementHighlight: (spriteMetadata.ui.find((e: any) => e.type === 'MovementHighlight') ?? spriteMetadata.ui[0]).id,
+    Health: (spriteMetadata.status.health.find((e: any) => e.value === 'Unknown') ?? spriteMetadata.status.health[0]).id,
+    Shadow: (spriteMetadata.effects.find((e: any) => e.type === 'Shadow') ?? spriteMetadata.effects[0]).id,
+    PathArrow: (spriteMetadata.infrastructure.paths.find((e: any) => e.variant === 'Horizontal') ?? spriteMetadata.infrastructure.paths[0]).id,
 };
-
-const availableTeams = new Set<TeamColor>(['Gray', 'Green', 'Blue', 'Red', 'Yellow']);
 
 export class KennySpriteProvider implements ITextureProvider {
     private spritesheetTexture: Texture | null = null;
     private textureMap: Map<SPRITE_ID, Texture> = new Map();
-    private spriteEntriesById: Map<SPRITE_ID, SpriteEntry> = new Map(
-        allSpriteEntries.map((entry) => [entry.id, entry] as const),
-    );
+    private defManager = EntityDefinitionManager.getInstance();
 
     private static instance: KennySpriteProvider;
 
@@ -114,15 +34,10 @@ export class KennySpriteProvider implements ITextureProvider {
         this.textureMap = this.sliceSpriteSheet();
     }
 
-    isSpriteSheetLoaded(): boolean {
+    private sliceSpriteSheet(): Map<SPRITE_ID, Texture> {
         if (!this.spritesheetTexture) {
             throw new Error('Sprite sheet texture not loaded. Call loadAll() before accessing textures.');
         }
-        return true;
-    }
-
-    private sliceSpriteSheet(): Map<SPRITE_ID, Texture> {
-        this.isSpriteSheetLoaded();
 
         const textures = new Map<SPRITE_ID, Texture>();
         let spriteId = 1 as SPRITE_ID;
@@ -136,7 +51,7 @@ export class KennySpriteProvider implements ITextureProvider {
                 textures.set(
                     spriteId,
                     new Texture({
-                        source: this.spritesheetTexture?.source,
+                        source: this.spritesheetTexture.source,
                         frame,
                     }),
                 );
@@ -148,68 +63,35 @@ export class KennySpriteProvider implements ITextureProvider {
         return textures;
     }
 
-    private getGroupedSpriteId(collection: Record<TeamColor, SpriteEntry[]>, type: string, team: TeamColor): SPRITE_ID {
-        if (!availableTeams.has(team)) {
-            throw new Error(`Invalid team color: ${team}`);
-        }
-        
-        const entry = collection[team].find((item) => item.type === type); 
-        if (!entry) {
-            throw new Error(`Sprite for type ${type} and team ${team} not found`);
-        }
-        return entry.id;
-    }
-
     getTextureById(tileId: SPRITE_ID): Texture {
         const texture = this.textureMap.get(tileId);
-
         if (!texture) {
             throw new Error(`Texture for tile ID ${tileId} not found`);
         }
-
         return texture;
     }
 
-    getTextureByName(name: string): Texture {
-        const entry = allSpriteEntries.find((item) => item.name === name);
-
-        if (!entry) {
-            throw new Error(`Sprite named ${name} not found`);
-        }
-
-        return this.getTextureById(entry.id);
+    getTerrainTexture(type: TerrainType, variant?: number): Texture {
+        const id = this.defManager.getTerrainSpriteId(type, variant);
+        return this.getTextureById(id);
     }
 
-    getSpriteMetadata(id: SPRITE_ID): SpriteEntry | undefined {
-        return this.spriteEntriesById.get(id);
-    }
-
-    getTerrainTexture(type: TerrainType): Texture {
-        return this.getTextureById(terrainLookup[type]);
+    getAutoTileTexture(type: TerrainType, bitmask: number): Texture {
+        const id = this.defManager.getAutoTileSpriteId(type, bitmask);
+        return this.getTextureById(id);
     }
 
     getUnitTexture(type: UnitType, team: TeamColor): Texture {
-        return this.getTextureById(this.getGroupedSpriteId(metadata.units, type, team));
+        const id = this.defManager.getUnitSpriteId(type, team);
+        return this.getTextureById(id);
     }
 
     getBuildingTexture(type: BuildingType, team: TeamColor): Texture {
-        return this.getTextureById(this.getGroupedSpriteId(metadata.buildings, type, team));
+        const id = this.defManager.getBuildingSpriteId(type, team);
+        return this.getTextureById(id);
     }
 
     getUITexture(type: UIElementType): Texture {
         return this.getTextureById(uiLookup[type]);
-    }
-
-    getAutoTileTexture(baseType: string, bitmask: number): Texture {
-        let entry = allSpriteEntries.find((item) => item.type === baseType && item.autoTileBitmask === bitmask);
-        if (!entry) {
-            console.warn(`Auto-tile sprite for type ${baseType} with bitmask ${bitmask} not found. Using default texture.`);
-            // Falback to default
-            entry = allSpriteEntries.find((item) => item.type === baseType && item.autoTileBitmask === 0);
-            if (!entry) {
-                throw new Error(`Default auto-tile sprite for type ${baseType} not found`);
-            }
-        }   
-        return this.getTextureById(entry.id);
     }
 }

@@ -1,19 +1,11 @@
 import { type LAYER_NAME } from "../shared/constants.ts";
+import type { TerrainType, UnitType, BuildingType } from "../shared/constants.ts";
 import type { IEntity } from "../types/Entity";
-import { Entity } from "../types/Entity.ts";
-import { Building } from "../types/Building.ts";
-import { Unit } from "../types/Unit.ts";
-import { Terrain, type TerrainData } from "../types/Terrain.ts";
-import type { TeamColor, TerrainType, SPRITE_ID } from "../shared/constants.ts";
-import type { ITextureProvider } from "../sprites/ITextureProvider.ts";
-
 import { EntityFactory } from "../types/EntityFactory.ts";
 
 type Layers = Record<LAYER_NAME, IEntity[]>;
-// Alias for GameMap used in other parts of the codebase
 export type TileMap = GameMap;
 
-// Receive GameMapData and provide APIs to manipulate map data
 export class GameMap {
     mapWidth: number;
     mapHeight: number;
@@ -26,9 +18,6 @@ export class GameMap {
             "Terrain": [] as IEntity[],
             "Building": [] as IEntity[],
             "Unit": [] as IEntity[],
-            // "Shadow": [] as IEntity[],
-            // "Effect": [] as IEntity[],
-            // "UI": [] as IEntity[],
         };
     }
 
@@ -93,27 +82,33 @@ export class GameMap {
                     const idx = row * this.mapWidth + col;
                     const entityJson = entitiesJson[idx];
                     if (entityJson) {
-                        const entity = EntityFactory.createEntity(layerName);
-                        if (entity) {
-                            entity.importFromJson(entityJson);
-                            this.setTile(col, row, layerName, entity);
+                        const obj = JSON.parse(entityJson);
+                        let entity: IEntity;
+                        switch (layerName) {
+                            case 'Terrain':
+                                entity = EntityFactory.createTerrain(obj.terrainType as TerrainType);
+                                break;
+                            case 'Unit':
+                                entity = EntityFactory.createUnit(obj.unitType as UnitType, obj.owner ?? 0);
+                                break;
+                            case 'Building':
+                                entity = EntityFactory.createBuilding(obj.buildingType as BuildingType, obj.owner ?? 0);
+                                break;
                         }
+                        this.setTile(col, row, layerName, entity);
                     }
                 }
             }
         }
     }
+
+    async loadFromJSON(url: string): Promise<void> {
+        const response = await fetch(url);
+        if (!response.ok) {
+            throw new Error(`Failed to load map data from ${url}: ${response.statusText}`);
+        }
+        const json = await response.text();
+        this.importFromJson(json);
+    }
+
 }
-
-// // Test import from Json
-// import { readFileSync } from 'fs';
-// import { resolve } from 'path';
-
-// function testImportFromJson() {
-//     const filePath = resolve('public/assets/maps/converted_sample.json');
-//     const jsonFile = readFileSync(filePath, 'utf-8');
-//     const gameMap = new GameMap();
-//     gameMap.importFromJson(jsonFile);
-//     console.log(gameMap);
-// }
-// testImportFromJson();

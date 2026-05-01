@@ -30,13 +30,14 @@ export const KENNY_SPRITESHEET_PATH = '/assets/Tilemap/tilemap_packed.png';
 export const DEFAULT_MAP_DATA_PATH = '/assets/maps/default-map.json';
 
 export type TerrainType = 'Grass' | 'Mountain' | 'Water' | 'Road' | 'Bridge' | 'Forest';
-export type UnitType = 'Infantry' | 'Tank' | 'Artillery' | 'Jet' | 'Heli' | 'Boat' | 'Sub';
-export type BuildingType = 'City' | 'Factory' | 'Airport' | 'Port' | 'Tower';
+export type UnitType = 'Infantry' | 'AntiTankInfantry' | 'Truck' | 'APC' | 'Tank' | 'Artillery' | 'Jet' | 'Heli' | 'TransportHeli' | 'Boat' | 'Battleship' | 'Sub';
+export type BuildingType = 'City' | 'House' | 'Tower' | 'Factory' | 'Port' | 'ComTower' | 'Silo' | 'Airport';
 export type UIElementType = 'Cursor' | 'MovementHighlight' | 'Health' | 'Shadow' | 'PathArrow';
-export type TeamColor = 'Blue' | 'Red' | 'Green' | 'Orange' | 'Gray' | 'Yellow';
+export type TeamColor = 'Blue' | 'Red' | 'Green' | 'Gray' | 'Yellow';
 
+export const OWNER_TO_TEAM: TeamColor[] = ['Gray', 'Green', 'Blue', 'Red', 'Yellow'];
 
-export type LAYER_NAME = 'Terrain' | 'Building' | 'Unit'
+export type LAYER_NAME = 'Terrain' | 'Building' | 'Unit';
 export type UI_LAYER_NAME = 'Shadow' | 'Effect' | 'UI';
 
 export type SPRITE_ID = number;

@@ -1,0 +1,192 @@
+{
+  "terrain": {
+    "Grass": {
+      "spriteIds": [1, 2, 3],
+      "overlay": false,
+      "autoTile": false,
+      "defaults": {
+        "defenseBonus": 0,
+        "movementCost": 1,
+        "passable": true
+      }
+    },
+    "Mountain": {
+      "spriteIds": [6],
+      "overlay": true,
+      "autoTile": false,
+      "defaults": {
+        "defenseBonus": 0,
+        "movementCost": 0,
+        "passable": true
+      }
+    },
+    "Water": {
+      "spriteIds": {
+        "0": 38,
+        "1": 20,
+        "2": 92,
+        "4": 39,
+        "7": 21,
+        "8": 93,
+        "10": 73,
+        "16": 56,
+        "17": 74,
+        "28": 57,
+        "32": 94,
+        "39": 5,
+        "40": 40,
+        "64": 37,
+        "68": 58,
+        "112": 55,
+        "114": 22,
+        "128": 91,
+        "130": 76,
+        "156": 23,
+        "160": 75,
+        "193": 19,
+        "201": 4
+      },
+      "overlay": false,
+      "autoTile": true,
+      "defaults": {
+        "defenseBonus": 0,
+        "movementCost": 0,
+        "passable": false
+      }
+    },
+    "Road": {
+      "spriteIds": {
+        "0": 109,
+        "1": 163,
+        "4": 110,
+        "5": 164,
+        "16": 127,
+        "17": 145,
+        "20": 128,
+        "21": 146,
+        "64": 112,
+        "65": 166,
+        "68": 111,
+        "69": 165,
+        "80": 130,
+        "81": 148,
+        "84": 129,
+        "85": 147
+      },
+      "overlay": false,
+      "autoTile": true,
+      "defaults": {
+        "defenseBonus": 0,
+        "movementCost": 1,
+        "passable": true
+      }
+    },
+    "Bridge": {
+      "spriteIds": {
+        "17": 167,
+        "68": 131
+      },
+      "overlay": false,
+      "autoTile": true,
+      "defaults": {
+        "defenseBonus": 0,
+        "movementCost": 1,
+        "passable": true
+      }
+    },
+    "Forest": {
+      "spriteIds": [95, 113],
+      "overlay": true,
+      "autoTile": false,
+      "defaults": {
+        "defenseBonus": 0,
+        "movementCost": 0,
+        "passable": true
+      }
+    }
+  },
+  "units": {
+    "Infantry": {
+      "spriteIds": { "Gray": 107, "Green": 125, "Blue": 143, "Red": 161, "Yellow": 179 },
+      "defaults": { "healthPoint": 0, "ammo": 0, "fuel": 0, "attackRange": 0, "attackPower": 0, "movementRange": 0 }
+    },
+    "AntiTankInfantry": {
+      "spriteIds": { "Gray": 108, "Green": 126, "Blue": 144, "Red": 162, "Yellow": 180 },
+      "defaults": { "healthPoint": 0, "ammo": 0, "fuel": 0, "attackRange": 0, "attackPower": 0, "movementRange": 0 }
+    },
+    "Truck": {
+      "spriteIds": { "Gray": 96, "Green": 114, "Blue": 132, "Red": 150, "Yellow": 168 },
+      "defaults": { "healthPoint": 0, "ammo": 0, "fuel": 0, "attackRange": 0, "attackPower": 0, "movementRange": 0 }
+    },
+    "APC": {
+      "spriteIds": { "Gray": 98, "Green": 116, "Blue": 134, "Red": 152, "Yellow": 170 },
+      "defaults": { "healthPoint": 0, "ammo": 0, "fuel": 0, "attackRange": 0, "attackPower": 0, "movementRange": 0 }
+    },
+    "Tank": {
+      "spriteIds": { "Gray": 99, "Green": 117, "Blue": 135, "Red": 153, "Yellow": 171 },
+      "defaults": { "healthPoint": 0, "ammo": 0, "fuel": 0, "attackRange": 0, "attackPower": 0, "movementRange": 0 }
+    },
+    "Artillery": {
+      "spriteIds": { "Gray": 100, "Green": 118, "Blue": 136, "Red": 154, "Yellow": 172 },
+      "defaults": { "healthPoint": 0, "ammo": 0, "fuel": 0, "attackRange": 0, "attackPower": 0, "movementRange": 0 }
+    },
+    "Jet": {
+      "spriteIds": { "Gray": 101, "Green": 119, "Blue": 137, "Red": 155, "Yellow": 173 },
+      "defaults": { "healthPoint": 0, "ammo": 0, "fuel": 0, "attackRange": 0, "attackPower": 0, "movementRange": 0 }
+    },
+    "Heli": {
+      "spriteIds": { "Gray": 102, "Green": 120, "Blue": 138, "Red": 156, "Yellow": 174 },
+      "defaults": { "healthPoint": 0, "ammo": 0, "fuel": 0, "attackRange": 0, "attackPower": 0, "movementRange": 0 }
+    },
+    "TransportHeli": {
+      "spriteIds": { "Gray": 103, "Green": 121, "Blue": 139, "Red": 157, "Yellow": 175 },
+      "defaults": { "healthPoint": 0, "ammo": 0, "fuel": 0, "attackRange": 0, "attackPower": 0, "movementRange": 0 }
+    },
+    "Boat": {
+      "spriteIds": { "Gray": 104, "Green": 122, "Blue": 140, "Red": 158, "Yellow": 176 },
+      "defaults": { "healthPoint": 0, "ammo": 0, "fuel": 0, "attackRange": 0, "attackPower": 0, "movementRange": 0 }
+    },
+    "Battleship": {
+      "spriteIds": { "Gray": 105, "Green": 123, "Blue": 141, "Red": 159, "Yellow": 177 },
+      "defaults": { "healthPoint": 0, "ammo": 0, "fuel": 0, "attackRange": 0, "attackPower": 0, "movementRange": 0 }
+    },
+    "Sub": {
+      "spriteIds": { "Gray": 106, "Green": 124, "Blue": 142, "Red": 160, "Yellow": 178 },
+      "defaults": { "healthPoint": 0, "ammo": 0, "fuel": 0, "attackRange": 0, "attackPower": 0, "movementRange": 0 }
+    }
+  },
+  "buildings": {
+    "City": {
+      "spriteIds": { "Gray": 9, "Green": 27, "Blue": 45, "Red": 63, "Yellow": 81 },
+      "defaults": { "healthPoint": 0, "defenseBonus": 0, "passable": true }
+    },
+    "House": {
+      "spriteIds": { "Gray": 10, "Green": 28, "Blue": 46, "Red": 64, "Yellow": 82 },
+      "defaults": { "healthPoint": 0, "defenseBonus": 0, "passable": true }
+    },
+    "Tower": {
+      "spriteIds": { "Gray": 11, "Green": 29, "Blue": 47, "Red": 65, "Yellow": 83 },
+      "defaults": { "healthPoint": 0, "defenseBonus": 0, "passable": true }
+    },
+    "Factory": {
+      "spriteIds": { "Gray": 12, "Green": 30, "Blue": 48, "Red": 66, "Yellow": 84 },
+      "defaults": { "healthPoint": 0, "defenseBonus": 0, "passable": true }
+    },
+    "Port": {
+      "spriteIds": { "Gray": 13, "Green": 31, "Blue": 49, "Red": 67, "Yellow": 85 },
+      "defaults": { "healthPoint": 0, "defenseBonus": 0, "passable": true }
+    },
+    "ComTower": {
+      "spriteIds": { "Gray": 14, "Green": 32, "Blue": 50, "Red": 68, "Yellow": 86 },
+      "defaults": { "healthPoint": 0, "defenseBonus": 0, "passable": true }
+    },
+    "Silo": {
+      "spriteIds": { "Gray": 15, "Green": 33, "Blue": 51, "Red": 69, "Yellow": 87 },
+      "defaults": { "healthPoint": 0, "defenseBonus": 0, "passable": true }
+    },
+    "Airport": {
+      "spriteIds": { "Gray": 16, "Green": 34, "Blue": 52, "Red": 70, "Yellow": 88 },
+      "defaults": { "healthPoint": 0, "defenseBonus": 0, "passable": true }
+    }
+  }
+}
