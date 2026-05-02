@@ -10,6 +10,7 @@
     "preview": "vite preview"
   },
   "devDependencies": {
+    "@pixi/devtools": "^2.0.1",
     "ts-node": "^10.9.2",
     "tsx": "^4.21.0",
     "typescript": "~5.9.3",
@@ -17,8 +18,7 @@
     "vitest": "^4.1.2"
   },
   "dependencies": {
-    "@pixi/devtools": "^2.0.1",
     "jest": "^30.3.0",
-    "pixi.js": "^8.17.1"
+    "pixi.js": "^8.18.1"
   }
 }

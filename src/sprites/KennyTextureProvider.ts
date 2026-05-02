@@ -10,7 +10,7 @@ const uiLookup: Record<UIElementType, SPRITE_ID> = {
     MovementHighlight: (spriteMetadata.ui.find((e: any) => e.type === 'MovementHighlight') ?? spriteMetadata.ui[0]).id,
     Health: (spriteMetadata.status.health.find((e: any) => e.value === 'Unknown') ?? spriteMetadata.status.health[0]).id,
     Shadow: (spriteMetadata.effects.find((e: any) => e.type === 'Shadow') ?? spriteMetadata.effects[0]).id,
-    PathArrow: (spriteMetadata.infrastructure.paths.find((e: any) => e.variant === 'Horizontal') ?? spriteMetadata.infrastructure.paths[0]).id,
+    PathArrow: (spriteMetadata.paths.find((e: any) => e.variant === 'Horizontal') ?? spriteMetadata.paths[0]).id,
 };
 
 export class KennySpriteProvider implements ITextureProvider {
@@ -20,7 +20,7 @@ export class KennySpriteProvider implements ITextureProvider {
 
     private static instance: KennySpriteProvider;
 
-    private constructor() {}
+    private constructor() { }
 
     public static getInstance(): KennySpriteProvider {
         if (!KennySpriteProvider.instance) {
@@ -31,7 +31,10 @@ export class KennySpriteProvider implements ITextureProvider {
 
     async loadAll(): Promise<void> {
         this.spritesheetTexture = await Assets.load<Texture>(KENNY_SPRITESHEET_PATH);
+        // this.spritesheetTexture = await Assets.load<Texture>("assets/tile_0094.png");
         this.textureMap = this.sliceSpriteSheet();
+        // Log the spritesheet height and width
+        console.log(`Loaded spritesheet with dimensions: ${this.spritesheetTexture.width}x${this.spritesheetTexture.height}`);
     }
 
     private sliceSpriteSheet(): Map<SPRITE_ID, Texture> {
@@ -42,18 +45,23 @@ export class KennySpriteProvider implements ITextureProvider {
         const textures = new Map<SPRITE_ID, Texture>();
         let spriteId = 1 as SPRITE_ID;
 
+        const step = TILE_SIZE + TILE_SPACING;
+
         for (let row = 0; row < SHEET_ROWS; row++) {
             for (let col = 0; col < SHEET_COLUMNS; col++) {
-                const x = col * ((TILE_SIZE - 1) + TILE_SPACING);
-                const y = row * ((TILE_SIZE - 1) + TILE_SPACING);
-                const frame = new Rectangle(x, y, TILE_SIZE, TILE_SIZE);
+                const frame = new Rectangle(
+                    col * step,
+                    row * step,
+                    TILE_SIZE,
+                    TILE_SIZE
+                );
 
                 textures.set(
                     spriteId,
                     new Texture({
                         source: this.spritesheetTexture.source,
                         frame,
-                    }),
+                    })
                 );
 
                 spriteId = (spriteId + 1) as SPRITE_ID;

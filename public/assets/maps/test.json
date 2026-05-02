@@ -1,0 +1,48 @@
+{
+    "width": 3,
+    "height": 3,
+    "layers": [
+        {
+            "name": "Terrain",
+            "data": [
+                "{\"terrainType\":\"Forest\"}",
+                "{\"terrainType\":\"Mountain\"}",
+                "{\"terrainType\":\"Grass\"}",
+                "{\"terrainType\":\"Grass\"}",
+                "{\"terrainType\":\"Grass\"}",
+                "{\"terrainType\":\"Grass\"}",
+                "{\"terrainType\":\"Grass\"}",
+                "{\"terrainType\":\"Grass\"}",
+                "{\"terrainType\":\"Grass\"}"
+            ]
+        },
+        {
+            "name": "Building",
+            "data": [
+                null,
+                null,
+                null,
+                null,
+                null,
+                "{\"buildingType\":\"Factory\",\"owner\":2}",
+                "{\"buildingType\":\"City\",\"owner\":2}",
+                null,
+                null
+            ]
+        },
+        {
+            "name": "Unit",
+            "data": [
+                null,
+                null,
+                null,
+                null,
+                "{\"unitType\":\"Infantry\",\"owner\":2}",
+                "{\"unitType\":\"Tank\",\"owner\":2}",
+                null,
+                null,
+                null
+            ]
+        }
+    ]
+}

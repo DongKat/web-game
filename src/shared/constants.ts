@@ -21,10 +21,10 @@ export const SHEET_ROWS = 11;
 export const TOTAL_TILES = SHEET_COLUMNS * SHEET_ROWS; // 198
 
 /** Display scale — how many screen pixels per tile pixel */
-export const SCALE = 3;
+export const SCALE = 6;
 
 /** Path to the packed tilemap spritesheet */
-export const KENNY_SPRITESHEET_PATH = '/assets/Tilemap/tilemap_packed.png';
+export const KENNY_SPRITESHEET_PATH = '/assets/Tilemap/tilemap.png';
 
 /** Path to the map data JSON */
 export const DEFAULT_MAP_DATA_PATH = '/assets/maps/default-map.json';

@@ -1,4 +1,4 @@
-import { Container, Sprite } from 'pixi.js';
+import { Container, Sprite, Texture } from 'pixi.js';
 import type { GameMap } from '../map/GameMap';
 import type { ITextureProvider } from '../sprites/ITextureProvider';
 import { SCALE, TILE_SIZE, OWNER_TO_TEAM } from '../shared/constants';
@@ -34,7 +34,7 @@ export class Renderer {
         this.rootContainer = new Container();
     }
 
-    public intialize(): void {
+    public initialize(): void {
         this.layerContainers.set('Terrain', new Container());
         this.layerContainers.set('Building', new Container());
         this.layerContainers.set('Unit', new Container());
@@ -79,10 +79,15 @@ export class Renderer {
         return bitmask;
     }
 
-    private createSprite(col: number, row: number): Sprite {
+    private createSprite(col: number, row: number, texture: Texture): Sprite {
         const sprite = new Sprite();
         sprite.x = col * TILE_SIZE * SCALE;
         sprite.y = row * TILE_SIZE * SCALE;
+        
+        texture.source.scaleMode = "nearest";
+
+        sprite.texture = texture;
+        sprite.anchor.set(0, 0);
         sprite.scale.set(SCALE);
         return sprite;
     }
@@ -104,30 +109,27 @@ export class Renderer {
                     // Autotile terrain (Water, Road, Bridge)
                     const bitmask = this.autotile(col, row, type);
                     const texture = this.textureProvider.getAutoTileTexture(type, bitmask);
-                    const sprite = this.createSprite(col, row);
-                    sprite.texture = texture;
+                    const sprite = this.createSprite(col, row, texture);
                     terrainContainer.addChild(sprite);
                 } else if (def.overlay) {
                     // Overlay terrain (Mountain, Forest) — render grass base + overlay
                     const grassDef = this.defManager.getTerrainDef('Grass');
-                    const grassVariant = Math.floor(Math.random() * (grassDef as any).spriteIds.length);
+                    // const grassVariant = Math.floor(Math.random() * (grassDef as any).spriteIds.length);
                     const grassTexture = this.textureProvider.getTerrainTexture('Grass', 0);
-                    const grassSprite = this.createSprite(col, row);
-                    grassSprite.texture = grassTexture;
+                    const grassSprite = this.createSprite(col, row, grassTexture);
                     terrainContainer.addChild(grassSprite);
-
+                    
                     const overlayVariant = Math.floor(Math.random() * (def.spriteIds as number[]).length);
                     const overlayTexture = this.textureProvider.getTerrainTexture(type, overlayVariant);
-                    const overlaySprite = this.createSprite(col, row);
-                    overlaySprite.texture = overlayTexture;
+                    const overlaySprite = this.createSprite(col, row, overlayTexture);
                     terrainContainer.addChild(overlaySprite);
                 } else {
                     // Simple terrain (Grass) — pick random variant
                     const variantCount = (def.spriteIds as number[]).length;
-                    const variant = Math.floor(Math.random() * variantCount);
-                    const texture = this.textureProvider.getTerrainTexture(type, variant);
-                    const sprite = this.createSprite(col, row);
-                    sprite.texture = texture;
+                    // const variant = Math.floor(Math.random() * variantCount);
+                    // const texture = this.textureProvider.getTerrainTexture(type, variant);
+                    const texture = this.textureProvider.getTerrainTexture(type, 1);
+                    const sprite = this.createSprite(col, row, texture);
                     terrainContainer.addChild(sprite);
                 }
             }
@@ -147,8 +149,7 @@ export class Renderer {
                 const buildingType = buildingTile.getType() as BuildingType;
                 const team = this.ownerToTeam(buildingTile.getOwner());
                 const texture = this.textureProvider.getBuildingTexture(buildingType, team);
-                const sprite = this.createSprite(col, row);
-                sprite.texture = texture;
+                const sprite = this.createSprite(col, row, texture);
                 buildingContainer.addChild(sprite);
             }
         }
@@ -167,8 +168,17 @@ export class Renderer {
                 const unitType = unitTile.getType() as UnitType;
                 const team = this.ownerToTeam(unitTile.getOwner());
                 const texture = this.textureProvider.getUnitTexture(unitType, team);
-                const sprite = this.createSprite(col, row);
-                sprite.texture = texture;
+                const sprite = this.createSprite(col, row, texture);
+
+                // TODO:
+                // // Center the unit sprite within the tile
+                // sprite.anchor.set(0.5, 0.5);
+                // sprite.x = col * TILE_SIZE * SCALE + (TILE_SIZE * SCALE) / 2;
+                // sprite.y = row * TILE_SIZE * SCALE + (TILE_SIZE * SCALE) / 2;
+                // // Special SCALE for unit to make building more visible
+                // sprite.scale.set(SCALE * 0.8);
+
+
                 unitContainer.addChild(sprite);
             }
         }
@@ -184,7 +194,9 @@ export class Renderer {
 
     public update(): void {
         if (this.updateFlag & 0b001) this.renderTerrain();
-        if (this.updateFlag & 0b010) this.renderBuildings();
-        if (this.updateFlag & 0b100) this.renderUnits();
+        // if (this.updateFlag & 0b010) this.renderBuildings();
+        // if (this.updateFlag & 0b100) this.renderUnits();
+
+        this.updateFlag = 0;
     }
 }
