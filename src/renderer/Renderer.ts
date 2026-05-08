@@ -38,7 +38,7 @@ export class Renderer {
         this.layerContainers.set('Terrain', new Container());
         this.layerContainers.set('Building', new Container());
         this.layerContainers.set('Unit', new Container());
-        this.layerContainers.set('Shadows', new Container());
+        // this.layerContainers.set('Shadows', new Container()); // TODO: No plane yet
         this.layerContainers.set('Effects', new Container());
         this.layerContainers.set('UI', new Container());
         for (const layerContainer of this.layerContainers.values()) {
@@ -52,7 +52,7 @@ export class Renderer {
         return OWNER_TO_TEAM[owner] ?? 'Gray';
     }
 
-    private autotile(col: number, row: number, neighborType: string): number {
+    private autotile(col: number, row: number, neighborType: string, diagonalCheck: boolean): number {
         const directions = [
             { dx: 0, dy: -1 },  // Up
             { dx: 1, dy: -1 },  // Up-Right
@@ -63,7 +63,6 @@ export class Renderer {
             { dx: -1, dy: 0 },  // Left
             { dx: -1, dy: -1 }, // Up-Left
         ];
-
         let bitmask = 0;
 
         for (let i = 0; i < directions.length; i++) {
@@ -76,6 +75,13 @@ export class Renderer {
                 bitmask |= (1 << i);
             }
         }
+
+        // Reset the diagonal bits
+        if (!diagonalCheck) {
+            bitmask &= 0b01010101; // Keep only orthogonal bits
+        }
+
+
         return bitmask;
     }
 
@@ -83,7 +89,7 @@ export class Renderer {
         const sprite = new Sprite();
         sprite.x = col * TILE_SIZE * SCALE;
         sprite.y = row * TILE_SIZE * SCALE;
-        
+
         texture.source.scaleMode = "nearest";
 
         sprite.texture = texture;
@@ -105,26 +111,38 @@ export class Renderer {
                 const type = terrainTile.getType() as TerrainType;
                 const def = this.defManager.getTerrainDef(type);
 
-                if (def.autoTile) {
-                    // Autotile terrain (Water, Road, Bridge)
-                    const bitmask = this.autotile(col, row, type);
-                    const texture = this.textureProvider.getAutoTileTexture(type, bitmask);
-                    const sprite = this.createSprite(col, row, texture);
-                    terrainContainer.addChild(sprite);
-                } else if (def.overlay) {
-                    // Overlay terrain (Mountain, Forest) — render grass base + overlay
-                    const grassDef = this.defManager.getTerrainDef('Grass');
-                    // const grassVariant = Math.floor(Math.random() * (grassDef as any).spriteIds.length);
+
+                if (def.overlay) {                        // Overlay terrain (Mountain, Forest) — render grass base + overlay
                     const grassTexture = this.textureProvider.getTerrainTexture('Grass', 0);
                     const grassSprite = this.createSprite(col, row, grassTexture);
                     terrainContainer.addChild(grassSprite);
-                    
-                    const overlayVariant = Math.floor(Math.random() * (def.spriteIds as number[]).length);
-                    const overlayTexture = this.textureProvider.getTerrainTexture(type, overlayVariant);
-                    const overlaySprite = this.createSprite(col, row, overlayTexture);
-                    terrainContainer.addChild(overlaySprite);
-                } else {
-                    // Simple terrain (Grass) — pick random variant
+
+                }
+
+                if (def.autoTile) {
+                    // Autotile terrain (Water, Road, Bridge)
+                    let bitmask: number = 0;
+                    switch (type) {
+                        case 'Water':
+                            bitmask = this.autotile(col, row, 'Grass', true);
+                            break;
+                        case 'Road':
+                            bitmask = this.autotile(col, row, 'Road', false);
+                            const bridgeBitmask = this.autotile(col, row, 'Bridge', false);
+                            // Combine road and bridge bitmasks, prioritizing bridge connections
+                            bitmask = (bitmask & ~bridgeBitmask) | bridgeBitmask;
+                            break;
+                        case 'Bridge':
+                            bitmask = this.autotile(col, row, 'Road', false);
+                            break;
+                    }
+
+                    const texture = this.textureProvider.getAutoTileTexture(type, bitmask);
+                    const sprite = this.createSprite(col, row, texture);
+                    terrainContainer.addChild(sprite);
+                }
+                else {
+                    // Simple terrain (Grass) -— pick random variant
                     const variantCount = (def.spriteIds as number[]).length;
                     // const variant = Math.floor(Math.random() * variantCount);
                     // const texture = this.textureProvider.getTerrainTexture(type, variant);
@@ -184,6 +202,24 @@ export class Renderer {
         }
     }
 
+    public renderEffects(): void {
+        // Health bar
+    }
+
+    public renderUI(): void {
+        // Movement Highlights
+        
+        
+        // Cursor
+    }
+
+
+
+
+
+
+
+
     public updateUnits(): void {
         this.updateFlag |= 0b100;
     }
@@ -192,10 +228,12 @@ export class Renderer {
         this.updateFlag |= 0b010;
     }
 
+
+
     public update(): void {
         if (this.updateFlag & 0b001) this.renderTerrain();
-        // if (this.updateFlag & 0b010) this.renderBuildings();
-        // if (this.updateFlag & 0b100) this.renderUnits();
+        if (this.updateFlag & 0b010) this.renderBuildings();
+        if (this.updateFlag & 0b100) this.renderUnits();
 
         this.updateFlag = 0;
     }

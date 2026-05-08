@@ -1,6 +1,7 @@
 import { Application } from 'pixi.js';
 import { Game } from './core/Game';
 import { initDevtools } from '@pixi/devtools';
+import { InputManager } from './core/InputManager.ts';
 
 
 async function main(): Promise<void> {
@@ -19,6 +20,18 @@ async function main(): Promise<void> {
     window.__PIXI_DEVTOOLS__ = {
         app: app,
     };
+
+    // Init InputManager
+    InputManager.getInstance().init(window, app.canvas);
+    InputManager.bindAction('select', ['KeyZ', 'Enter']);
+    InputManager.bindAction('cancel', ['KeyX', 'Escape']);
+    InputManager.bindAction('up', ['ArrowUp', 'KeyW']);
+    InputManager.bindAction('down', ['ArrowDown', 'KeyS']);
+    InputManager.bindAction('left', ['ArrowLeft', 'KeyA']);
+    InputManager.bindAction('right', ['ArrowRight', 'KeyD']);
+    
+
+
 
 
     const game = new Game();

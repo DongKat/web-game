@@ -57,8 +57,8 @@ export class InputManager {
         }, { passive: false });
     }
 
-    bindAction(action: string, keys: string[]): void {
-        this.bindings[action] = keys;
+    public static bindAction(action: string, keys: string[]): void {
+        InputManager.getInstance().bindings[action] = keys;
     }
 
     // Keyboard event handlers
@@ -120,16 +120,16 @@ export class InputManager {
     }
 
     // Keyboard action queries
-    public isActionDown(action: string) {
-        return this.bindings[action]?.some((k) => this.isKeyDown(k)) ?? false;
+    public static isActionDown(action: string) {
+        return InputManager.getInstance().bindings[action]?.some((k) => InputManager.getInstance().isKeyDown(k)) ?? false;
     }
 
-    public isActionPressed(action: string) {
-        return this.bindings[action]?.some((k) => this.isKeyPressed(k)) ?? false;
+    public static isActionPressed(action: string) {
+        return InputManager.getInstance().bindings[action]?.some((k) => InputManager.getInstance().isKeyPressed(k)) ?? false;
     }
 
-    public isActionReleased(action: string) {
-        return this.bindings[action]?.some((k) => this.isKeyReleased(k)) ?? false;
+    public static isActionReleased(action: string) {
+        return InputManager.getInstance().bindings[action]?.some((k) => InputManager.getInstance().isKeyReleased(k)) ?? false;
     }
 
     // Mouse queries

@@ -34,7 +34,7 @@ const buildingDefs = entityDefs.buildings as Record<string, BuildingDef>;
 export class EntityDefinitionManager {
     private static instance: EntityDefinitionManager;
 
-    private constructor() {}
+    private constructor() { }
 
     public static getInstance(): EntityDefinitionManager {
         if (!EntityDefinitionManager.instance) {
@@ -81,6 +81,17 @@ export class EntityDefinitionManager {
         const ids = def.spriteIds as Record<string, number>;
         const id = ids[String(bitmask)];
         if (id !== undefined) return id;
+
+
+        if (type === 'Water') {
+            // Fallback for water:
+            // Reset diagonal bits
+            // Use orthagonal bitmask
+            const orthogonalBitmask = bitmask & 0b01010101;
+            const orthogonalId = ids[String(orthogonalBitmask)];
+            if (orthogonalId !== undefined) return orthogonalId;
+        }
+
         // Fallback to bitmask 0
         const fallback = ids['0'];
         if (fallback !== undefined) return fallback;
