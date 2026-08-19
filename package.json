@@ -4,21 +4,21 @@
   "version": "0.0.0",
   "type": "module",
   "scripts": {
-    "test": "vitest",
     "dev": "vite",
     "build": "tsc && vite build",
-    "preview": "vite preview"
+    "preview": "vite preview",
+    "test": "vitest run",
+    "test:watch": "vitest"
   },
   "devDependencies": {
-    "ts-node": "^10.9.2",
-    "tsx": "^4.21.0",
-    "typescript": "~5.9.3",
-    "vite": "^8.0.1",
-    "vitest": "^4.1.2"
+    "@types/node": "^26.2.0",
+    "typescript": "~6.0.2",
+    "vite": "^8.2.0",
+    "vitest": "^4.1.11"
   },
   "dependencies": {
     "@pixi/devtools": "^2.0.1",
-    "jest": "^30.3.0",
-    "pixi.js": "^8.17.1"
+    "csv-parse": "^7.0.2",
+    "pixi.js": "^8.19.0"
   }
 }

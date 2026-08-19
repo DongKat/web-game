@@ -1,0 +1,199 @@
+id,name,kind,material,team,subtype,facing,edge,variant,note
+0,terrain.grass,terrain,grass,,,,15,0,
+1,terrain.grass,terrain,grass,,,,15,1,sparse tufts
+2,terrain.grass,terrain,grass,,,,15,2,flowers
+3,terrain.water,terrain,water,,,,6,1,2x2 pond nw; same mask as lake set
+4,terrain.water,terrain,water,,,,12,1,2x2 pond ne; same mask as lake set
+5,overlay.mountain,overlay,mountain,,mountain,,,0,
+6,structure.machine,structure,,neutral,machine,,,0,UNVERIFIED gray tracked machine - rename once identified
+7,overlay.lamp,overlay,,,lamp,,,0,UNVERIFIED curved pole with head - lamp or crane hook
+8,structure.city.neutral,structure,,neutral,city,,,0,low houses cluster
+9,structure.hq.neutral,structure,,neutral,hq,,,0,headquarters with garage doors
+10,structure.apartment.neutral,structure,,neutral,apartment,,,0,tall block; many windows
+11,structure.factory.neutral,structure,,neutral,factory,,,0,sawtooth roof
+12,structure.port.neutral,structure,,neutral,port,,,0,dockside crane
+13,structure.airport.neutral,structure,,neutral,airport,,,0,hangar with antenna
+14,structure.silo.neutral,structure,,neutral,silo,,,0,UNVERIFIED rocket/missile pad
+15,structure.barracks.neutral,structure,,neutral,barracks,,,0,walled yard with vehicle
+16,structure.flag.neutral,structure,,neutral,flag,,,0,flag frame 0
+17,structure.flag.neutral,structure,,neutral,flag,,,1,flag frame 1
+18,terrain.water,terrain,water,,,,6,0,lake 9-slice nw
+19,terrain.water,terrain,water,,,,14,0,lake 9-slice n
+20,terrain.water,terrain,water,,,,12,0,lake 9-slice ne
+21,terrain.water,terrain,water,,,,3,1,2x2 pond sw; same mask as lake set
+22,terrain.water,terrain,water,,,,9,1,2x2 pond se; same mask as lake set
+23,structure.turret,structure,,neutral,turret,,,0,UNVERIFIED four radial gray barrels - anti-air or obstacle
+24,structure.machine,structure,,neutral,machine,,,1,UNVERIFIED gray machine - rename once identified
+25,structure.fence,structure,,neutral,fence,,,0,UNVERIFIED gray panel with mesh - fence or gate
+26,structure.city.green,structure,,green,city,,,0,low houses cluster
+27,structure.hq.green,structure,,green,hq,,,0,headquarters with garage doors
+28,structure.apartment.green,structure,,green,apartment,,,0,tall block; many windows
+29,structure.factory.green,structure,,green,factory,,,0,sawtooth roof
+30,structure.port.green,structure,,green,port,,,0,dockside crane
+31,structure.airport.green,structure,,green,airport,,,0,hangar with antenna
+32,structure.silo.green,structure,,green,silo,,,0,UNVERIFIED rocket/missile pad
+33,structure.barracks.green,structure,,green,barracks,,,0,walled yard with vehicle
+34,structure.flag.green,structure,,green,flag,,,0,flag frame 0
+35,structure.flag.green,structure,,green,flag,,,1,flag frame 1
+36,terrain.water,terrain,water,,,,7,0,lake 9-slice w
+37,terrain.water,terrain,water,,,,15,0,lake 9-slice center
+38,terrain.water,terrain,water,,,,13,0,lake 9-slice e
+39,terrain.water.channel,terrain,water,,,n,,0,channel north end; land nubs at S corners
+40,overlay.path.arrow,overlay,path,,arrow,n,4,0,edge = side the path enters from
+41,overlay.path.arrow,overlay,path,,arrow,w,2,0,edge = side the path enters from
+42,overlay.path.line,overlay,path,,line,,10,0,
+43,overlay.path.arrow,overlay,path,,arrow,e,8,0,edge = side the path enters from
+44,structure.city.blue,structure,,blue,city,,,0,low houses cluster
+45,structure.hq.blue,structure,,blue,hq,,,0,headquarters with garage doors
+46,structure.apartment.blue,structure,,blue,apartment,,,0,tall block; many windows
+47,structure.factory.blue,structure,,blue,factory,,,0,sawtooth roof
+48,structure.port.blue,structure,,blue,port,,,0,dockside crane
+49,structure.airport.blue,structure,,blue,airport,,,0,hangar with antenna
+50,structure.silo.blue,structure,,blue,silo,,,0,UNVERIFIED rocket/missile pad
+51,structure.barracks.blue,structure,,blue,barracks,,,0,walled yard with vehicle
+52,structure.flag.blue,structure,,blue,flag,,,0,flag frame 0
+53,structure.flag.blue,structure,,blue,flag,,,1,flag frame 1
+54,terrain.water,terrain,water,,,,3,0,lake 9-slice sw
+55,terrain.water,terrain,water,,,,11,0,lake 9-slice s
+56,terrain.water,terrain,water,,,,9,0,lake 9-slice se
+57,terrain.water.channel,terrain,water,,,,5,1,channel middle; land full height W+E
+58,overlay.path.line,overlay,path,,line,,5,0,
+59,overlay.path.corner,overlay,path,,corner,,6,0,
+60,overlay.path.corner,overlay,path,,corner,,12,0,
+61,ui.cursor.select,ui,,,cursor,,,0,four corner brackets
+62,structure.city.red,structure,,red,city,,,0,low houses cluster
+63,structure.hq.red,structure,,red,hq,,,0,headquarters with garage doors
+64,structure.apartment.red,structure,,red,apartment,,,0,tall block; many windows
+65,structure.factory.red,structure,,red,factory,,,0,sawtooth roof
+66,structure.port.red,structure,,red,port,,,0,dockside crane
+67,structure.airport.red,structure,,red,airport,,,0,hangar with antenna
+68,structure.silo.red,structure,,red,silo,,,0,UNVERIFIED rocket/missile pad
+69,structure.barracks.red,structure,,red,barracks,,,0,walled yard with vehicle
+70,structure.flag.red,structure,,red,flag,,,0,flag frame 0
+71,structure.flag.red,structure,,red,flag,,,1,flag frame 1
+72,terrain.water.corner,terrain,water,,,ne,,0,wide land corner
+73,terrain.water.waterfall,terrain,water,,,n,,0,land band across N with falling water
+74,terrain.water.corner,terrain,water,,,nw,,0,wide land corner
+75,terrain.water.channel,terrain,water,,,s,,2,channel south end; land nubs at N corners
+76,overlay.path.arrow,overlay,path,,arrow,s,1,0,edge = side the path enters from
+77,overlay.path.corner,overlay,path,,corner,,3,0,
+78,overlay.path.corner,overlay,path,,corner,,9,0,
+79,ui.hazard,ui,,,hazard,,,0,diagonal yellow stripes
+80,structure.city.orange,structure,,orange,city,,,0,low houses cluster
+81,structure.hq.orange,structure,,orange,hq,,,0,headquarters with garage doors
+82,structure.apartment.orange,structure,,orange,apartment,,,0,tall block; many windows
+83,structure.factory.orange,structure,,orange,factory,,,0,sawtooth roof
+84,structure.port.orange,structure,,orange,port,,,0,dockside crane
+85,structure.airport.orange,structure,,orange,airport,,,0,hangar with antenna
+86,structure.silo.orange,structure,,orange,silo,,,0,UNVERIFIED rocket/missile pad
+87,structure.barracks.orange,structure,,orange,barracks,,,0,walled yard with vehicle
+88,structure.flag.orange,structure,,orange,flag,,,0,flag frame 0
+89,structure.flag.orange,structure,,orange,flag,,,1,flag frame 1
+90,terrain.water.corner,terrain,water,,,nw,,1,narrow land corner
+91,terrain.water.corner,terrain,water,,,ne,,1,narrow land corner
+92,terrain.water.corner,terrain,water,,,se,,0,
+93,terrain.water.corner,terrain,water,,,sw,,0,
+94,overlay.forest,overlay,forest,,tree,,,0,single tree
+95,unit.recon.neutral,unit,,neutral,recon,e,,0,open-top scout car
+96,unit.supply.neutral,unit,,neutral,supply,e,,0,truck with cargo
+97,unit.tank_light.neutral,unit,,neutral,tank_light,e,,0,small tracked tank
+98,unit.tank.neutral,unit,,neutral,tank,e,,0,medium tracked tank
+99,unit.artillery.neutral,unit,,neutral,artillery,e,,0,angled rocket launcher on tracks
+100,unit.plane.neutral,unit,,neutral,plane,e,,0,jet; top view
+101,unit.helicopter.neutral,unit,,neutral,helicopter,e,,0,rotor blur; top view
+102,unit.antiair.neutral,unit,,neutral,antiair,e,,0,UNVERIFIED twin round mounts - AA gun or bomber
+103,unit.boat.neutral,unit,,neutral,boat,e,,0,patrol boat; waterline
+104,unit.battleship.neutral,unit,,neutral,battleship,e,,0,large gun ship; waterline
+105,unit.lander.neutral,unit,,neutral,lander,e,,0,transport ship; waterline
+106,unit.infantry.neutral,unit,,neutral,infantry,e,,0,rifleman
+107,unit.mech.neutral,unit,,neutral,mech,e,,0,heavy trooper
+108,terrain.pavement,terrain,pavement,,,,0,0,
+109,terrain.pavement,terrain,pavement,,,,2,0,
+110,terrain.pavement,terrain,pavement,,,,10,0,
+111,terrain.pavement,terrain,pavement,,,,8,0,
+112,overlay.forest,overlay,forest,,tree,,,1,two trees
+113,unit.recon.green,unit,,green,recon,e,,0,open-top scout car
+114,unit.supply.green,unit,,green,supply,e,,0,truck with cargo
+115,unit.tank_light.green,unit,,green,tank_light,e,,0,small tracked tank
+116,unit.tank.green,unit,,green,tank,e,,0,medium tracked tank
+117,unit.artillery.green,unit,,green,artillery,e,,0,angled rocket launcher on tracks
+118,unit.plane.green,unit,,green,plane,e,,0,jet; top view
+119,unit.helicopter.green,unit,,green,helicopter,e,,0,rotor blur; top view
+120,unit.antiair.green,unit,,green,antiair,e,,0,UNVERIFIED twin round mounts - AA gun or bomber
+121,unit.boat.green,unit,,green,boat,e,,0,patrol boat; waterline
+122,unit.battleship.green,unit,,green,battleship,e,,0,large gun ship; waterline
+123,unit.lander.green,unit,,green,lander,e,,0,transport ship; waterline
+124,unit.infantry.green,unit,,green,infantry,e,,0,rifleman
+125,unit.mech.green,unit,,green,mech,e,,0,heavy trooper
+126,terrain.pavement,terrain,pavement,,,,4,0,
+127,terrain.pavement,terrain,pavement,,,,6,0,
+128,terrain.pavement,terrain,pavement,,,,14,0,carries part of a circular pad marking
+129,terrain.pavement,terrain,pavement,,,,12,0,carries part of a circular pad marking
+130,structure.bridge,structure,bridge,,,e,10,0,horizontal deck
+131,unit.recon.blue,unit,,blue,recon,e,,0,open-top scout car
+132,unit.supply.blue,unit,,blue,supply,e,,0,truck with cargo
+133,unit.tank_light.blue,unit,,blue,tank_light,e,,0,small tracked tank
+134,unit.tank.blue,unit,,blue,tank,e,,0,medium tracked tank
+135,unit.artillery.blue,unit,,blue,artillery,e,,0,angled rocket launcher on tracks
+136,unit.plane.blue,unit,,blue,plane,e,,0,jet; top view
+137,unit.helicopter.blue,unit,,blue,helicopter,e,,0,rotor blur; top view
+138,unit.antiair.blue,unit,,blue,antiair,e,,0,UNVERIFIED twin round mounts - AA gun or bomber
+139,unit.boat.blue,unit,,blue,boat,e,,0,patrol boat; waterline
+140,unit.battleship.blue,unit,,blue,battleship,e,,0,large gun ship; waterline
+141,unit.lander.blue,unit,,blue,lander,e,,0,transport ship; waterline
+142,unit.infantry.blue,unit,,blue,infantry,e,,0,rifleman
+143,unit.mech.blue,unit,,blue,mech,e,,0,heavy trooper
+144,terrain.pavement,terrain,pavement,,,,5,0,
+145,terrain.pavement,terrain,pavement,,,,7,0,
+146,terrain.pavement,terrain,pavement,,,,15,0,carries part of a circular pad marking
+147,terrain.pavement,terrain,pavement,,,,13,0,carries part of a circular pad marking
+148,terrain.water.dock,terrain,water,,,n,,0,gray quay along N edge
+149,unit.recon.red,unit,,red,recon,e,,0,open-top scout car
+150,unit.supply.red,unit,,red,supply,e,,0,truck with cargo
+151,unit.tank_light.red,unit,,red,tank_light,e,,0,small tracked tank
+152,unit.tank.red,unit,,red,tank,e,,0,medium tracked tank
+153,unit.artillery.red,unit,,red,artillery,e,,0,angled rocket launcher on tracks
+154,unit.plane.red,unit,,red,plane,e,,0,jet; top view
+155,unit.helicopter.red,unit,,red,helicopter,e,,0,rotor blur; top view
+156,unit.antiair.red,unit,,red,antiair,e,,0,UNVERIFIED twin round mounts - AA gun or bomber
+157,unit.boat.red,unit,,red,boat,e,,0,patrol boat; waterline
+158,unit.battleship.red,unit,,red,battleship,e,,0,large gun ship; waterline
+159,unit.lander.red,unit,,red,lander,e,,0,transport ship; waterline
+160,unit.infantry.red,unit,,red,infantry,e,,0,rifleman
+161,unit.mech.red,unit,,red,mech,e,,0,heavy trooper
+162,terrain.pavement,terrain,pavement,,,,1,0,
+163,terrain.pavement,terrain,pavement,,,,3,0,
+164,terrain.pavement,terrain,pavement,,,,11,0,carries part of a circular pad marking
+165,terrain.pavement,terrain,pavement,,,,9,0,carries part of a circular pad marking
+166,structure.bridge,structure,bridge,,,n,5,0,vertical deck
+167,unit.recon.orange,unit,,orange,recon,e,,0,open-top scout car
+168,unit.supply.orange,unit,,orange,supply,e,,0,truck with cargo
+169,unit.tank_light.orange,unit,,orange,tank_light,e,,0,small tracked tank
+170,unit.tank.orange,unit,,orange,tank,e,,0,medium tracked tank
+171,unit.artillery.orange,unit,,orange,artillery,e,,0,angled rocket launcher on tracks
+172,unit.plane.orange,unit,,orange,plane,e,,0,jet; top view
+173,unit.helicopter.orange,unit,,orange,helicopter,e,,0,rotor blur; top view
+174,unit.antiair.orange,unit,,orange,antiair,e,,0,UNVERIFIED twin round mounts - AA gun or bomber
+175,unit.boat.orange,unit,,orange,boat,e,,0,patrol boat; waterline
+176,unit.battleship.orange,unit,,orange,battleship,e,,0,large gun ship; waterline
+177,unit.lander.orange,unit,,orange,lander,e,,0,transport ship; waterline
+178,unit.infantry.orange,unit,,orange,infantry,e,,0,rifleman
+179,unit.mech.orange,unit,,orange,mech,e,,0,heavy trooper
+180,ui.digit,ui,,,digit,,,0,glyph 0
+181,ui.digit,ui,,,digit,,,1,glyph 1
+182,ui.digit,ui,,,digit,,,2,glyph 2
+183,ui.digit,ui,,,digit,,,3,glyph 3
+184,ui.digit,ui,,,digit,,,4,glyph 4
+185,ui.digit,ui,,,digit,,,5,glyph 5
+186,ui.digit,ui,,,digit,,,6,glyph 6
+187,ui.digit,ui,,,digit,,,7,glyph 7
+188,ui.digit,ui,,,digit,,,8,glyph 8
+189,ui.digit,ui,,,digit,,,9,glyph 9
+190,ui.glyph.question,ui,,,glyph,,,0,question mark
+191,ui.icon.ammo,ui,,,icon,,,0,yellow crate
+192,ui.icon.fuel,ui,,,icon,,,0,red jerrycan
+193,ui.icon.lock,ui,,,icon,,,0,padlock
+194,ui.icon.surrender,ui,,,icon,,,0,white flag
+195,ui.icon.health,ui,,,icon,,,0,heart
+196,ui.icon.pointer,ui,,,icon,,,0,hand cursor
+197,overlay.shadow,overlay,,,shadow,,,0,dithered ellipse; unit drop shadow
