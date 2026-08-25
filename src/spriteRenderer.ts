@@ -1,5 +1,5 @@
-import { Container, Sprite } from 'pixi.js';
-import { LAYER_ORDER, TILE_SIZE } from './constant';
+import { Container, Sprite, Texture } from 'pixi.js';
+import { LAYER_ORDER, TILE_SIZE, STRUCTURE_SCALE, UNIT_SCALE } from './constant';
 import type { SpriteLoader } from './spriteLoader';
 
 export type LayerName = typeof LAYER_ORDER[number];
@@ -38,11 +38,18 @@ export class SpriteRenderer {
         return container;
     }
 
-    /** Place a labelled tile at a grid cell. Returns the sprite; the caller owns it. */
     draw(name: string, col: number, row: number, layer: LayerName, variant = 0): Sprite {
-        const sprite = new Sprite(this.loader.byName(name, variant));
-        sprite.label = name;                                  // shows up in @pixi/devtools
-        sprite.position.set(col * TILE_SIZE, row * TILE_SIZE);
+        return this.drawTexture(this.loader.byName(name, variant), col, row, layer, name);
+    }
+
+    drawTexture(texture: Texture, col: number, row: number, layer: LayerName, label = ''): Sprite {
+        const sprite = new Sprite(texture);
+        sprite.label = label;
+        sprite.anchor.set(0.5, 1);
+        if (layer === 'unit' || layer === 'structure') {
+            sprite.scale.set(layer === 'unit' ? UNIT_SCALE : STRUCTURE_SCALE);
+        }
+        sprite.position.set(col * TILE_SIZE + TILE_SIZE / 2, row * TILE_SIZE + TILE_SIZE);
         this.layer(layer).addChild(sprite);
         return sprite;
     }

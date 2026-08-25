@@ -46,12 +46,12 @@ describe('layers', () => {
 describe('draw', () => {
     it('converts grid cells to pixels', () => {
         const sprite = renderer.draw('terrain.grass', 3, 5, 'terrain');
-        expect([sprite.x, sprite.y]).toEqual([3 * TILE_SIZE, 5 * TILE_SIZE]);
+        expect([sprite.x, sprite.y]).toEqual([3 * TILE_SIZE + TILE_SIZE / 2, 5 * TILE_SIZE + TILE_SIZE]);
     });
 
     it('places cell (0,0) at the origin', () => {
         const sprite = renderer.draw('terrain.grass', 0, 0, 'terrain');
-        expect([sprite.x, sprite.y]).toEqual([0, 0]);
+        expect([sprite.x, sprite.y]).toEqual([TILE_SIZE / 2, TILE_SIZE]);
     });
 
     it('parents the sprite to the named layer only', () => {
@@ -138,6 +138,6 @@ describe('repaint', () => {
         for (let col = 0; col < 6; col++) renderer.draw('terrain.grass', col, 0, 'terrain');
 
         expect(renderer.layer('terrain').children).toHaveLength(6);
-        expect(renderer.layer('terrain').children.at(-1)!.x).toBe(5 * TILE_SIZE);
+        expect(renderer.layer('terrain').children.at(-1)!.x).toBe(5 * TILE_SIZE + TILE_SIZE / 2);
     });
 });

@@ -11,6 +11,9 @@ export const SHEET_ROWS = 11;
 export const SHEET_SPACING = 0;
 export const SHEET_MARGIN = 0;
 
+export const STRUCTURE_SCALE = 1;
+export const UNIT_SCALE = 0.8;
+
 export const SHEET_GEOMETRY = {
     tileSize: TILE_SIZE,
     cols: SHEET_COLS,
