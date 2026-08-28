@@ -64,6 +64,8 @@ export const CSV_COMMENT = "#";
  */
 export const LAYER_ORDER = ["terrain", "overlay", "structure", "unit", "fx"] as const;
 
+export const INCOME_PER_PROPERTY = 1000;
+
 /** 4-bit autotile mask: sides where the same material continues. */
 export const EDGE_NORTH = 1;
 export const EDGE_EAST = 2;
