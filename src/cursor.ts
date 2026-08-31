@@ -1,43 +1,36 @@
-
-
-
-    
-const CursorMode = {
-    Hover: 0,
-    Attack: 1,
-    Move: 2,
-    Select: 3,
-} as const
-
-type CursorMode = (typeof CursorMode)[keyof typeof CursorMode]
-
+import { Sprite, type Container, type Texture } from 'pixi.js';
+import { TILE_SIZE } from './constant';
 
 export class Cursor {
-    cell: { c: number, r: number } | null
-    mode: CursorMode
-    locked: boolean
+    cell: { c: number; r: number } | null;
+    locked: boolean;
+    readonly sprite: Sprite;
 
-    constructor(cell: { c: number, r: number } | null) {
-        this.cell = cell
-        this.mode = CursorMode.Hover
-        this.locked = false
-    }
+    constructor(cursorTexture: Texture, layer: Container) {
+        this.cell = null;
+        this.locked = false;
 
-    
-    setMode(mode: CursorMode): void        // swaps sprite texture
-    {
-        this.mode = mode
-    }
-    lock(): void {             // freeze position
-        this.locked = true
+        this.sprite = new Sprite(cursorTexture);
+        this.sprite.anchor.set(0.5, 1);
+        this.sprite.visible = true; // Visible on init
+        layer.addChild(this.sprite);
     }
 
-    unlock(): void {           // resume following pointer
-        this.locked = false
+    moveTo(c: number, r: number): void {
+        this.cell = { c, r };
+        this.sprite.position.set(c * TILE_SIZE + TILE_SIZE / 2, r * TILE_SIZE + TILE_SIZE);
     }
 
-    on(event: 'hover' | 'select', _callback: () => void): void {
-        this.mode = event === 'hover' ? CursorMode.Hover : CursorMode.Select
+    hide(): void {
+        this.sprite.visible = false;
     }
-    
+
+    // TODO: Not yet implemented
+    lock(): void {
+        this.locked = true;
+    }
+
+    unlock(): void {
+        this.locked = false;
+    }
 }
