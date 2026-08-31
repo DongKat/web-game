@@ -11,8 +11,8 @@ export const SHEET_ROWS = 11;
 export const SHEET_SPACING = 0;
 export const SHEET_MARGIN = 0;
 
-export const STRUCTURE_SCALE = 1;
-export const UNIT_SCALE = 0.8;
+export const STRUCTURE_SCALE = 0.9;
+export const UNIT_SCALE = 0.7;
 
 export const SHEET_GEOMETRY = {
     tileSize: TILE_SIZE,
@@ -62,7 +62,7 @@ export const CSV_COMMENT = "#";
  * HUD is deliberately absent -- it must be a sibling of the camera's world
  * container, not a child, or it pans with the map.
  */
-export const LAYER_ORDER = ["terrain", "overlay", "structure", "unit", "fx"] as const;
+export const LAYER_ORDER = ["terrain", "overlay", "structure", "unit", "fx", "cursor"] as const;
 
 export const INCOME_PER_PROPERTY = 1000;
 

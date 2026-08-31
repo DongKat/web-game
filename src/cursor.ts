@@ -1,31 +1,31 @@
-import { Sprite, type Container, type Texture } from 'pixi.js';
-import { TILE_SIZE } from './constant';
+import type { GameMapManager } from './gameMapManager';
 
 export class Cursor {
     cell: { c: number; r: number } | null;
     locked: boolean;
-    readonly sprite: Sprite;
+    private readonly manager: GameMapManager;
 
-    constructor(cursorTexture: Texture, layer: Container) {
+    constructor(manager: GameMapManager) {
         this.cell = null;
         this.locked = false;
-
-        this.sprite = new Sprite(cursorTexture);
-        this.sprite.anchor.set(0.5, 1);
-        this.sprite.visible = true; // Visible on init
-        layer.addChild(this.sprite);
+        this.manager = manager;
     }
 
     moveTo(c: number, r: number): void {
+        if (this.cell) {
+            this.manager.removeCursor(this.cell.c, this.cell.r);
+        }
         this.cell = { c, r };
-        this.sprite.position.set(c * TILE_SIZE + TILE_SIZE / 2, r * TILE_SIZE + TILE_SIZE);
+        this.manager.placeCursor('ui.cursor.select', c, r);
     }
 
     hide(): void {
-        this.sprite.visible = false;
+        if (this.cell) {
+            this.manager.removeCursor(this.cell.c, this.cell.r);
+            this.cell = null;
+        }
     }
 
-    // TODO: Not yet implemented
     lock(): void {
         this.locked = true;
     }

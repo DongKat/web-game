@@ -11,11 +11,11 @@
     { "type": "forest",   "c": 3, "r": 5 }
   ],
   "structures": [
-    { "type": "hq",   "team": "green", "c": 1, "r": 1 },
-    { "type": "city", "team": "red",   "c": 8, "r": 7 }
+    { "type": "hq",   "team": "blue", "c": 1, "r": 1 },
+    { "type": "city", "team": "blue",   "c": 8, "r": 7 }
   ],
   "units": [
-    { "type": "tank",     "team": "green", "c": 2, "r": 2 },
-    { "type": "infantry", "team": "red",   "c": 7, "r": 6 }
+    { "type": "tank",     "team": "blue", "c": 2, "r": 2 },
+    { "type": "infantry", "team": "blue",   "c": 7, "r": 6 }
   ]
 }

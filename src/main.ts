@@ -30,13 +30,13 @@ async function main(): Promise<void> {
     
     manager.drawAll();
     
-    const cursor = new Cursor(loader.byName('ui.cursor.select'), renderer.layer('fx'));
+    const cursor = new Cursor(manager);
     cursor.moveTo(0, 0);
 
-    const player = new Player('red', 'Player 1', true, 0);
+    const player = new Player('blue', 'Player 1', true, 0);
     const input = new InputManager(app, world, cursor, map);
 
-    const controller = new ActionController(player, manager);
+    const controller = new ActionController(player, manager, input);
 
     input.on('cellhover', (c, r) => {
         cursor.moveTo(c, r);

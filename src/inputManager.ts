@@ -13,6 +13,7 @@ export class InputManager {
     private readonly listeners = new Map<InputEvent, Set<(...args: any[]) => void>>();
     private readonly onKeyDown: (e: KeyboardEvent) => void;
     private enabled = true;
+    cellFilter: ((c: number, r: number) => boolean) | null = null;
 
     constructor(app: Application, world: Container, cursor: Cursor, map: GameMap) {
         this.app = app;
@@ -119,6 +120,7 @@ export class InputManager {
         const prev = this.cursor.cell ?? { c: 0, r: 0 };
         const c = Math.max(0, Math.min(this.map.w - 1, prev.c + dc));
         const r = Math.max(0, Math.min(this.map.h - 1, prev.r + dr));
+        if (this.cellFilter && !this.cellFilter(c, r)) return;
         if (c !== prev.c || r !== prev.r || !this.cursor.cell) {
             this.emit('cellhover', c, r);
         }

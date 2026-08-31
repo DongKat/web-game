@@ -39,10 +39,10 @@ id,name,kind,material,team,subtype,facing,edge,variant,note
 37,terrain.water,terrain,water,,,,15,0,lake 9-slice center
 38,terrain.water,terrain,water,,,,13,0,lake 9-slice e
 39,terrain.water.channel,terrain,water,,,n,,0,channel north end; land nubs at S corners
-40,overlay.path.arrow,overlay,path,,arrow,n,4,0,edge = side the path enters from
-41,overlay.path.arrow,overlay,path,,arrow,w,2,0,edge = side the path enters from
-42,overlay.path.line,overlay,path,,line,,10,0,
-43,overlay.path.arrow,overlay,path,,arrow,e,8,0,edge = side the path enters from
+40,ui.path.arrow,ui,path,,arrow,n,4,0,edge = side the path enters from
+41,ui.path.arrow,ui,path,,arrow,w,2,0,edge = side the path enters from
+42,ui.path.line,ui,path,,line,,10,0,
+43,ui.path.arrow,ui,path,,arrow,e,8,0,edge = side the path enters from
 44,structure.city.blue,structure,,blue,city,,,0,low houses cluster
 45,structure.hq.blue,structure,,blue,hq,,,0,headquarters with garage doors
 46,structure.apartment.blue,structure,,blue,apartment,,,0,tall block; many windows
@@ -57,9 +57,9 @@ id,name,kind,material,team,subtype,facing,edge,variant,note
 55,terrain.water,terrain,water,,,,11,0,lake 9-slice s
 56,terrain.water,terrain,water,,,,9,0,lake 9-slice se
 57,terrain.water.channel,terrain,water,,,,5,1,channel middle; land full height W+E
-58,overlay.path.line,overlay,path,,line,,5,0,
-59,overlay.path.corner,overlay,path,,corner,,6,0,
-60,overlay.path.corner,overlay,path,,corner,,12,0,
+58,ui.path.line,ui,path,,line,,5,0,
+59,ui.path.corner,ui,path,,corner,,6,0,
+60,ui.path.corner,ui,path,,corner,,12,0,
 61,ui.cursor.select,ui,,,cursor,,,0,four corner brackets
 62,structure.city.red,structure,,red,city,,,0,low houses cluster
 63,structure.hq.red,structure,,red,hq,,,0,headquarters with garage doors
@@ -75,10 +75,10 @@ id,name,kind,material,team,subtype,facing,edge,variant,note
 73,terrain.water.waterfall,terrain,water,,,n,,0,land band across N with falling water
 74,terrain.water.corner,terrain,water,,,nw,,0,wide land corner
 75,terrain.water.channel,terrain,water,,,s,,2,channel south end; land nubs at N corners
-76,overlay.path.arrow,overlay,path,,arrow,s,1,0,edge = side the path enters from
-77,overlay.path.corner,overlay,path,,corner,,3,0,
-78,overlay.path.corner,overlay,path,,corner,,9,0,
-79,ui.hazard,ui,,,hazard,,,0,diagonal yellow stripes
+76,ui.path.arrow,ui,path,,arrow,s,1,0,edge = side the path enters from
+77,ui.path.corner,ui,path,,corner,,3,0,s
+78,ui.path.corner,ui,path,,corner,,9,0,
+79,overlay.highlight,overlay,,,,,,0,diagonal yellow stripes
 80,structure.city.orange,structure,,orange,city,,,0,low houses cluster
 81,structure.hq.orange,structure,,orange,hq,,,0,headquarters with garage doors
 82,structure.apartment.orange,structure,,orange,apartment,,,0,tall block; many windows

@@ -2,7 +2,7 @@ import { TILE_SIZE } from './constant';
 import { seededVariant } from './gameMap';
 import type { Sprite } from 'pixi.js';
 import type { GameMap, Placement } from './gameMap';
-import type { SpriteLoader } from './spriteLoader';
+import type { SpriteLoader, TileQuery } from './spriteLoader';
 import type { SpriteRenderer } from './spriteRenderer';
 
 export class GameMapManager {
@@ -14,6 +14,8 @@ export class GameMapManager {
         overlay: Map<number, Sprite>;
         structure: Map<number, Sprite>;
         unit: Map<number, Sprite>;
+        fx: Map<number, Sprite>;
+        cursor: Map<number, Sprite>;
     };
 
     constructor(map: GameMap, loader: SpriteLoader, renderer: SpriteRenderer) {
@@ -25,6 +27,8 @@ export class GameMapManager {
             overlay: new Map(),
             structure: new Map(),
             unit: new Map(),
+            fx: new Map(),
+            cursor: new Map(),
         };
     }
 
@@ -146,6 +150,58 @@ export class GameMapManager {
 
     overlayAt(c: number, r: number): Placement | undefined {
         return this.map.overlays.find(o => o.c === c && o.r === r);
+    }
+
+    // ── FX (temporary UI: path arrows, highlights) ──────────
+
+    placeFx(name: string, c: number, r: number): Sprite {
+        this.removeFx(c, r);
+        const sprite = this.renderer.draw(name, c, r, 'fx');
+        this.sprites.fx.set(this.key(c, r), sprite);
+        return sprite;
+    }
+
+    placeFxByQuery(query: TileQuery, c: number, r: number): Sprite | null {
+        const defs = this.loader.query(query);
+        if (defs.length === 0) return null;
+        this.removeFx(c, r);
+        const tex = this.loader.byId(defs[0].id);
+        const sprite = this.renderer.drawTexture(tex, c, r, 'fx');
+        this.sprites.fx.set(this.key(c, r), sprite);
+        return sprite;
+    }
+
+    removeFx(c: number, r: number): void {
+        const k = this.key(c, r);
+        this.sprites.fx.get(k)?.destroy();
+        this.sprites.fx.delete(k);
+    }
+
+    clearFx(): void {
+        for (const sprite of this.sprites.fx.values()) sprite.destroy();
+        this.sprites.fx.clear();
+        this.renderer.clear('fx');
+    }
+
+    // ── Cursor ─────────────────────────────────────────────────
+
+    placeCursor(name: string, c: number, r: number): Sprite {
+        this.removeCursor(c, r);
+        const sprite = this.renderer.draw(name, c, r, 'cursor');
+        this.sprites.cursor.set(this.key(c, r), sprite);
+        return sprite;
+    }
+
+    removeCursor(c: number, r: number): void {
+        const k = this.key(c, r);
+        this.sprites.cursor.get(k)?.destroy();
+        this.sprites.cursor.delete(k);
+    }
+
+    clearCursor(): void {
+        for (const sprite of this.sprites.cursor.values()) sprite.destroy();
+        this.sprites.cursor.clear();
+        this.renderer.clear('cursor');
     }
 
     // ── Shared helpers ─────────────────────────────────────────
