@@ -9,6 +9,8 @@ import { ActionController, HoverState } from './actionState';
 import { Player } from './player';
 import { loadDefs } from './defsLoader';
 import { TurnManager } from './turnManager';
+import { AI } from './ai';
+import { UIManager } from './uiManager';
 
 async function main(): Promise<void> {
     const app = new Application();
@@ -40,16 +42,22 @@ async function main(): Promise<void> {
 
     const players = [
         new Player('blue', 'Player 1', true, 0),
-        new Player('red', 'Player 2', true, 0),
+        new Player('red', 'Player 2', false, 0),
     ];
     const input = new InputManager(app, world, cursor, map);
     const controller = new ActionController(players[0], manager, input, defs);
     const turnManager = new TurnManager(players, manager, controller);
     controller.turnManager = turnManager;
 
+    const appEl = document.getElementById('app')!;
+    const ui = new UIManager(appEl, manager, defs);
+    ui.updateTurn(turnManager);
+    ui.updatePhase('move');
+
     input.on('cellhover', (c, r) => {
         cursor.moveTo(c, r);
         controller.onHover(c, r);
+        ui.updateHover(c, r, turnManager);
     });
 
     input.on('cellselect', (c, r) => {
@@ -61,21 +69,43 @@ async function main(): Promise<void> {
         controller.onCancel();
     });
 
-    input.on('endturn', () => {
+    const ai = new AI(controller, manager, defs, turnManager);
+
+    // One end-of-turn path for both humans and the AI, so an AI turn ends exactly the
+    // way a human's does. Recursive: an AI turn ends by calling back into this.
+    function endTurn(): void {
         turnManager.endTurn();
         controller.transition(new HoverState(controller, manager));
-        console.log(`Turn ${turnManager.turnCount} — ${turnManager.activePlayer.name}'s turn (funds: ${turnManager.activePlayer.funds})`);
+        ui.updateTurn(turnManager);
+        ui.updatePhase('move');
 
-        
         const victor = turnManager.winner();
         if (victor) {
-            input.disable();
-            console.log(`${victor.name} wins!`);
+            controller.onWin?.(victor);
+            return;
         }
-    });
+
+        const next = turnManager.activePlayer;
+        if (!next.human) {
+            ai.takeTurn(next).then(() => {
+                if (!turnManager.winner()) endTurn();
+            });
+        }
+    }
+
+    input.on('endturn', endTurn);
+
+    controller.onPhaseChange = (phase: string) => {
+        ui.updatePhase(phase);
+        ui.updateTurn(turnManager);
+    };
+
+    controller.onWin = (victor) => {
+        input.disable();
+        ui.showWinner(victor);
+    };
 
     console.log(`${map.name}: ${map.w}x${map.h}, ${loader.tileCount} tiles`);
-    console.log(`Turn ${turnManager.turnCount} — ${turnManager.activePlayer.name}'s turn`);
 }
 
 main().catch(console.error);

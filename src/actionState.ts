@@ -2,6 +2,7 @@ import type { GameDefs } from './defsLoader';
 import type { Placement } from './gameMap';
 import type { GameMapManager } from './gameMapManager';
 import { bfsReachable, bfsPath } from './highlightMovement';
+import { resolveExchange } from './combat';
 import type { InputManager } from './inputManager';
 import type { Player } from './player';
 import type { TurnManager } from './turnManager';
@@ -62,6 +63,8 @@ export class ActionController {
     readonly input: InputManager;
     readonly gameDefs: GameDefs;
     turnManager!: TurnManager;
+    onPhaseChange: ((phase: string) => void) | null = null;
+    onWin: ((victor: Player) => void) | null = null;
 
     constructor(player: Player, manager: GameMapManager, input: InputManager, gameDefs: GameDefs) {
         this.player = player;
@@ -94,14 +97,15 @@ export class ActionController {
 export class HoverState implements ActionState {
     private readonly controller: ActionController;
     private readonly manager: GameMapManager;
-    // TODO: Use gameDefs to show unit/terrain info on hover
 
     constructor(controller: ActionController, manager: GameMapManager) {
         this.controller = controller;
         this.manager = manager;
     }
 
-    enter(): void { }
+    enter(): void {
+        this.controller.onPhaseChange?.('move');
+    }
     exit(): void { }
 
     onHover(_c: number, _r: number): void {
@@ -152,6 +156,7 @@ export class SelectState implements ActionState {
     private highlightedCells: { c: number; r: number }[] = [];
 
     enter(): void {
+        this.controller.onPhaseChange?.('select');
         const unitDef = this.gameDefs.units.get(this._unit.type);
         const range = unitDef?.movementRange; // TODO: factor in terrain movement cost
         if (range === undefined) {
@@ -267,11 +272,10 @@ export class AttackState implements ActionState {
     }
 
     enter(): void {
+        this.controller.onPhaseChange?.('attack');
         for (const t of this.possibleTargets) {
-            this.manager.placeOverlay('highlight', t.c, t.r);
+            this.manager.placeOverlay('highlight', t.c, t.r, 0xff4444);
         }
-        // this.controller.input.cellFilter = (c, r) =>
-        //     this.targetKeys.has(r * this.manager.map.w + c);
     }
 
     exit(): void {
@@ -296,14 +300,13 @@ export class AttackState implements ActionState {
         const defenderState = tm.getUnitState(target.c, target.r);
         if (!attackerState || !defenderState) return;
 
-        const attackerHpRatio = attackerState.hp / 100;
-        const damage = Math.round(attackerDef.attack * attackerHpRatio * (100 / (100 + defenderDef.defense)));
-        tm.applyDamage(target.c, target.r, damage);
-
-        if (defenderState.hp > 0 && defenderDef.attackRange >= 1) {
-            const defenderHpRatio = defenderState.hp / 100;
-            const counterDamage = Math.round(defenderDef.attack * defenderHpRatio * (100 / (100 + attackerDef.defense)));
-            tm.applyDamage(this.unit.c, this.unit.r, counterDamage);
+        const exchange = resolveExchange(
+            attackerDef, attackerState.hp,
+            defenderDef, defenderState.hp,
+        );
+        tm.applyDamage(target.c, target.r, exchange.damage);
+        if (exchange.counter > 0) {
+            tm.applyDamage(this.unit.c, this.unit.r, exchange.counter);
         }
 
         this.controller.transition(new HoverState(this.controller, this.manager));
@@ -311,7 +314,7 @@ export class AttackState implements ActionState {
         const victor = tm.winner();
         if (victor) {
             this.controller.input.disable();
-            console.log(`${victor.name} wins!`);
+            this.controller.onWin?.(victor);
         }
     }
 

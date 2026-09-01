@@ -152,11 +152,13 @@ export class GameMapManager {
 
     // ── Overlays ───────────────────────────────────────────────
 
-    placeOverlay(type: string, c: number, r: number): Sprite {
+    placeOverlay(type: string, c: number, r: number, tint?: number): Sprite {
         this.removeOverlay(c, r);
         const p: Placement = { type, c, r };
         this.map.overlays.push(p);
-        return this.drawPlacement(p, 'overlay');
+        const sprite = this.drawPlacement(p, 'overlay');
+        if (tint !== undefined) sprite.tint = tint;
+        return sprite;
     }
 
     removeOverlay(c: number, r: number): void {
