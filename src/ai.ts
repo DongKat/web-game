@@ -106,8 +106,10 @@ export class AI {
     }
 
     /**
-     * Pick this unit's action: the best positive-value attack if one exists, else a
-     * step toward the nearest enemy. Returns null when the unit should hold.
+     * Pick this unit's action, in preference order: a favourable attack; else a
+     * retreat if the unit is threatened and can reduce the number of attackers; else
+     * an unfavourable attack if it is threatened and cornered; else a step toward the
+     * nearest enemy. Returns null when the unit should hold.
      */
     decide(unit: Placement): Plan | null {
         const def = this.defs.units.get(unit.type);
@@ -120,6 +122,8 @@ export class AI {
         // on the nearest enemy" and walk straight into death. Hold until they have a job.
         if (def.attack <= 0) return null;
 
+        // Track the best attack regardless of sign. A negative score only means
+        // "worse than doing nothing", and doing nothing is not always an option.
         let best: AttackPlan | null = null;
         for (const dest of cells) {
             for (const target of this.adjacentEnemies(dest, unit.team!)) {
@@ -128,17 +132,30 @@ export class AI {
                 if (!targetDef || !targetState) continue;
 
                 const score = scoreAttack(def, state.hp, targetDef, targetState.hp);
-                if (score > 0 && (!best || score > best.score)) {
+                if (!best || score > best.score) {
                     best = { dest, target, score };
                 }
             }
         }
-        if (best) return best;
+        if (best && best.score > 0) return best;
 
-        // No worthwhile attack: close on the nearest enemy so contact happens eventually.
         const enemies = this.manager.map.units.filter(u => u.team !== unit.team);
         if (enemies.length === 0) return null;
 
+        // The attack looked bad. If the unit is already under threat, try to break
+        // contact; retreating only counts if it actually reduces the number of
+        // attackers, otherwise the unit has gained nothing by walking.
+        const here = this.attackerCount({ c: unit.c, r: unit.r }, enemies);
+        if (here > 0) {
+            const escape = this.bestRetreat(unit, here, cells, enemies);
+            if (escape) return escape;
+
+            // Cornered: it will be attacked wherever it stands. Swinging beats standing
+            // still, which means taking the same damage without dealing any back.
+            if (best) return best;
+        }
+
+        // Nothing to attack and nowhere safer: close on the nearest enemy.
         let bestCell: Cell | null = null;
         let bestDist = Infinity;
         for (const dest of cells) {
@@ -149,6 +166,49 @@ export class AI {
             }
         }
         if (!bestCell || (bestCell.c === unit.c && bestCell.r === unit.r)) return null;
+        return { dest: bestCell, target: null };
+    }
+
+    /**
+     * How many enemies could reach a square adjacent to `cell` and attack it next
+     * turn. A deliberately narrow version of a threat map: it counts attackers rather
+     * than weighing their damage, which is all the retreat decision needs.
+     */
+    private attackerCount(cell: Cell, enemies: Placement[]): number {
+        let count = 0;
+        for (const enemy of enemies) {
+            const enemyDef = this.defs.units.get(enemy.type);
+            if (!enemyDef || enemyDef.attack <= 0) continue;
+            // Reach to any square adjacent to `cell`, hence range + 1.
+            const reach = manhattan({ c: enemy.c, r: enemy.r }, cell);
+            if (reach <= enemyDef.movementRange + 1) count++;
+        }
+        return count;
+    }
+
+    /**
+     * Move to a square under threat from strictly fewer enemies. Returns null when no
+     * reachable square is safer, so the caller can fall back to attacking.
+     */
+    private bestRetreat(unit: Placement, here: number, cells: Cell[], enemies: Placement[]): MovePlan | null {
+        let bestCell: Cell | null = null;
+        let bestCount = here;
+        let bestDist = -Infinity;
+        for (const dest of cells) {
+            if (dest.c === unit.c && dest.r === unit.r) continue;
+            const count = this.attackerCount(dest, enemies);
+            const dist = Math.min(...enemies.map(e => manhattan(dest, e)));
+            // Fewer attackers first; among equals, prefer the most distance gained.
+            const better = bestCell === null
+                ? count < bestCount
+                : count < bestCount || (count === bestCount && dist > bestDist);
+            if (better) {
+                bestCount = count;
+                bestCell = dest;
+                bestDist = dist;
+            }
+        }
+        if (!bestCell || bestCount >= here) return null;
         return { dest: bestCell, target: null };
     }
 

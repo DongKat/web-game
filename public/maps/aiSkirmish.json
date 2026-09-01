@@ -1,0 +1,105 @@
+{
+    "name": "AI Skirmish",
+    "w": 14,
+    "h": 10,
+    "seed": 7,
+    "terrain": "gggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggg",
+    "legend": {
+        "g": "grass"
+    },
+    "overlays": [
+        {
+            "type": "forest",
+            "c": 4,
+            "r": 3
+        },
+        {
+            "type": "forest",
+            "c": 5,
+            "r": 3
+        },
+        {
+            "type": "forest",
+            "c": 8,
+            "r": 6
+        },
+        {
+            "type": "forest",
+            "c": 9,
+            "r": 6
+        },
+        {
+            "type": "mountain",
+            "c": 6,
+            "r": 1
+        },
+        {
+            "type": "mountain",
+            "c": 7,
+            "r": 8
+        }
+    ],
+    "structures": [],
+    "units": [
+        {
+            "type": "infantry",
+            "team": "blue",
+            "c": 1,
+            "r": 3
+        },
+        {
+            "type": "infantry",
+            "team": "blue",
+            "c": 1,
+            "r": 5
+        },
+        {
+            "type": "mech",
+            "team": "blue",
+            "c": 2,
+            "r": 4
+        },
+        {
+            "type": "tank",
+            "team": "blue",
+            "c": 1,
+            "r": 6
+        },
+        {
+            "type": "recon",
+            "team": "blue",
+            "c": 2,
+            "r": 2
+        },
+        {
+            "type": "infantry",
+            "team": "red",
+            "c": 12,
+            "r": 4
+        },
+        {
+            "type": "infantry",
+            "team": "red",
+            "c": 12,
+            "r": 6
+        },
+        {
+            "type": "mech",
+            "team": "red",
+            "c": 11,
+            "r": 5
+        },
+        {
+            "type": "tank",
+            "team": "red",
+            "c": 12,
+            "r": 3
+        },
+        {
+            "type": "recon",
+            "team": "red",
+            "c": 11,
+            "r": 7
+        }
+    ]
+}

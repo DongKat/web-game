@@ -32,7 +32,7 @@ async function main(): Promise<void> {
 
     const loader = await SpriteLoader.load();
     const renderer = new SpriteRenderer(loader, world);
-    const map = await GameMap.load('/maps/battleDemo.json');
+    const map = await GameMap.load('/maps/aiSkirmish.json');
     const manager = new GameMapManager(map, loader, renderer);
     
     manager.drawAll();

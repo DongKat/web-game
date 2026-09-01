@@ -190,6 +190,63 @@ describe('AI.decide', () => {
         expect(plan.target).toBe(bigTarget);
     });
 
+    it('attacks anyway when cornered and doomed', () => {
+        // The bug this fixes: a 7 HP tank next to a 47 HP tank scores -280 for the
+        // attack (its 3 damage vs a lethal 7 counter), but standing still means dying
+        // without dealing any damage at all. Swinging is strictly better.
+        const self: Placement = { type: 'tank', team: 'blue', c: 2, r: 2 };
+        const enemy: Placement = { type: 'tank', team: 'red', c: 2, r: 3 };
+        // Boxed in by allies so no retreat square is available.
+        const wall: Placement[] = [
+            { type: 'tank', team: 'blue', c: 1, r: 2 },
+            { type: 'tank', team: 'blue', c: 3, r: 2 },
+            { type: 'tank', team: 'blue', c: 2, r: 1 },
+        ];
+        const ai = makeAI([self, enemy, ...wall], new Map([
+            ['2,2', { hp: 7, hasMoved: false }],
+            ['2,3', { hp: 47, hasMoved: false }],
+            ['1,2', { hp: 100, hasMoved: false }],
+            ['3,2', { hp: 100, hasMoved: false }],
+            ['2,1', { hp: 100, hasMoved: false }],
+        ]));
+
+        const plan = ai.decide(self)!;
+
+        expect(plan.target).toBe(enemy);
+    });
+
+    it('retreats a wounded unit that can escape instead of attacking at a loss', () => {
+        // Same bad exchange, but open ground behind it: breaking contact beats trading.
+        const self: Placement = { type: 'tank', team: 'blue', c: 5, r: 5 };
+        const enemy: Placement = { type: 'infantry', team: 'red', c: 5, r: 6 };
+        const ai = makeAI([self, enemy], new Map([
+            ['5,5', { hp: 7, hasMoved: false }],
+            ['5,6', { hp: 100, hasMoved: false }],
+        ]));
+
+        const plan = ai.decide(self)!;
+
+        expect(plan.target).toBeNull();
+        // Infantry moves 3, so escaping means getting more than 4 tiles away.
+        const dist = Math.abs(plan.dest.c - enemy.c) + Math.abs(plan.dest.r - enemy.r);
+        expect(dist).toBeGreaterThan(4);
+    });
+
+    it('does not volunteer for a losing attack when unthreatened', () => {
+        // A healthy recon that could reach the tank but would lose the exchange, and
+        // is outside the tank's reach: it should close in, not throw itself away.
+        const self: Placement = { type: 'recon', team: 'blue', c: 0, r: 0 };
+        const enemy: Placement = { type: 'tank', team: 'red', c: 9, r: 0 };
+        const ai = makeAI([self, enemy], new Map([
+            ['0,0', { hp: 100, hasMoved: false }],
+            ['9,0', { hp: 100, hasMoved: false }],
+        ]));
+
+        const plan = ai.decide(self)!;
+
+        expect(plan.target).toBeNull();
+    });
+
     it('returns null when there are no enemies left', () => {
         const self: Placement = { type: 'infantry', team: 'blue', c: 2, r: 2 };
         const ai = makeAI([self], new Map([['2,2', { hp: 100, hasMoved: false }]]));
