@@ -5,8 +5,10 @@ import { GameMap } from './gameMap';
 import { GameMapManager } from './gameMapManager';
 import { InputManager } from './inputManager';
 import { Cursor } from './cursor';
-import { ActionController } from './actionState';
+import { ActionController, HoverState } from './actionState';
 import { Player } from './player';
+import { loadDefs } from './defsLoader';
+import { TurnManager } from './turnManager';
 
 async function main(): Promise<void> {
     const app = new Application();
@@ -23,9 +25,12 @@ async function main(): Promise<void> {
     app.stage.addChild(world);
     world.scale.set(4);
 
+    // Load entity definitions
+    const defs = await loadDefs();
+
     const loader = await SpriteLoader.load();
     const renderer = new SpriteRenderer(loader, world);
-    const map = await GameMap.load('/maps/demo.json');
+    const map = await GameMap.load('/maps/battleDemo.json');
     const manager = new GameMapManager(map, loader, renderer);
     
     manager.drawAll();
@@ -33,10 +38,14 @@ async function main(): Promise<void> {
     const cursor = new Cursor(manager);
     cursor.moveTo(0, 0);
 
-    const player = new Player('blue', 'Player 1', true, 0);
+    const players = [
+        new Player('blue', 'Player 1', true, 0),
+        new Player('red', 'Player 2', true, 0),
+    ];
     const input = new InputManager(app, world, cursor, map);
-
-    const controller = new ActionController(player, manager, input);
+    const controller = new ActionController(players[0], manager, input, defs);
+    const turnManager = new TurnManager(players, manager, controller);
+    controller.turnManager = turnManager;
 
     input.on('cellhover', (c, r) => {
         cursor.moveTo(c, r);
@@ -52,7 +61,14 @@ async function main(): Promise<void> {
         controller.onCancel();
     });
 
+    input.on('endturn', () => {
+        turnManager.endTurn();
+        controller.transition(new HoverState(controller, manager));
+        console.log(`Turn ${turnManager.turnCount} — ${turnManager.activePlayer.name}'s turn (funds: ${turnManager.activePlayer.funds})`);
+    });
+
     console.log(`${map.name}: ${map.w}x${map.h}, ${loader.tileCount} tiles`);
+    console.log(`Turn ${turnManager.turnCount} — ${turnManager.activePlayer.name}'s turn`);
 }
 
 main().catch(console.error);

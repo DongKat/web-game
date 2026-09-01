@@ -4,7 +4,7 @@ import type { GameMap, Placement } from './gameMap';
 export class Player {
     readonly team: string;
     readonly name: string;
-    readonly human: boolean;
+    readonly human: boolean; // Is human or AI
     funds: number;
 
     constructor(team: string, name: string, human = true, funds = 0) {
@@ -15,6 +15,7 @@ export class Player {
     }
 
     units(map: GameMap): Placement[] {
+        // TODO: This iterate through the map :v
         return map.units.filter(u => u.team === this.team);
     }
 

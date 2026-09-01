@@ -3,7 +3,7 @@ import type { Application, Container, FederatedPointerEvent } from 'pixi.js';
 import type { Cursor } from './cursor';
 import type { GameMap } from './gameMap';
 
-type InputEvent = 'cellhover' | 'cellselect' | 'cancel';
+type InputEvent = 'cellhover' | 'cellselect' | 'cancel' | 'endturn';
 
 export class InputManager {
     private readonly app: Application;
@@ -27,7 +27,7 @@ export class InputManager {
     }
 
     on(event: 'cellhover' | 'cellselect', cb: (c: number, r: number) => void): void;
-    on(event: 'cancel', cb: () => void): void;
+    on(event: 'cancel' | 'endturn', cb: () => void): void;
     on(event: InputEvent, cb: (...args: any[]) => void): void {
         let set = this.listeners.get(event);
         if (!set) {
@@ -108,6 +108,9 @@ export class InputManager {
                 break;
             case 'Escape':
                 this.emit('cancel');
+                break;
+            case 'e':
+                this.emit('endturn');
                 break;
             default:
                 return;
