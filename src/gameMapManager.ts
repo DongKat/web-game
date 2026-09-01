@@ -112,6 +112,21 @@ export class GameMapManager {
         sprite.position.set(toC * TILE_SIZE + TILE_SIZE / 2, toR * TILE_SIZE + TILE_SIZE);
         this.sprites.unit.delete(fromK);
         this.sprites.unit.set(this.key(toC, toR), sprite);
+        // Set alpha to indicate that the unit has moved
+        sprite.alpha = 0.5;
+    }
+
+    setUnitAlpha(c: number, r: number, alpha: number): void {
+        const sprite = this.sprites.unit.get(this.key(c, r));
+        if (sprite) sprite.alpha = alpha;
+    }
+
+    resetUnitAlpha(team: string): void {
+        for (const unit of this.map.units) {
+            if (unit.team === team) {
+                this.setUnitAlpha(unit.c, unit.r, 1);
+            }
+        }
     }
 
     unitAt(c: number, r: number): Placement | undefined {

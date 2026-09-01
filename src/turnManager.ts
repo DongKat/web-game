@@ -59,6 +59,11 @@ export class TurnManager {
         if (state) state.hasMoved = true;
     }
 
+    unmarkMoved(c: number, r: number): void {
+        const state = this.unitStates.get(this.key(c, r));
+        if (state) state.hasMoved = false;
+    }
+
     applyDamage(c: number, r: number, damage: number): void {
         const state = this.unitStates.get(this.key(c, r));
         if (!state) return;
@@ -76,7 +81,7 @@ export class TurnManager {
         }
 
         const player = this.activePlayer;
-        player.collectIncome(this.manager.map);
+        // player.collectIncome(this.manager.map);
 
         for (const unit of this.manager.map.units) {
             if (unit.team === player.team) {
@@ -85,8 +90,8 @@ export class TurnManager {
             }
         }
 
+        this.manager.resetUnitAlpha(player.team);
         this.controller.player = player;
-        // TODO: transition controller to HoverState for new player
     }
 
     isDefeated(player: Player): boolean {

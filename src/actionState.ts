@@ -110,6 +110,14 @@ export class HoverState implements ActionState {
 
     onSelect(c: number, r: number): void {
         const unit = this.manager.unitAt(c, r);
+
+        // If unit moved, block selection
+        const unitState = this.controller.turnManager.getUnitState(c, r);
+        if (unitState?.hasMoved) {
+            return;
+        }
+
+
         if (unit && unit.team === this.controller.player.team) {
             this.controller.transition(new SelectState(this.controller, this.manager, unit, this.controller.gameDefs));
             return;
@@ -189,16 +197,19 @@ export class SelectState implements ActionState {
 
     onSelect(c: number, r: number): void {
         if (!this.inRange(c, r)) return;
-        if (c === this._unit.c && r === this._unit.r) return;
 
-        // If target cell is occupied by any unit, prevent selection.
-        if (this.manager.unitAt(c, r)) {
+        const isWait = c === this._unit.c && r === this._unit.r;
+
+        if (!isWait && this.manager.unitAt(c, r)) {
             return;
-
         }
-        this.controller.turnManager.moveUnitState(this._unit.c, this._unit.r, c, r);
-        this.manager.moveUnit(this._unit.c, this._unit.r, c, r);
+
+        if (!isWait) {
+            this.controller.turnManager.moveUnitState(this._unit.c, this._unit.r, c, r);
+            this.manager.moveUnit(this._unit.c, this._unit.r, c, r);
+        }
         this.controller.turnManager.markMoved(c, r);
+        this.manager.setUnitAlpha(c, r, 0.5);
 
         const directions = [
             { c: 0, r: -1 },
@@ -221,7 +232,7 @@ export class SelectState implements ActionState {
         }
 
         if (targets.length > 0) {
-            this.controller.transition(new AttackState(this.controller, this.manager, { ...this._unit, c, r }, this.gameDefs, targets));
+            this.controller.transition(new AttackState(this.controller, this.manager, { ...this._unit, c, r }, this.gameDefs, targets, this._unit.c, this._unit.r));
             return;
         }
 
@@ -238,14 +249,18 @@ export class AttackState implements ActionState {
     private readonly controller: ActionController;
     private readonly manager: GameMapManager;
     private readonly unit: Placement;
+    private readonly originC: number;
+    private readonly originR: number;
     private readonly gameDefs: GameDefs;
     private readonly possibleTargets: Placement[];
     private readonly targetKeys: Set<number>;
 
-    constructor(controller: ActionController, manager: GameMapManager, unit: Placement, gameDefs: GameDefs, possibleTargets: Placement[]) {
+    constructor(controller: ActionController, manager: GameMapManager, unit: Placement, gameDefs: GameDefs, possibleTargets: Placement[], originC: number, originR: number) {
         this.controller = controller;
         this.manager = manager;
         this.unit = unit;
+        this.originC = originC;
+        this.originR = originR;
         this.gameDefs = gameDefs;
         this.possibleTargets = possibleTargets;
         this.targetKeys = new Set(possibleTargets.map(t => t.r * manager.map.w + t.c));
@@ -292,9 +307,23 @@ export class AttackState implements ActionState {
         }
 
         this.controller.transition(new HoverState(this.controller, this.manager));
+
+        const victor = tm.winner();
+        if (victor) {
+            this.controller.input.disable();
+            console.log(`${victor.name} wins!`);
+        }
     }
 
     onCancel(): void {
+        const tm = this.controller.turnManager;
+        const moved = this.unit.c !== this.originC || this.unit.r !== this.originR;
+        if (moved) {
+            this.manager.moveUnit(this.unit.c, this.unit.r, this.originC, this.originR);
+            tm.moveUnitState(this.unit.c, this.unit.r, this.originC, this.originR);
+        }
+        this.manager.setUnitAlpha(this.originC, this.originR, 1);
+        tm.unmarkMoved(this.originC, this.originR);
         this.controller.transition(new HoverState(this.controller, this.manager));
     }
 }

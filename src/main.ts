@@ -65,6 +65,13 @@ async function main(): Promise<void> {
         turnManager.endTurn();
         controller.transition(new HoverState(controller, manager));
         console.log(`Turn ${turnManager.turnCount} — ${turnManager.activePlayer.name}'s turn (funds: ${turnManager.activePlayer.funds})`);
+
+        
+        const victor = turnManager.winner();
+        if (victor) {
+            input.disable();
+            console.log(`${victor.name} wins!`);
+        }
     });
 
     console.log(`${map.name}: ${map.w}x${map.h}, ${loader.tileCount} tiles`);
