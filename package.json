@@ -19,6 +19,7 @@
   "dependencies": {
     "@pixi/devtools": "^2.0.1",
     "csv-parse": "^7.0.2",
-    "pixi.js": "^8.19.0"
+    "pixi.js": "^8.19.0",
+    "yaml": "^2.9.0"
   }
 }

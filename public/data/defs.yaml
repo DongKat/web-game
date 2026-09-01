@@ -1,0 +1,109 @@
+terrains:
+  grass:
+    defenseBonus: 1
+  forest:
+    defenseBonus: 2
+  mountain:
+    defenseBonus: 4
+  water:
+    defenseBonus: 0
+  pavement:
+    defenseBonus: 0
+
+structures:
+  city:
+    defenseBonus: 3
+  hq:
+    defenseBonus: 4
+  factory:
+    defenseBonus: 3
+  airport:
+    defenseBonus: 3
+  port:
+    defenseBonus: 3
+  barracks:
+    defenseBonus: 3
+  apartment:
+    defenseBonus: 3
+  silo:
+    defenseBonus: 3
+
+units:
+  infantry:
+    attack: 55
+    defense: 45
+    movementRange: 3
+    attackRange: 1
+    cost: 1000
+  mech:
+    attack: 65
+    defense: 50
+    movementRange: 2
+    attackRange: 1
+    cost: 3000
+  recon:
+    attack: 35
+    defense: 25
+    movementRange: 8
+    attackRange: 1
+    cost: 4000
+  tank_light:
+    attack: 55
+    defense: 35
+    movementRange: 6
+    attackRange: 1
+    cost: 7000
+  tank:
+    attack: 70
+    defense: 50
+    movementRange: 6
+    attackRange: 1
+    cost: 7000
+  artillery:
+    attack: 80
+    defense: 20
+    movementRange: 5
+    attackRange: 3
+    cost: 6000
+  antiair:
+    attack: 65
+    defense: 30
+    movementRange: 6
+    attackRange: 1
+    cost: 8000
+  supply:
+    attack: 0
+    defense: 20
+    movementRange: 6
+    attackRange: 0
+    cost: 5000
+  plane:
+    attack: 75
+    defense: 40
+    movementRange: 9
+    attackRange: 1
+    cost: 20000
+  helicopter:
+    attack: 55
+    defense: 30
+    movementRange: 6
+    attackRange: 1
+    cost: 9000
+  boat:
+    attack: 40
+    defense: 20
+    movementRange: 6
+    attackRange: 1
+    cost: 6000
+  battleship:
+    attack: 65
+    defense: 40
+    movementRange: 5
+    attackRange: 5
+    cost: 28000
+  lander:
+    attack: 0
+    defense: 20
+    movementRange: 6
+    attackRange: 0
+    cost: 12000

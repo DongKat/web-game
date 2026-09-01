@@ -1,0 +1,26 @@
+{
+    "name": "BattleDemo",
+    "w": 10,
+    "h": 8,
+    "seed": 42,
+    "terrain": "gggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggg",
+    "legend": {
+        "g": "grass"
+    },
+    "overlays": [],
+    "structures": [],
+    "units": [
+        {
+            "type": "tank",
+            "team": "blue",
+            "c": 2,
+            "r": 2
+        },
+        {
+            "type": "tank",
+            "team": "red",
+            "c": 7,
+            "r": 6
+        }
+    ]
+}
